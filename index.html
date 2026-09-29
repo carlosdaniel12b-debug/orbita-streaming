@@ -103,17 +103,15 @@
         </div>
       </a>
 
-      <!-- Menú de Navegación -->
+      <!-- Menú de Navegación Multi-Página -->
       <nav class="nav-menu" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link active">Inicio</a>
+        <a href="catalogo.html" class="nav-link">Catálogo ($3)</a>
+        <a href="combos.html" class="nav-link">Armar Combo (2 x $5)</a>
         <button type="button" class="nav-link nav-link-ai" id="nav-open-orbit-ai" data-open-orbit-ai aria-label="Abrir asistente Orbit AI">
           <span class="ai-spark-dot"></span>
           <span>Orbit AI ✦</span>
         </button>
-        <a href="#plataformas" class="nav-link">Plataformas ($3)</a>
-        <a href="#armar-combo" class="nav-link">Armar Combo (2 x $5)</a>
-        <a href="#ventajas" class="nav-link">Ventajas</a>
-        <a href="#testimonios" class="nav-link">Testimonios</a>
-        <a href="#faq" class="nav-link">FAQ</a>
       </nav>
 
       <!-- Acciones de Cabecera -->
@@ -178,12 +176,10 @@
       </button>
     </div>
     <div class="mobile-nav-list">
+      <a href="index.html" class="mobile-nav-link active">🏠 Inicio <span>→</span></a>
+      <a href="catalogo.html" class="mobile-nav-link">🍿 Catálogo Individual ($3) <span>→</span></a>
+      <a href="combos.html" class="mobile-nav-link">⚡ Armar Combo (2 x $5) <span>→</span></a>
       <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">🤖 Asistente Orbit (IA) <span>⚡</span></a>
-      <a href="#plataformas" class="mobile-nav-link">Plataformas ($3) <span>→</span></a>
-      <a href="#armar-combo" class="mobile-nav-link">Armar Combo (2 x $5) <span>→</span></a>
-      <a href="#ventajas" class="mobile-nav-link">Ventajas & Garantía <span>→</span></a>
-      <a href="#testimonios" class="mobile-nav-link">Testimonios <span>→</span></a>
-      <a href="#faq" class="mobile-nav-link">Preguntas Frecuentes <span>→</span></a>
     </div>
     <div class="mobile-drawer-footer">
       <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="justify-content: center; width: 100%;">
@@ -266,14 +262,14 @@
           <span>¿Qué ver? Preguntar a Orbit</span>
         </button>
 
-        <a href="#armar-combo" class="btn-cosmic-primary">
+        <a href="combos.html" class="btn-cosmic-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
           </svg>
           <span>Armar Combo (2 x $5)</span>
         </a>
 
-        <a href="#plataformas" class="btn-cosmic-glass">
+        <a href="catalogo.html" class="btn-cosmic-glass">
           <span>Ver Catálogo ($3)</span>
           <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -303,86 +299,97 @@
     </div>
   </section>
 
-  <!-- ==================== PLATAFORMAS DISPONIBLES ==================== -->
-  <section class="section-padding" id="plataformas">
+  <!-- ==================== ESCAPARATE DE CATÁLOGO ($3) ==================== -->
+  <section class="section-padding" id="catalogo-preview">
     <div class="container">
       <div class="section-header reveal-on-scroll">
-        <span class="section-tag">✦ TARIFAS FIJAS & TRANSPARENTES ✦</span>
-        <h2 class="section-title">Plataformas Individuales a $3</h2>
+        <span class="section-tag">✦ PLATAFORMAS INDIVIDUALES ✦</span>
+        <h2 class="section-title">Tu Streaming Favorito a Solo $3</h2>
         <p class="section-description">
-          Disfruta de las mejores plataformas con perfil privado con clave PIN, calidad 4K HDR y soporte continuo. O combina 2 cualesquiera por solo $5.
+          Disfruta de pantallas privadas con clave PIN, calidad 4K HDR y soporte 24/7. Explora las 9 plataformas oficiales disponibles en nuestro catálogo.
         </p>
       </div>
 
-      <!-- Filtro por categorías -->
-      <div class="platforms-filter-bar reveal-on-scroll">
-        <button class="platform-filter-btn active" data-filter="all">Todas las Apps</button>
-        <button class="platform-filter-btn" data-filter="cinema">Series & Películas</button>
-        <button class="platform-filter-btn" data-filter="music">Música</button>
-        <button class="platform-filter-btn" data-filter="tools">Diseño (Canva Pro)</button>
+      <!-- Preview de Plataformas Destacadas -->
+      <div class="preset-combos-grid reveal-on-scroll">
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">SERIES & CINE</span>
+              <span class="preset-combo-save-pill">Perfil con PIN</span>
+            </div>
+            <div class="preset-combo-title">Netflix Premium 4K</div>
+            <p class="preset-combo-desc">El catálogo más visto del mundo en Ultra HD 4K, descargas offline y perfil privado exclusivo con clave.</p>
+          </div>
+          <div class="preset-combo-pricing">
+            <span class="preset-combo-price">$3.00</span>
+            <span class="preset-combo-period">/ mes</span>
+          </div>
+        </div>
+
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">DEPORTES EN VIVO</span>
+              <span class="preset-combo-save-pill">ESPN en Vivo</span>
+            </div>
+            <div class="preset-combo-title">Disney+ con ESPN</div>
+            <p class="preset-combo-desc">Champions League, Premier, F1, cine de Disney, Pixar, Marvel y Star Wars en 1 pantalla privada.</p>
+          </div>
+          <div class="preset-combo-pricing">
+            <span class="preset-combo-price">$3.00</span>
+            <span class="preset-combo-period">/ mes</span>
+          </div>
+        </div>
+
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">PRODUCTIVIDAD</span>
+              <span class="preset-combo-save-pill">365 Días</span>
+            </div>
+            <div class="preset-combo-title">Canva Pro Anual</div>
+            <p class="preset-combo-desc">Quitafondos mágico, kit de marcas y millones de plantillas premium directo a tu propio correo.</p>
+          </div>
+          <div class="preset-combo-pricing">
+            <span class="preset-combo-price">$4.00</span>
+            <span class="preset-combo-period">/ año completo</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Grid de Tarjetas con Logos Oficiales Vectoriales -->
-      <div class="platforms-grid" id="platforms-grid">
-        <!-- Generado dinámicamente desde app.js con STREAMING_PLATFORMS -->
+      <!-- Botón para ver catálogo completo -->
+      <div style="text-align: center; margin-top: 2.5rem;" class="reveal-on-scroll">
+        <a href="catalogo.html" class="btn-cosmic-primary" style="display: inline-flex; font-size: 1.05rem; padding: 1rem 2.25rem;">
+          <span>🍿 Explorar las 9 Plataformas del Catálogo</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== ARMAR TU COMBO PERSONALIZADO (2 x $5) ==================== -->
-  <section class="section-padding custom-combo-studio-section" id="armar-combo">
+  <!-- ==================== ESCAPARATE DE COMBOS (2 x $5) ==================== -->
+  <section class="section-padding custom-combo-studio-section" id="combos-preview">
     <div class="container">
       <div class="section-header reveal-on-scroll">
-        <span class="section-tag">✦ CONFIGURADOR INTERACTIVO ✦</span>
-        <h2 class="section-title">Arma tu Combo a Tu Medida</h2>
+        <span class="section-tag">✦ REGLA DE AHORRO ÓRBITA ✦</span>
+        <h2 class="section-title">Combos Especiales (2 x $5)</h2>
         <p class="section-description">
-          Tarifa fija: <strong>$3 por aplicación individual</strong> o combina <strong>2 aplicaciones por solo $5</strong>. Además, <strong>Canva Pro Anual a solo $4/año</strong>. Selecciona tus apps y el descuento se calculará en vivo automáticamente.
+          ¿Por qué pagar de más? Combina <strong>2 aplicaciones por solo $5.00 / mes</strong> (ahorras $1.00 cada mes). O solicita un <strong>Pack Trío por $8.00 / mes</strong>. Pantallas 100% independientes con sus propios PINs.
         </p>
       </div>
 
-      <div class="custom-combo-studio-card reveal-on-scroll">
-        <div class="studio-header">
-          <div class="studio-title-wrap">
-            <span class="studio-badge">DESCUENTO AUTOMÁTICO</span>
-            <h3 class="studio-main-heading">Selecciona 2 Plataformas para activar el Combo Dúo ($5)</h3>
-            <p class="studio-subtext">Haz clic en las tarjetas de abajo para sumarlas a tu paquete. Puedes elegir cualquiera:</p>
-          </div>
-          <div class="studio-selected-counter">
-            <span id="custom-selected-count">0</span> seleccionadas
-          </div>
+      <div class="subpage-cross-banner reveal-on-scroll">
+        <div>
+          <span class="preset-combo-badge">CONFIGURADOR INTERACTIVO DE COMBOS</span>
+          <h3 style="color: #ffffff; font-size: 1.5rem; font-weight: 800; margin: 0.5rem 0;">Diseña tu Paquete Personalizado con Descuento en Vivo</h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0;">Selecciona tus plataformas favoritas (Netflix, Disney+, Max, Spotify, Canva, etc.) y nuestro cotizador calculará tu tarifa de ahorro al instante.</p>
         </div>
-
-        <!-- Selector interactivo de aplicaciones disponibles -->
-        <div class="custom-app-selector-grid" id="custom-app-selector-grid">
-          <!-- Generado dinámicamente desde app.js -->
-        </div>
-
-        <!-- Resumen de cotización en vivo -->
-        <div class="custom-combo-summary-box">
-          <div class="summary-left-info">
-            <div class="summary-combo-title" id="summary-combo-title">Combo Personalizado Órbita</div>
-            <div class="summary-combo-apps" id="summary-combo-apps">Selecciona al menos 1 aplicación</div>
-            <div class="summary-discount-tag" id="summary-discount-tag" style="display: none;">
-              🎉 ¡Descuento de Combo Aplicado!
-            </div>
-          </div>
-          <div class="summary-right-pricing">
-            <div class="summary-price-total">
-              <span class="currency-symbol">$</span>
-              <span id="custom-total-price">0.00</span>
-              <span class="period-text" id="custom-price-period">/ mes</span>
-            </div>
-            <div class="summary-regular-price" id="custom-regular-price" style="display: none;">
-              Precio regular: <span>$6.00</span>
-            </div>
-            <a href="#" id="btn-order-custom-combo" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary btn-combo-order">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
-              </svg>
-              <span>Pedir Combo por WhatsApp</span>
-            </a>
-          </div>
-        </div>
+        <a href="combos.html" class="btn-cosmic-primary" style="white-space: nowrap; font-size: 1.05rem; padding: 1rem 2rem;">
+          <span>⚡ Abrir Configurador de Combos</span>
+        </a>
       </div>
     </div>
   </section>
@@ -532,27 +539,27 @@
 
         <!-- Columna 2: Navegación Rápida -->
         <div>
-          <h4 class="footer-col-title">Navegación</h4>
+          <h4 class="footer-col-title">Páginas</h4>
           <ul class="footer-links-list">
-            <li><a href="#hero" class="footer-link">Inicio</a></li>
-            <li><button type="button" class="footer-link footer-btn-link" data-open-orbit-ai>Orbit AI (Asistente)</button></li>
-            <li><a href="#plataformas" class="footer-link">Plataformas ($3)</a></li>
-            <li><a href="#armar-combo" class="footer-link">Armar Combo (2 x $5)</a></li>
-            <li><a href="#ventajas" class="footer-link">Ventajas del Servicio</a></li>
-            <li><a href="#faq" class="footer-link">Preguntas Frecuentes</a></li>
+            <li><a href="index.html" class="footer-link">🏠 Inicio</a></li>
+            <li><a href="catalogo.html" class="footer-link">🍿 Catálogo de Plataformas ($3)</a></li>
+            <li><a href="combos.html" class="footer-link">⚡ Armar Combo (2 x $5)</a></li>
+            <li><button type="button" class="footer-link footer-btn-link" data-open-orbit-ai>🤖 Orbit AI (Asistente)</button></li>
+            <li><a href="#ventajas" class="footer-link">🛡️ Ventajas del Servicio</a></li>
+            <li><a href="#faq" class="footer-link">❓ Preguntas Frecuentes</a></li>
           </ul>
         </div>
 
         <!-- Columna 3: Servicios Destacados -->
         <div>
-          <h4 class="footer-col-title">Plataformas</h4>
+          <h4 class="footer-col-title">Plataformas Populares</h4>
           <ul class="footer-links-list">
-            <li><a href="#plataformas" class="footer-link">Netflix Premium 4K ($3)</a></li>
-            <li><a href="#plataformas" class="footer-link">Disney+ & ESPN ($3)</a></li>
-            <li><a href="#plataformas" class="footer-link">HBO Max ($3)</a></li>
-            <li><a href="#plataformas" class="footer-link">Amazon Prime Video ($3)</a></li>
-            <li><a href="#plataformas" class="footer-link">Spotify Premium ($3)</a></li>
-            <li><a href="#plataformas" class="footer-link">Canva Pro Anual ($4)</a></li>
+            <li><a href="catalogo.html" class="footer-link">Netflix Premium 4K ($3)</a></li>
+            <li><a href="catalogo.html" class="footer-link">Disney+ & ESPN ($3)</a></li>
+            <li><a href="catalogo.html" class="footer-link">HBO Max ($3)</a></li>
+            <li><a href="catalogo.html" class="footer-link">Amazon Prime Video ($3)</a></li>
+            <li><a href="catalogo.html" class="footer-link">Spotify Premium ($3)</a></li>
+            <li><a href="catalogo.html" class="footer-link">Canva Pro Anual ($4)</a></li>
           </ul>
         </div>
 

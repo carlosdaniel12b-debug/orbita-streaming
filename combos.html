@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armar Combo (2 x $5) | Órbita Streaming</title>
+  <meta name="description" content="Configurador oficial de combos de streaming. Combina 2 aplicaciones por solo $5/mes con perfiles privados y clave PIN independiente. Ahorra en Netflix, Disney+, Max y más.">
+  <meta name="theme-color" content="#070a09">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Armar Combo (2 x $5) | Órbita Streaming">
+  <meta property="og:description" content="Combina 2 aplicaciones por $5/mes o 3 aplicaciones por $8/mes. Pantallas 100% privadas con PIN.">
+  <meta property="og:type" content="website">
+
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Estilos Principales -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='41' fill='none' stroke='%23ccff00' stroke-width='8'/><circle cx='50' cy='50' r='23' fill='none' stroke='%23ccff00' stroke-width='13'/><circle cx='50' cy='9' r='5' fill='%23ffffff'/></svg>">
+</head>
+<body>
+
+  <!-- Nebulosas Cósmicas Reactivas de Fondo con Animación Cromática -->
+  <div class="cosmic-nebula-glow-1" aria-hidden="true"></div>
+  <div class="cosmic-nebula-glow-2" aria-hidden="true"></div>
+
+  <!-- Meteoros / Estrellas Fugaces Animadas en el Fondo -->
+  <div class="cosmic-shooting-stars" aria-hidden="true">
+    <div class="shooting-star s1"></div>
+    <div class="shooting-star s2"></div>
+    <div class="shooting-star s3"></div>
+    <div class="shooting-star s4"></div>
+  </div>
+
+  <!-- Polvo Cósmico Flotante Bioluminiscente -->
+  <div class="cosmic-floating-dust" aria-hidden="true">
+    <div class="dust-particle d1"></div>
+    <div class="dust-particle d2"></div>
+    <div class="dust-particle d3"></div>
+    <div class="dust-particle d4"></div>
+    <div class="dust-particle d5"></div>
+    <div class="dust-particle d6"></div>
+  </div>
+
+  <!-- Contenedor Global Three.js para la animación 3D de planetas y órbitas cósmicas (Difuminada) -->
+  <div class="hero-3d-bg" id="hero-3d-canvas-container" aria-hidden="true"></div>
+
+  <!-- Capa Difusora de Fondo Cósmico (Profundidad Atmosférica y Desenfoque Suave) -->
+  <div class="cosmic-blur-backdrop" aria-hidden="true"></div>
+
+  <!-- ==================== HEADER FLOTANTE ==================== -->
+  <div class="header-wrapper">
+    <header class="main-header" id="main-header">
+      <!-- Logo Órbita Streaming Oficial -->
+      <a href="index.html" class="brand-logo-link" aria-label="Ir al inicio de Órbita Streaming">
+        <svg viewBox="0 0 100 100" class="brand-orbit-glyph" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="orbit-ring-outer"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="orbit-ring-inner"/>
+          <circle cx="50" cy="9" r="4" fill="#ffffff" class="orbit-satellite-dot"/>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-text-title">ÓRBITA</span>
+          <span class="brand-text-sub">STREAMING</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación Multi-Página -->
+      <nav class="nav-menu" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="catalogo.html" class="nav-link">Catálogo ($3)</a>
+        <a href="combos.html" class="nav-link active">Armar Combo (2 x $5)</a>
+        <button type="button" class="nav-link nav-link-ai" id="nav-open-orbit-ai" data-open-orbit-ai aria-label="Abrir asistente Orbit AI">
+          <span class="ai-spark-dot"></span>
+          <span>Orbit AI ✦</span>
+        </button>
+      </nav>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <!-- Selector de Moneda Dinámico -->
+        <div class="currency-selector-wrap">
+          <label for="currency-select" class="sr-only">Seleccionar divisa</label>
+          <select id="currency-select" class="currency-dropdown" aria-label="Seleccionar moneda">
+            <option value="USD" selected>USD ($)</option>
+            <option value="COP">COP (Col$)</option>
+            <option value="MXN">MXN (Mex$)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="PEN">PEN (S/)</option>
+          </select>
+        </div>
+
+        <!-- Botón Audio Cósmico -->
+        <button type="button" class="header-icon-btn" id="header-audio-toggle" aria-label="Alternar audio cósmico" title="Activar/Silenciar sonido de absorción">
+          <span class="audio-icon-on">🔊</span>
+        </button>
+
+        <!-- Botón Directo WhatsApp -->
+        <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+          </svg>
+          <span class="btn-text">WhatsApp</span>
+        </a>
+
+        <!-- Botón Hamburguesa Móvil -->
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Drawer Menú Móvil -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="brand-logo-link">
+        <svg viewBox="0 0 100 100" class="brand-orbit-glyph" style="width: 32px; height: 32px;">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+          <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-text-title" style="font-size: 1.2rem;">ÓRBITA</span>
+          <span class="brand-text-sub" style="font-size: 0.55rem;">STREAMING</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Cerrar menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-list">
+      <a href="index.html" class="mobile-nav-link">🏠 Inicio <span>→</span></a>
+      <a href="catalogo.html" class="mobile-nav-link">🍿 Catálogo Individual ($3) <span>→</span></a>
+      <a href="combos.html" class="mobile-nav-link active">⚡ Armar Combo (2 x $5) <span>→</span></a>
+      <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">🤖 Asistente Orbit (IA) <span>⚡</span></a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="justify-content: center; width: 100%;">
+        <span>Chatear por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================== HERO DE COMBOS ==================== -->
+  <section class="subpage-hero" id="combos-hero">
+    <div class="container hero-content">
+      <div class="subpage-breadcrumb">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span style="color: var(--accent-lime);">Armar Combo (2 x $5)</span>
+      </div>
+
+      <div class="hero-cosmic-badge">
+        <span class="cosmic-sparkle">✦</span>
+        <span>DESCUENTO OFICIAL ÓRBITA • 2 PANTALLAS PRIVADAS CON PIN</span>
+        <span class="cosmic-sparkle">✦</span>
+      </div>
+
+      <h1 class="hero-main-title">
+        Arma tu Combo <br>
+        <span class="title-gradient-block">a Tu Medida</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Combina <strong>2 aplicaciones por solo $5.00 / mes</strong> (ahorras $1.00 cada mes). O añade una 3ra app por solo <strong>$8.00 / mes</strong>. Ambas pantallas son 100% privadas, con su propia clave PIN y en Ultra HD 4K.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== CONFIGURADOR INTERACTIVO ==================== -->
+  <section class="section-padding custom-combo-studio-section" id="armar-combo" style="padding-top: 0.5rem;">
+    <div class="container">
+      <div class="custom-combo-studio-card reveal-on-scroll">
+        <div class="studio-header">
+          <div class="studio-title-wrap">
+            <span class="studio-badge">DESCUENTO AUTOMÁTICO</span>
+            <h3 class="studio-main-heading">Selecciona 2 Plataformas para activar el Combo Dúo ($5)</h3>
+            <p class="studio-subtext">Haz clic en las tarjetas de abajo para sumarlas a tu paquete. El descuento se aplica en vivo:</p>
+          </div>
+          <div class="studio-selected-counter">
+            <span id="custom-selected-count">2</span> seleccionadas
+          </div>
+        </div>
+
+        <!-- Selector interactivo de aplicaciones disponibles -->
+        <div class="custom-app-selector-grid" id="custom-app-selector-grid">
+          <!-- Generado dinámicamente desde app.js -->
+        </div>
+
+        <!-- Resumen de cotización en vivo -->
+        <div class="custom-combo-summary-box">
+          <div class="summary-left-info">
+            <div class="summary-combo-title" id="summary-combo-title">Combo Personalizado Órbita</div>
+            <div class="summary-combo-apps" id="summary-combo-apps">Netflix + Disney+</div>
+            <div class="summary-discount-tag" id="summary-discount-tag">
+              🎉 ¡Descuento de Combo Aplicado!
+            </div>
+          </div>
+          <div class="summary-right-pricing">
+            <div class="summary-price-total">
+              <span class="currency-symbol">$</span>
+              <span id="custom-total-price">5.00</span>
+              <span class="period-text" id="custom-price-period">/ mes</span>
+            </div>
+            <div class="summary-regular-price" id="custom-regular-price">
+              Precio regular: <span>$6.00</span>
+            </div>
+            <a href="#" id="btn-order-custom-combo" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary btn-combo-order">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+              </svg>
+              <span>Pedir Combo por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAQUETES PRE-ARMADOS RECOMENDADOS ==================== -->
+  <section class="section-padding bg-surface-alt" id="paquetes-destacados">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ COMBINACIONES ESTRELLA ✦</span>
+        <h2 class="section-title">Paquetes Recomendados</h2>
+        <p class="section-description">
+          Las combinaciones más pedidas por nuestros usuarios. Cárgalas con 1 solo clic en el configurador o solicítalas de inmediato.
+        </p>
+      </div>
+
+      <div class="preset-combos-grid reveal-on-scroll">
+        <!-- Paquete 1: Combo Rey -->
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">MÁS POPULAR</span>
+              <span class="preset-combo-save-pill">Ahorras $1.00</span>
+            </div>
+            <div class="preset-combo-title">Combo Rey: Cine & Deportes</div>
+            <p class="preset-combo-desc">Todas las series virales de Netflix 4K combinadas con la Champions League, Premier y F1 en vivo por ESPN en Disney+.</p>
+            <div class="preset-combo-icons-row">
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/netflix.svg" alt="Netflix">
+              </div>
+              <span style="font-weight: 800; color: var(--accent-lime);">+</span>
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/disneyplus.svg" alt="Disney+">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="preset-combo-pricing">
+              <span class="preset-combo-price">$5.00</span>
+              <span class="preset-combo-period">/ mes total</span>
+            </div>
+            <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'disneyplus'])">
+              <span>⚡ Cargar en Configurador</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paquete 2: Combo Cinéfilo -->
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">CINÉFILOS</span>
+              <span class="preset-combo-save-pill">Ahorras $1.00</span>
+            </div>
+            <div class="preset-combo-title">Combo Cinéfilo: Netflix + Max</div>
+            <p class="preset-combo-desc">La calidad indiscutible de HBO (House of the Dragon, The Last of Us) sumada al catálogo masivo de Netflix con PIN privado.</p>
+            <div class="preset-combo-icons-row">
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/netflix.svg" alt="Netflix">
+              </div>
+              <span style="font-weight: 800; color: var(--accent-lime);">+</span>
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/max.svg" alt="Max">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="preset-combo-pricing">
+              <span class="preset-combo-price">$5.00</span>
+              <span class="preset-combo-period">/ mes total</span>
+            </div>
+            <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'hbomax'])">
+              <span>⚡ Cargar en Configurador</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paquete 3: Combo Total (Música + Series) -->
+        <div class="preset-combo-card">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge">MULTIMEDIA</span>
+              <span class="preset-combo-save-pill">Ahorras $1.00</span>
+            </div>
+            <div class="preset-combo-title">Combo Total: Netflix + Spotify</div>
+            <p class="preset-combo-desc">Entretenimiento visual para tu pantalla y más de 100M de canciones sin anuncios en tu smartphone con Spotify Premium.</p>
+            <div class="preset-combo-icons-row">
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/netflix.svg" alt="Netflix">
+              </div>
+              <span style="font-weight: 800; color: var(--accent-lime);">+</span>
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/spotify.svg" alt="Spotify">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="preset-combo-pricing">
+              <span class="preset-combo-price">$5.00</span>
+              <span class="preset-combo-period">/ mes total</span>
+            </div>
+            <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'spotify'])">
+              <span>⚡ Cargar en Configurador</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paquete 4: Pack Trío Hogar -->
+        <div class="preset-combo-card" style="border-color: rgba(56, 189, 248, 0.4);">
+          <div>
+            <div class="preset-combo-header">
+              <span class="preset-combo-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">PACK 3 PANTALLAS</span>
+              <span class="preset-combo-save-pill">3 Apps Privadas</span>
+            </div>
+            <div class="preset-combo-title">Pack Trío: Netflix + Disney+ + Max</div>
+            <p class="preset-combo-desc">El paquete definitivo para todo tu hogar: cine, series multipremiadas y deportes internacionales en 3 pantallas con PIN propio.</p>
+            <div class="preset-combo-icons-row">
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/netflix.svg" alt="Netflix">
+              </div>
+              <span style="font-weight: 800; color: var(--accent-lime);">+</span>
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/disneyplus.svg" alt="Disney+">
+              </div>
+              <span style="font-weight: 800; color: var(--accent-lime);">+</span>
+              <div class="preset-combo-icon-circle">
+                <img src="assets/icons/max.svg" alt="Max">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="preset-combo-pricing">
+              <span class="preset-combo-price">$8.00</span>
+              <span class="preset-combo-period">/ mes total ($5 + $3)</span>
+            </div>
+            <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'disneyplus', 'hbomax'])">
+              <span>⚡ Cargar 3 Apps en Configurador</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner de Cruce hacia Catálogo Individual -->
+      <div class="subpage-cross-banner reveal-on-scroll">
+        <div>
+          <span class="preset-combo-badge">¿SOLO DESEAS 1 SOLA APLICACIÓN?</span>
+          <h3 style="color: #ffffff; font-size: 1.35rem; font-weight: 800; margin: 0.4rem 0;">Revisa nuestro Catálogo Individual ($3.00/mes)</h3>
+          <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0;">Si prefieres una sola pantalla privada o Canva Pro Anual ($4/año), explora nuestro catálogo completo.</p>
+        </div>
+        <a href="catalogo.html" class="btn-cosmic-glass" style="white-space: nowrap;">
+          <span>🍿 Ver Catálogo Individual</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="main-footer" id="contacto">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <div class="brand-logo-link footer-brand-logo">
+            <svg viewBox="0 0 100 100" class="brand-orbit-glyph" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="orbit-ring-outer"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="orbit-ring-inner"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff" class="orbit-satellite-dot"/>
+            </svg>
+            <div class="brand-text-block">
+              <span class="brand-text-title">ÓRBITA</span>
+              <span class="brand-text-sub">STREAMING</span>
+            </div>
+          </div>
+          <p class="footer-tagline">
+            Tu universo de entretenimiento digital en una sola órbita. Perfiles privados, soporte continuo 24/7 y garantía de reposición inmediata.
+          </p>
+          <div class="footer-direct-wa">
+            <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="footer-wa-badge">
+              <span class="wa-dot"></span>
+              <span>WhatsApp Directo: +593 99 822 6756</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Páginas</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">🏠 Inicio</a></li>
+            <li><a href="catalogo.html">🍿 Catálogo de Plataformas ($3)</a></li>
+            <li><a href="combos.html" style="color: var(--accent-lime); font-weight: 700;">⚡ Armar Combo (2 x $5)</a></li>
+            <li><a href="index.html#ventajas">🛡️ Ventajas & Garantía</a></li>
+            <li><a href="index.html#faq">❓ Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Regla de Ahorro</h4>
+          <ul class="footer-links-list">
+            <li><span>🍿 1 App Individual: <strong>$3.00 / mes</strong></span></li>
+            <li><span>⚡ Combo Dúo (2 Apps): <strong>$5.00 / mes</strong></span></li>
+            <li><span>🎨 Canva Pro Anual: <strong>$4.00 / año</strong></span></li>
+            <li><span>👨‍👩‍👧 Pack Trío (3 Apps): <strong>$8.00 / mes</strong></span></li>
+            <li><span>⚡ Activación: <strong>Menos de 5 min</strong></span></li>
+          </ul>
+        </div>
+
+        <div class="footer-support-col">
+          <h4 class="footer-heading">Atención Inmediata</h4>
+          <p class="footer-text-sm">Escríbenos directamente por WhatsApp para activar tus pantallas en minutos con soporte 24/7.</p>
+          <div class="footer-cta-box">
+            <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="width: 100%; justify-content: center;">
+              <span>Chatear con Asesor</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright y Firma de Creador -->
+      <div class="footer-bottom-bar">
+        <div class="footer-creator-box">
+          <span class="creator-sparkle">✦</span>
+          <span class="creator-text">Creada por <strong>Carlos Daniel</strong></span>
+          <span class="creator-sparkle">✦</span>
+        </div>
+
+        <p class="footer-disclaimer">
+          <strong>Aviso de Independencia:</strong> Órbita Streaming es un intermediario digital independiente que facilita servicios de acceso y gestión de perfiles de entretenimiento. Todas las marcas registradas, logotipos y nombres comerciales de plataformas son propiedad exclusiva de sus respectivos titulares y se utilizan únicamente con fines ilustrativos e informativos.
+        </p>
+
+        <p class="footer-copyright">
+          &copy; 2026 <strong>Órbita Streaming</strong> • Creada por <strong>Carlos Daniel</strong>. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== VENTANA FLOTANTE: ORBIT AI ==================== -->
+  <div class="orbit-ai-floating-window" id="orbit-ai-window" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="orbit-ai-window-backdrop" id="orbit-ai-backdrop"></div>
+    <div class="orbit-ai-window-dialog">
+      <div class="orbit-ai-win-header">
+        <div class="orbit-ai-win-profile">
+          <div class="orbit-ai-win-avatar">
+            <svg viewBox="0 0 100 100" class="ai-avatar-svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+            </svg>
+            <span class="orbit-ai-pulse-dot"></span>
+          </div>
+          <div>
+            <div class="orbit-ai-win-name">Orbit ✦ Asistente Inteligente</div>
+            <div class="orbit-ai-win-status">EN LÍNEA • ASESOR DE STREAMING</div>
+          </div>
+        </div>
+        <button type="button" class="orbit-ai-close-btn" id="orbit-ai-close-btn" aria-label="Cerrar asistente Orbit">✕</button>
+      </div>
+
+      <div class="orbit-ai-chips-shelf" id="ai-prompt-chips"></div>
+      <div class="orbit-ai-chat-body" id="ai-chat-box">
+        <div class="ai-message ai-bot-message">
+          <div class="ai-bot-avatar">
+            <svg viewBox="0 0 100 100" class="ai-avatar-svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="ai-message-content">
+            <div class="ai-bot-name">Orbit ✦ Asistente Inteligente</div>
+            <p>¡Hola! Soy <strong>Orbit</strong>, tu asistente de entretenimiento. ¿Buscas armar un <strong>Combo Dúo (2 apps por $5)</strong> o un paquete trío? Cuéntame qué plataformas deseas o presiona uno de los botones rápidos de arriba.</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="orbit-ai-input-dock" id="ai-input-form">
+        <div class="ai-input-wrap">
+          <input type="text" id="ai-user-query" class="ai-text-input" placeholder="Ej: Quiero un combo de Netflix y Disney+..." autocomplete="off">
+          <button type="submit" class="ai-submit-btn" aria-label="Enviar mensaje">
+            <span>Consultar</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Botón Flotante para Lanzar Orbit AI -->
+  <div class="floating-orbit-ai-container">
+    <button type="button" class="floating-orbit-ai-btn" id="floating-orbit-ai-btn" data-open-orbit-ai aria-label="Abrir asistente inteligente Orbit">
+      <div class="orbit-ai-btn-avatar">
+        <svg viewBox="0 0 100 100" class="ai-avatar-svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+          <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+        </svg>
+        <span class="btn-live-dot"></span>
+      </div>
+      <div class="orbit-ai-btn-content">
+        <span class="orbit-ai-btn-title">Orbit ✦ Asistente</span>
+        <span class="orbit-ai-btn-sub">¿Qué ver hoy?</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Botón Flotante de WhatsApp -->
+  <div class="floating-whatsapp-wrap">
+    <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" aria-label="Contactar soporte por WhatsApp">
+      <span class="wa-beacon-ring"></span>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/orbit-canvas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

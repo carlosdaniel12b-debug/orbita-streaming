@@ -890,6 +890,9 @@
     const comboSection = document.getElementById('armar-combo');
     if (comboSection) {
       comboSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.location.href = `combos.html?add=${platformIds.join(',')}`;
+      return;
     }
 
     showToast(`✦ Cargado en el Configurador: ${platformIds.join(' + ')} ✦`);
@@ -1101,6 +1104,29 @@
   // --- 6. CONFIGURADOR INTERACTIVO "ARMAR COMBO" ($3 c/u, 2 x $5, Canva $4) ---
   // =========================================================================
   function initCustomComboBuilder() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const addParam = params.get('add');
+      const comboParam = params.get('combo');
+      if (addParam) {
+        state.selectedCustomPlatforms.clear();
+        addParam.split(',').forEach(id => {
+          const cleanId = id.trim().toLowerCase();
+          if (STREAMING_PLATFORMS.some(p => p.id === cleanId)) {
+            state.selectedCustomPlatforms.add(cleanId);
+          }
+        });
+      } else if (comboParam === 'rey') {
+        state.selectedCustomPlatforms = new Set(['netflix', 'disneyplus']);
+      } else if (comboParam === 'cine') {
+        state.selectedCustomPlatforms = new Set(['netflix', 'hbomax']);
+      } else if (comboParam === 'total') {
+        state.selectedCustomPlatforms = new Set(['netflix', 'spotify']);
+      } else if (comboParam === 'trio') {
+        state.selectedCustomPlatforms = new Set(['netflix', 'disneyplus', 'hbomax']);
+      }
+    } catch (e) {}
+
     renderCustomComboCheckboxes();
     updateCustomComboCalculator();
   }
