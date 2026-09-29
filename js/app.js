@@ -565,8 +565,16 @@
     });
   }
 
+  function formatAiText(str) {
+    if (!str) return '';
+    let formatted = escapeHtml(str);
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    formatted = formatted.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+    return `<p>${formatted}</p>`;
+  }
+
   function processAiQuery(userText, directPreset = null) {
-    // Asegurar que la ventana flotante esté abierta al procesar consulta
     openOrbitAiWindow();
 
     const chatBox = document.getElementById('ai-chat-box');
@@ -594,11 +602,44 @@
     if (directPreset) {
       rec = { ...directPreset };
     } else {
-      // Normalizar texto sin tildes para matching robusto
       const rawText = userText.toLowerCase();
       const normText = rawText.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-      // A) Detección de Plataformas Mencionadas Directamente
+      // A) Saludos y cortesía básica
+      const isGreeting = /\b(hola|buen dia|buenos dias|buenas tardes|buenas noches|hey|que tal|saludos|hello|hi)\b/.test(normText);
+
+      // B) Preguntas de funciones / Capacidades del bot
+      const isCapabilities = /\b(que puedes hacer|quien eres|para que sirves|como me ayudas|tus funciones|que haces|ayuda|funciones|capacidades|como funcionas)\b/.test(normText);
+
+      // C) Medios de pago y proceso de compra
+      const isPayment = /\b(como pago|medios de pago|metodos de pago|formas de pago|forma de pago|transferencia|binance|usdt|zelle|pago movil|nequi|dolar|bolivares|pesos|tarjeta|como comprar|como compro|donde pago|pago)\b/.test(normText);
+
+      // D) Preguntas de garantía y seguridad
+      const isWarranty = /\b(garantia|se cae|soporte|estafa|seguro|seguridad|confiable|confianza|caida|problema|reposicion)\b/.test(normText);
+
+      // E) Preguntas sobre perfiles con PIN
+      const isProfilePin = /\b(pin|clave pin|perfil privado|alguien mas|pantalla privada|historial|mi perfil)\b/.test(normText);
+
+      // F) Promoción de Spotify Gratis
+      const isPromoSpotify = /\b(spotify gratis|promo spotify|promocion spotify|regalo spotify|gratis spotify)\b/.test(normText);
+
+      // G) Comparativas directas entre plataformas
+      const isComparison = /\b(diferencia|cual es mejor|comparar|comparativa|vs|versus|o max|o netflix|o disney)\b/.test(normText);
+
+      // H) Detección de Géneros Cinematográficos
+      const isTerror = /\b(terror|miedo|suspenso|horror|paranormal|scream|conjuro|sangre|exorcismo|fantasmas|monstruo|halloween|escalofrio|perturbadora|perturbador)\b/.test(normText);
+      const isAccion = /\b(accion|disparos|adrenalina|persecucion|peleas|pelea|john wick|rapido|top gun|mision imposible|balas|combate|artes marciales)\b/.test(normText);
+      const isScifi = /\b(ciencia ficcion|scifi|sci fi|espacio|interestelar|interstellar|dune|stranger things|star wars|alien|aliens|galaxia|viajes en el tiempo|futurista|futuro|cyberpunk)\b/.test(normText);
+      const isDrama = /\b(drama|llorar|emotiva|conmovedora|oppenheimer|succession|the bear|shogun|oscar|premios|profunda|triste|reflexiva)\b/.test(normText);
+      const isComedia = /\b(comedia|risa|risas|divertida|graciosa|chistosa|the office|friends|sitcom|humor|reir)\b/.test(normText);
+      const isAnime = /\b(anime|otaku|manga|japones|demon slayer|attack on titan|jujutsu|shonen|goku|naruto|bleach|animacion japonesa)\b/.test(normText);
+      const isFamily = /\b(nino|ninos|nina|ninas|infantil|caricatura|caricaturas|bebe|bebes|pixar|toy story|bob esponja|paw patrol|disney|intensamente|moana|familia|familiar)\b/.test(normText);
+      const isRomance = /\b(romance|romantica|romanticas|amor|pareja|novios|enamorados|la la land|desamor|san valentin|novia|novio)\b/.test(normText);
+      const isSports = /\b(deporte|deportes|futbol|champions|messi|ronaldo|liga|espn|premier|partido|partidos|soccer|f1|formula 1|tenis|ufc|libertadores|sudamericana|conmebol|básquet|basquet|nba)\b/.test(normText);
+      const isTools = /\b(diseno|logo|logos|instagram|redes|post|flyer|publicidad|emprendimiento|negocio|estudio|tarea|universidad|plantilla|plantillas|quitar fondo|quitafondos|creador|marketing|fotos)\b/.test(normText);
+      const isMusic = /\b(musica|cancion|canciones|playlist|podcast|podcasts|gym|gimnasio|audifonos|auriculares|sonido|audio|escuchar)\b/.test(normText);
+
+      // I) Detección de Plataformas Mencionadas Directamente
       const detectedPlatforms = [];
       if (/\b(netflix)\b/.test(normText)) detectedPlatforms.push('netflix');
       if (/\b(disney|disney\+|disneyplus|star\+|starplus)\b/.test(normText)) detectedPlatforms.push('disneyplus');
@@ -610,95 +651,251 @@
       if (/\b(spotify|spoty)\b/.test(normText)) detectedPlatforms.push('spotify');
       if (/\b(canva|canva pro)\b/.test(normText)) detectedPlatforms.push('canva');
 
-      // B) Detección de Cantidad Solicitada
-      // Regex para 1 SOLA plataforma:
-      const singleRegex = /\b(una|1|uno|sola|solo|solita|solito|solamente|individual|unitaria|1 sola|1 solo|una sola|solo una|solo 1|una sola aplicacion|una sola plataforma|una sola app|una aplicacion|una plataforma|una app|1 aplicacion|1 plataforma|1 app|nada mas una|solito)\b/;
-      // Regex explícito para rechazo de combo:
-      const noComboRegex = /\b(no quiero combo|sin combo|en vez de combo|cero combo)\b/;
-
-      // Regex para 2 PLATAFORMAS / COMBO:
+      // J) Cantidad solicitada (1, 2 o 3 apps)
       const comboRegex = /\b(dos|2|ambas|combo|duo|dupla|pareja|juntas|las dos|los dos|2 aplicaciones|2 apps|dos aplicaciones|dos apps|armar combo|paquete|duplas)\b/;
-
-      // Regex para 3 PLATAFORMAS:
       const threeRegex = /\b(tres|3|3 aplicaciones|3 apps|tres aplicaciones|trio|trío)\b/;
 
-      let requestedCount = null;
-      if (threeRegex.test(normText)) {
-        requestedCount = 3;
-      } else if (noComboRegex.test(normText)) {
-        requestedCount = 1;
-      } else if (comboRegex.test(normText) && !singleRegex.test(normText)) {
-        requestedCount = 2;
-      } else if (singleRegex.test(normText) && !comboRegex.test(normText)) {
-        requestedCount = 1;
-      } else if (singleRegex.test(normText) && comboRegex.test(normText)) {
-        // Conflicto: e.g. "quiero una sola aplicacion, no un combo"
-        requestedCount = 1;
+      // -------------------------------------------------------------
+      // ROUTING DE INTENCIONES CONVERSACIONALES
+      // -------------------------------------------------------------
+
+      // 1. Saludos iniciales
+      if (isGreeting && detectedPlatforms.length === 0 && !isTerror && !isAccion && !isScifi) {
+        rec = {
+          title: "¡Hola! Soy Orbit, tu Copiloto IA",
+          badge: "Agente Inteligente Activo",
+          reason: "¡Hola! 👋 Qué alegría saludarte. Soy **Orbit**, tu agente de inteligencia artificial en Órbita Streaming.\n\nPuedo conversar contigo y ayudarte en lo que necesites:\n• 🍿 **Recomendarte qué ver hoy:** Pídeme películas o series de terror, acción, comedia, anime, ciencia ficción o romance con títulos exactos.\n• 💡 **Descubrir qué app te conviene:** Te comparo Netflix, Max, Disney+, Prime, Paramount y más.\n• ⚡ **Armar tu Combo Dúo (2 apps x $5/mes)** y aprovechar la promo de Spotify Gratis.\n• 🔒 Resolver dudas sobre perfiles privados con PIN, medios de pago y garantía.\n\n¿De qué tienes ganas hoy, o qué plataforma estás buscando?",
+          recommendIds: ['netflix', 'hbomax', 'disneyplus'],
+          isCombo: true,
+          price: 5.00,
+          tip: "💡 Puedes escribir lo que quieras: 'recomiéndame pelis de terror', 'cuánto vale disney', 'cómo pago', etc."
+        };
       }
 
-      // Si el usuario especificó exactamente 2 plataformas y no dijo que quería 1 sola:
-      if (detectedPlatforms.length === 2 && requestedCount !== 1) {
-        requestedCount = 2;
-      } else if (detectedPlatforms.length === 1 && requestedCount === null) {
-        // Mencionó 1 plataforma específica y no mencionó combo -> Tratar como 1 sola
-        requestedCount = 1;
+      // 2. ¿Qué puedes hacer? / Capacidades
+      else if (isCapabilities && detectedPlatforms.length === 0) {
+        rec = {
+          title: "¿Qué puedo hacer por ti?",
+          badge: "Capacidades de Orbit AI",
+          reason: "🤖 **¡Tengo superpoderes para tu entretenimiento!** Como tu agente de IA oficial en Órbita Streaming, puedo:\n\n1. 🎬 **Recomendar Cine y Series:** Pídeme por ejemplo *'películas de terror'*, *'anime de acción'*, *'series adictivas para maratonear'* o *'qué ver en pareja'*, y te daré títulos recomendados y la plataforma exacta donde verlos.\n2. ⚖️ **Comparar Plataformas:** Pregúntame *'¿qué es mejor, Netflix o Max?'* o *'¿dónde ver fútbol en vivo?'* y te lo explico sin rodeos.\n3. 💰 **Optimizar tu Presupuesto:** Te asesoro entre 1 app individual ($3/mes), Canva Pro Anual ($4/año) o Combos Dúo (2 apps x $5/mes con Spotify gratis).\n4. 🛡️ **Garantía y Métodos de Pago:** Te explico cómo pagar por Binance USDT, Zelle, Pago Móvil o transferencias, y cómo activar tu perfil privado con PIN.\n\n¡Dime qué te gustaría saber o qué género prefieres!",
+          recommendIds: ['netflix', 'disneyplus'],
+          isCombo: true,
+          price: 5.00,
+          tip: "⚡ Escribe tu duda o pide una recomendación de cine y te responderé de inmediato."
+        };
       }
 
-      // C) Detección Temática / Categoría
-      const isSports = /\b(deporte|deportes|futbol|champions|messi|ronaldo|liga|espn|premier|partido|partidos|soccer|f1|formula 1|tenis|ufc|libertadores|sudamericana|conmebol|básquet|basquet|nba)\b/.test(normText);
-      const isCinema = /\b(serie|series|pelicula|peliculas|cine|estreno|estrenos|maraton|stranger|dragon|last of us|hollywood|taquillera|accion|terror|comedia|drama)\b/.test(normText);
-      const isMusic = /\b(musica|cancion|canciones|playlist|podcast|podcasts|gym|gimnasio|audifonos|auriculares|sonido|audio|escuchar)\b/.test(normText);
-      const isTools = /\b(diseno|logo|logos|instagram|redes|post|flyer|publicidad|emprendimiento|negocio|estudio|tarea|universidad|plantilla|plantillas|quitar fondo|quitafondos|creador|marketing|fotos)\b/.test(normText);
-      const isFamily = /\b(nino|ninos|infantil|infantiles|caricatura|caricaturas|familia|familiar|pixar|marvel|star wars|nickelodeon|paw patrol|bob esponja|disney)\b/.test(normText);
-      const isQuality = /\b(calidad|4k|dolby|vision|atmos|tasa de bits|bitrate|apple tv|fidelidad)\b/.test(normText);
-      const isNovelas = /\b(novela|novelas|mexico|mexicana|latino|latina|televisa|univision|telenovela)\b/.test(normText);
+      // 3. Medios de pago / Cómo comprar
+      else if (isPayment && detectedPlatforms.length === 0) {
+        rec = {
+          title: "Medios de Pago & Activación en 5 Min",
+          badge: "Pagos 100% Seguros",
+          reason: "💳 **¡Pagar y activar tus cuentas es sumamente sencillo y seguro!**\n\nAceptamos diversos métodos de pago:\n• 🪙 **Criptomonedas:** Binance Pay (USDT) directo y sin comisiones.\n• 🇺🇸 **Zelle** para pagos en dólares.\n• 📱 **Pago Móvil & Transferencias Bancarias** (a tasa del día garantizada).\n• 🇨🇴 **Nequi / Bancolombia** (según disponibilidad para usuarios en Colombia).\n\n⚡ **Entrega Express:** Al enviar tu comprobante a nuestro WhatsApp oficial, te entregamos tu acceso oficial con tu **PIN de perfil privado en menos de 5 minutos**.",
+          recommendIds: ['netflix', 'disneyplus'],
+          isCombo: true,
+          price: 5.00,
+          tip: "📲 Pulsa el botón de WhatsApp abajo para solicitar los datos de pago al instante."
+        };
+      }
 
-      // D) Construcción de la Recomendación según requestedCount
+      // 4. Garantía y soporte
+      else if (isWarranty && detectedPlatforms.length === 0) {
+        rec = {
+          title: "Garantía de Reposición Órbita (30 Días)",
+          badge: "Seguridad & Garantía Total",
+          reason: "🛡️ **Tu servicio está completamente protegido en Órbita:**\n\n• **Garantía Total de 30 Días:** Cada cuenta contratada cuenta con garantía activa durante todo el mes. Si en algún momento presentas cualquier inconveniente, nuestro equipo de soporte en WhatsApp te da **reemplazo o solución inmediata**.\n• **Cuentas 100% Originales:** Son accesos a las aplicaciones oficiales, no APKs modificadas ni enlaces de dudosa procedencia.\n• **Soporte Humano 24/7:** Te atendemos directamente vía WhatsApp todos los días.",
+          recommendIds: ['netflix'],
+          isCombo: false,
+          price: 3.00,
+          tip: "✨ Miles de clientes activos confían en nuestra atención y garantía continua."
+        };
+      }
 
-      // CASO 1: El usuario pidió 1 SOLA APLICACIÓN (o mencionó 1 específica)
-      if (requestedCount === 1) {
-        let targetId = 'netflix'; // Default para 1 app
-        if (detectedPlatforms.length > 0) {
-          targetId = detectedPlatforms[0];
-        } else if (isMusic) {
-          targetId = 'spotify';
-        } else if (isTools) {
-          targetId = 'canva';
-        } else if (isSports) {
-          targetId = 'disneyplus';
-        } else if (isFamily) {
-          targetId = 'disneyplus';
-        } else if (isQuality) {
-          targetId = 'appletv';
-        } else if (isNovelas) {
-          targetId = 'vix';
-        } else if (isCinema) {
-          targetId = 'netflix';
-        }
+      // 5. Perfil privado y PIN
+      else if (isProfilePin) {
+        rec = {
+          title: "Privacidad Total: Tu Perfil con Clave PIN",
+          badge: "100% Privado & Seguro",
+          reason: "🔒 **¿Cómo funciona el perfil privado con PIN?**\n\n• Al contratar tu pantalla, te asignamos un **perfil exclusivo con tu nombre** dentro de la cuenta oficial.\n• Le colocas una **clave PIN personal de 4 dígitos** para que nadie más pueda entrar a ver tus cosas.\n• Tu historial, tu lista de películas y el algoritmo son **totalmente tuyos**, con reproducción en Ultra HD 4K.",
+          recommendIds: ['netflix', 'hbomax'],
+          isCombo: true,
+          price: 5.00,
+          tip: "🔒 Tu privacidad es sagrada: nadie interfiere con tus series ni con tu historial."
+        };
+      }
 
-        const platformData = STREAMING_PLATFORMS.find(p => p.id === targetId) || STREAMING_PLATFORMS[0];
+      // 6. Promo de Spotify gratis
+      else if (isPromoSpotify) {
+        rec = {
+          title: "Super Promo: Combo 2x$5 + SPOTIFY GRATIS",
+          badge: "Promoción Estrella de Regalo",
+          reason: "🎁 **¡La mejor promoción de Órbita Streaming!**\n\nAl ordenar cualquier **Combo Dúo de 2 aplicaciones por solo $5.00/mes** (como Netflix + Disney+, o Max + Prime Video), te obsequiamos **1 cuenta de SPOTIFY PREMIUM totalmente GRATIS** durante el mes.\n\n¡Disfrutas del mejor cine y series en dos plataformas más 100 millones de canciones sin anuncios sin pagar un solo centavo extra!",
+          recommendIds: ['netflix', 'disneyplus', 'spotify'],
+          isCombo: true,
+          price: 5.00,
+          tip: "🎁 Para activarla, pulsa en WhatsApp y pide tu Combo 2x$5 con el bono de Spotify de regalo."
+        };
+      }
+
+      // 7. Comparativas (Netflix vs Max, etc.)
+      else if (isComparison) {
+        rec = {
+          title: "Comparativa: Netflix vs Max (HBO)",
+          badge: "Duelo de Gigantes",
+          reason: "⚖️ **¿Netflix o Max? Aquí te ayudo a elegir la mejor opción:**\n\n• **Elige Netflix ($3/mes):** Si prefieres cantidad masiva de contenido, series que se vuelven virales cada semana (*Stranger Things*, *Merlina*, *El Juego del Calamar*), realities y documentales.\n• **Elige Max ($3/mes):** Si priorizas el cine de mayor prestigio mundial, producciones de HBO multipremiadas (*House of the Dragon*, *The Last of Us*, *Succession*), cine de Warner en 4K y el universo de *Dune* y *DC Comics*.\n\n💡 **El Secreto:** En lugar de elegir una sola por $3, ¡puedes llevarte el **Combo Dúo Cinéfilo con ambas por solo $5/mes**!",
+          recommendIds: ['netflix', 'hbomax'],
+          isCombo: true,
+          price: 5.00,
+          tip: "⚡ Las dos plataformas en Ultra HD 4K con perfil privado y PIN por solo $5."
+        };
+      }
+
+      // 8. Recomendación por Géneros de Películas y Series
+      else if (isTerror && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.terror) {
+        const g = ORBITA_AI_KB.genres.terror;
+        rec = {
+          title: g.name,
+          badge: "Recomendación de Terror & Suspenso",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "👻 Pide tu combo de terror en WhatsApp y recíbelo con entrega inmediata en 5 minutos."
+        };
+      } else if (isAccion && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.accion) {
+        const g = ORBITA_AI_KB.genres.accion;
+        rec = {
+          title: g.name,
+          badge: "Recomendación de Acción Pura",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "💥 Películas taquilleras y superproducciones en Ultra HD 4K."
+        };
+      } else if (isScifi && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.scifi) {
+        const g = ORBITA_AI_KB.genres.scifi;
+        rec = {
+          title: g.name,
+          badge: "Recomendación Sci-Fi & Espacio",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "🚀 Visuales asombrosos en 4K Dolby Vision y sonido envolvente."
+        };
+      } else if (isDrama && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.drama) {
+        const g = ORBITA_AI_KB.genres.drama;
+        rec = {
+          title: g.name,
+          badge: "Cine de Culto & Premiadas",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "🏆 Historias profundas y actuaciones multipremiadas."
+        };
+      } else if (isComedia && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.comedia) {
+        const g = ORBITA_AI_KB.genres.comedia;
+        rec = {
+          title: g.name,
+          badge: "Comedia & Sitcoms Adictivas",
+          reason: g.answer,
+          recommendIds: ['hbomax', 'netflix'],
+          isCombo: true,
+          price: 5.00,
+          tip: "😂 Las mejores sitcoms de la historia completas en tu pantalla."
+        };
+      } else if (isAnime && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.anime) {
+        const g = ORBITA_AI_KB.genres.anime;
+        rec = {
+          title: g.name,
+          badge: "Universo Anime Shonen",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "⚔️ Capítulos nuevos y películas anime en máxima resolución."
+        };
+      } else if (isFamily && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.infantil) {
+        const g = ORBITA_AI_KB.genres.infantil;
+        rec = {
+          title: g.name,
+          badge: "Infantil & Familiar Seguro",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "🎈 Control parental con PIN para que los niños disfruten con seguridad."
+        };
+      } else if (isRomance && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.romance) {
+        const g = ORBITA_AI_KB.genres.romance;
+        rec = {
+          title: g.name,
+          badge: "Cine Romántico & Parejas",
+          reason: g.answer,
+          recommendIds: g.idealCombo,
+          isCombo: true,
+          price: 5.00,
+          tip: "❤️ Ideal para maratonear este fin de semana en pareja."
+        };
+      } else if (isSports) {
+        rec = {
+          title: "Deportes en Vivo: Champions, F1 & Ligas",
+          badge: "Deportes & Fútbol Total",
+          reason: "⚽ **¡La pasión del deporte en vivo sin cortes!**\n\n• **Disney+ (ESPN):** La casa de la Champions League, Premier League inglesa, Fórmula 1, torneos de tenis de Grand Slam y ligas internacionales por solo **$3.00/mes**.\n• **ViX Premium:** Transmisiones en vivo de la Liga MX y fútbol en español por **$3.00/mes**.\n\n💡 **Recomendación:** Llévate el **Combo Dúo Gol (Disney+ & ViX) por solo $5.00/mes** para tener cobertura deportiva total en vivo.",
+          recommendIds: ['disneyplus', 'vix'],
+          isCombo: true,
+          price: 5.00,
+          tip: "⚽ Transmisiones en vivo de ESPN y ViX con perfil privado."
+        };
+      } else if (isTools) {
+        rec = {
+          title: "Canva Pro Anual (365 Días)",
+          badge: "Plan Anual $4",
+          reason: "🎨 **¡La herramienta imprescindible para creadores, estudiantes y negocios!**\n\nObtienes **1 año completo (365 días)** de Canva Pro por solo **$4.00 el año** (menos de $0.35 al mes):\n• Quitafondos mágico en 1 clic.\n• Kit de marcas y fuentes personalizadas.\n• Más de 100 millones de fotos, videos y plantillas premium.\n• Activado directo a tu propio correo electrónico.",
+          recommendIds: ['canva'],
+          isCombo: false,
+          price: 4.00,
+          tip: "✨ Garantía completa durante todo el año de servicio."
+        };
+      } else if (isMusic) {
+        rec = {
+          title: "Spotify Premium Individual",
+          badge: "1 Aplicación Individual ($3)",
+          reason: "🎧 **¡Música y podcasts sin límites!**\n\nCon **Spotify Premium** disfrutas de más de 100 millones de canciones sin cortes comerciales, audio de máxima calidad (320 kbps) y descargas sin conexión a internet por solo **$3.00 al mes**.\n\n💡 **Tip de Ahorro:** Si compras un Combo Dúo de 2 aplicaciones por $5, ¡te regalamos Spotify totalmente gratis!",
+          recommendIds: ['spotify'],
+          isCombo: false,
+          price: 3.00,
+          tip: "💡 Tarifa individual de $3.00/mes o gratis con tu Combo 2x$5."
+        };
+      }
+
+      // 9. Detección de Plataformas Específicas
+      else if (detectedPlatforms.length === 1 && !comboRegex.test(normText)) {
+        const targetId = detectedPlatforms[0];
+        const pData = STREAMING_PLATFORMS.find(p => p.id === targetId) || STREAMING_PLATFORMS[0];
         const profile = (ORBITA_AI_KB.platforms && ORBITA_AI_KB.platforms[targetId]) || {};
 
-        let reasonText = profile.reason || `Para lo que necesitas en 1 sola aplicación, **${platformData.name}** es la opción ideal: perfil privado con clave PIN, alta definición y garantía total por solo ${formatPrice(platformData.priceUSD)}/${platformData.pricePeriod}.`;
-        
-        let tipText = platformData.id === 'canva'
-          ? '✨ Acceso anual completo (365 días) activado directo a tu propio correo electrónico.'
-          : `💡 Si luego deseas sumar otra plataforma, con nuestro Combo Dúo te llevas 2 pantallas por solo $5.00/mes (ahorras $1/mes).`;
+        let reasonText = profile.reason || `Para lo que buscas, **${pData.name}** es excelente: perfil 100% privado con clave PIN, calidad Ultra HD y garantía total por solo ${formatPrice(pData.priceUSD)}/${pData.pricePeriod}.`;
+        let tipText = pData.id === 'canva'
+          ? '✨ Acceso anual completo (365 días) activado directo a tu propio correo.'
+          : `💡 Si deseas sumar otra plataforma, con el Combo Dúo te llevas 2 pantallas por solo $5/mes (ahorras $1/mes).`;
 
         rec = {
-          recommendIds: [platformData.id],
+          recommendIds: [pData.id],
           isCombo: false,
-          price: platformData.priceUSD,
-          title: `${platformData.name} (1 Pantalla Privada)`,
-          badge: platformData.id === 'canva' ? 'Plan Anual $4' : '1 Aplicación Individual ($3)',
+          price: pData.priceUSD,
+          title: `${pData.name} (1 Pantalla Privada)`,
+          badge: pData.id === 'canva' ? 'Plan Anual $4' : '1 Aplicación Individual ($3)',
           reason: reasonText,
           tip: tipText
         };
       }
 
-      // CASO 2: El usuario pidió 2 APLICACIONES / COMBO DÚO
-      else if (requestedCount === 2) {
-        let pairIds = ['netflix', 'disneyplus']; // Default para combo
+      // 10. Detección de Combo de 2 Plataformas
+      else if (detectedPlatforms.length >= 2 || comboRegex.test(normText)) {
+        let pairIds = ['netflix', 'disneyplus'];
         if (detectedPlatforms.length >= 2) {
           pairIds = [detectedPlatforms[0], detectedPlatforms[1]];
         } else if (detectedPlatforms.length === 1) {
@@ -706,20 +903,6 @@
           const profile = (ORBITA_AI_KB.platforms && ORBITA_AI_KB.platforms[firstId]) || {};
           const partnerId = profile.partnerId || (firstId === 'disneyplus' ? 'netflix' : 'disneyplus');
           pairIds = [firstId, partnerId];
-        } else if (isSports) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.sports.comboIds) || ['disneyplus', 'vix'];
-        } else if (isCinema) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.cinema.comboIds) || ['netflix', 'hbomax'];
-        } else if (isMusic) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.music.comboIds) || ['spotify', 'netflix'];
-        } else if (isTools) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.tools.comboIds) || ['canva', 'netflix'];
-        } else if (isFamily) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.family.comboIds) || ['disneyplus', 'paramount'];
-        } else if (isQuality) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.quality.comboIds) || ['appletv', 'hbomax'];
-        } else if (isNovelas) {
-          pairIds = (ORBITA_AI_KB.categories && ORBITA_AI_KB.categories.novelas.comboIds) || ['vix', 'netflix'];
         }
 
         const p1 = STREAMING_PLATFORMS.find(p => p.id === pairIds[0]) || STREAMING_PLATFORMS[0];
@@ -731,21 +914,17 @@
           price: 5.00,
           title: `Combo Dúo: ${p1.shortName} + ${p2.shortName}`,
           badge: 'Combo Dúo (2 Pantallas x $5)',
-          reason: `¡Excelente elección! Combinando **${p1.name}** y **${p2.name}** tienes la cobertura de entretenimiento perfecta. En lugar de pagar $6 ($3 por cada una), en Órbita pagas únicamente **$5.00/mes** por ambas cuentas con perfiles 100% privados y PIN.`,
+          reason: `¡Excelente elección! Al combinar **${p1.name}** y **${p2.name}** tienes entretenimiento completo para todo tu hogar. En lugar de pagar $6 ($3 por cada una), en Órbita pagas únicamente **$5.00/mes** por ambas cuentas con perfiles 100% privados y PIN. ¡Y además puedes solicitar tu cuenta de Spotify de regalo!`,
           tip: '⚡ Al ordenar te entregamos ambas credenciales y tus PINs exclusivos en menos de 5 minutos.'
         };
       }
 
-      // CASO 3: El usuario pidió 3 APLICACIONES
-      else if (requestedCount === 3) {
+      // 11. Detección de Paquete de 3 Apps
+      else if (threeRegex.test(normText)) {
         let trioIds = ['netflix', 'disneyplus', 'hbomax'];
         if (detectedPlatforms.length >= 3) {
           trioIds = detectedPlatforms.slice(0, 3);
-        } else if (detectedPlatforms.length === 2) {
-          const third = STREAMING_PLATFORMS.find(p => !detectedPlatforms.includes(p.id)) || STREAMING_PLATFORMS[2];
-          trioIds = [...detectedPlatforms, third.id];
         }
-
         const plats = trioIds.map(id => STREAMING_PLATFORMS.find(p => p.id === id)).filter(Boolean);
         const trioNames = plats.map(p => p.shortName).join(' + ');
 
@@ -761,59 +940,26 @@
         };
       }
 
-      // CASO 4: Consulta abierta / recomendación general sin cantidad explícita
+      // 12. Fallback Conversacional Amigable (NUNCA recomienda Netflix a ciegas)
       else {
-        // Si es de música o diseño, por naturaleza es 1 app
-        if (isMusic) {
-          rec = {
-            recommendIds: ['spotify'],
-            isCombo: false,
-            price: 3.00,
-            title: 'Spotify Premium Individual',
-            badge: '1 Aplicación Individual ($3)',
-            reason: '**Spotify Premium** es la indicada: más de 100M de canciones sin anuncios, calidad de audio máxima y descargas por solo $3.00 al mes. Si también te gustan las series, puedes sumarle Netflix en Combo Dúo por solo $5/mes.',
-            tip: '💡 Tarifa individual de $3.00/mes o en Combo Dúo con otra app por $5.00/mes.'
-          };
-        } else if (isTools) {
-          rec = {
-            recommendIds: ['canva'],
-            isCombo: false,
-            price: 4.00,
-            title: 'Canva Pro Anual (365 Días)',
-            badge: 'Plan Anual $4',
-            reason: 'Para diseño y redes sociales, **Canva Pro Anual** a solo $4.00 por todo el año es la mejor inversión: quitafondos mágico, kit de marcas y plantillas premium directo a tu correo.',
-            tip: '✨ 365 días de garantía y soporte continuo en WhatsApp.'
-          };
-        } else if (isSports) {
-          rec = {
-            recommendIds: ['disneyplus'],
-            isCombo: false,
-            price: 3.00,
-            title: 'Disney+ con ESPN en Vivo (1 Pantalla)',
-            badge: '1 Aplicación Individual ($3)',
-            reason: 'Para fútbol y deportes en vivo, **Disney+** es la opción principal gracias a ESPN (Champions League, Premier, F1 y tenis) por solo $3.00 al mes. Si también sigues la Liga MX o deseas más partidos, puedes llevarte el **Combo Dúo con ViX por solo $5.00/mes**.',
-            tip: '⚽ Llévate solo Disney+ por $3/mes o añade ViX en combo por $5/mes.'
-          };
-        } else {
-          rec = {
-            recommendIds: ['netflix'],
-            isCombo: false,
-            price: 3.00,
-            title: 'Netflix Premium 4K (1 Pantalla)',
-            badge: '1 Aplicación Individual ($3)',
-            reason: '¡Te recomiendo **Netflix Premium**! Es el catálogo de series y estrenos más visto del mundo, con perfil 100% privado con PIN y calidad Ultra HD 4K por solo $3.00 al mes. Además, si deseas más entretenimiento, puedes armar un **Combo Dúo con Disney+ o Max por solo $5.00/mes**.',
-            tip: '💡 En Órbita tú decides: 1 aplicación por $3, o cualquier combo de 2 por solo $5.'
-          };
-        }
+        rec = {
+          title: "Orbit: Tu Asesor de Streaming",
+          badge: "Asistente Inteligente",
+          reason: "¡Entendido! Como tu asesor personal de streaming, puedo orientarte en lo que prefieras:\n\n• Si buscas **películas o series**, dime qué género te gusta (terror, acción, comedia, anime, ciencia ficción o drama) y te diré qué ver y dónde.\n• Si buscas **ahorrar**, nuestro **Combo Dúo de 2 aplicaciones por $5/mes** te incluye además **Spotify Gratis de regalo**.\n• Si deseas saber sobre **pagos**, aceptamos Binance USDT, Zelle, Pago Móvil y transferencias con entrega en 5 minutos.\n\n¿En qué plataforma estás pensando o qué te gustaría ver hoy?",
+          recommendIds: ['netflix', 'hbomax'],
+          isCombo: true,
+          price: 5.00,
+          tip: "💡 Pregúntame sobre cualquier película, serie o plataforma con total libertad."
+        };
       }
     }
 
     if (!rec) return;
 
     // Preparar elementos de renderizado
-    const recPlatforms = rec.recommendIds.map(id => STREAMING_PLATFORMS.find(p => p.id === id)).filter(Boolean);
+    const recPlatforms = (rec.recommendIds || ['netflix']).map(id => STREAMING_PLATFORMS.find(p => p.id === id)).filter(Boolean);
     const priceFormatted = formatPrice(rec.price || (recPlatforms.length === 1 ? recPlatforms[0].priceUSD : 5.00));
-    const periodLabel = rec.recommendIds.includes('canva') && rec.recommendIds.length === 1 ? '/ año' : '/ mes';
+    const periodLabel = rec.recommendIds && rec.recommendIds.includes('canva') && rec.recommendIds.length === 1 ? '/ año' : '/ mes';
     const appsNames = recPlatforms.map(p => p.shortName || p.name).join(' + ');
 
     const chipsHtml = recPlatforms.map(p => `
@@ -830,11 +976,10 @@
     } else if (rec.isThree) {
       waMsg = `¡Hola Órbita Streaming! Deseo solicitar el paquete de 3 aplicaciones: *${appsNames}* por *${priceFormatted}* (${periodLabel}). ¿Cuáles son los métodos de pago?`;
     } else {
-      waMsg = `¡Hola Órbita Streaming! Orbit me recomendó el *Combo Dúo: ${appsNames}* por *${priceFormatted}* (${periodLabel}). Deseo activarlo de inmediato, ¿cuáles son los medios de pago?`;
+      waMsg = `¡Hola Órbita Streaming! Orbit me recomendó: *${rec.title || appsNames}* por *${priceFormatted}* (${periodLabel}). Deseo activarlo de inmediato, ¿cuáles son los medios de pago?`;
     }
     const waUrl = `https://wa.me/${ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
 
-    // Botones de acción dinámicos según sea 1 sola aplicación o combo
     let actionButtonsHtml = '';
     if (!rec.isCombo && recPlatforms.length === 1) {
       const p = recPlatforms[0];
@@ -861,10 +1006,10 @@
     } else {
       actionButtonsHtml = `
         <button type="button" class="ai-btn-action-primary" onclick="window.selectComboPlatforms(${JSON.stringify(rec.recommendIds)})">
-          <span>⚡ Cargar en Armar Combo (2 x $5)</span>
+          <span>⚡ Cargar en Armar Combo ($5)</span>
         </button>
         <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-btn-action-secondary">
-          <span>📲 Pedir Combo por WhatsApp (${priceFormatted})</span>
+          <span>📲 Pedir por WhatsApp (${priceFormatted})</span>
         </a>
       `;
     }
@@ -872,6 +1017,7 @@
     const badgeClass = rec.isCombo ? 'badge-combo' : 'badge-single';
     const badgeText = rec.badge || (rec.isCombo ? 'Combo Dúo (2 Pantallas)' : '1 Aplicación Individual');
     const tipHtml = rec.tip ? `<div class="ai-rec-note">${rec.tip}</div>` : '';
+    const formattedReason = formatAiText(rec.reason);
 
     // 3. Respuesta con typing simulation (280ms)
     setTimeout(() => {
@@ -886,8 +1032,8 @@
           </svg>
         </div>
         <div class="ai-message-content">
-          <div class="ai-bot-name">Orbit ✦ Asistente Inteligente</div>
-          <p>${rec.reason}</p>
+          <div class="ai-bot-name">Orbit ✦ Agente de Streaming IA</div>
+          <div class="ai-text-body">${formattedReason}</div>
           <div class="ai-recommendation-card">
             <div class="ai-rec-header">
               <div>
@@ -1658,6 +1804,7 @@
     };
 
     let pipes = [];
+    let asteroids = [];
     let particles = [];
     let stars = [];
     const pipeWidth = 46;
@@ -1899,6 +2046,29 @@
       });
     }
 
+    function spawnAsteroid(xPos) {
+      const radius = Math.floor(Math.random() * 8 + 13); // 13 to 21px
+      const minY = 45 + radius;
+      const maxY = canvasH - 45 - radius;
+      const yPos = minY + Math.random() * Math.max(20, maxY - minY);
+      const vertexCount = 7;
+      const vertices = [];
+      for (let i = 0; i < vertexCount; i++) {
+        const angle = (i / vertexCount) * Math.PI * 2;
+        const r = radius * (0.75 + Math.random() * 0.45);
+        vertices.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
+      }
+      asteroids.push({
+        x: xPos,
+        y: yPos,
+        radius: radius,
+        vertices: vertices,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.038,
+        speed: currentLevel.speed * (0.95 + Math.random() * 0.3)
+      });
+    }
+
     function circleRectOverlap(cx, cy, r, rx, ry, rw, rh) {
       const closestX = Math.max(rx, Math.min(cx, rx + rw));
       const closestY = Math.max(ry, Math.min(cy, ry + rh));
@@ -1928,6 +2098,7 @@
       score = 0;
       currentLevel = LEVELS[0];
       pipes = [];
+      asteroids = [];
       particles = [];
       levelBannerTimer = 0;
       screenFlashOpacity = 0;
@@ -2185,6 +2356,59 @@
         }
       }
 
+      // 4b. Spawn y movimiento de Asteroides Cósmicos (Desde Nivel 2)
+      if (currentLevel.id >= 2) {
+        const lastAst = asteroids[asteroids.length - 1];
+        if (!lastAst || (canvasW - lastAst.x >= 260)) {
+          if (Math.random() > 0.35) {
+            spawnAsteroid(canvasW + 30);
+          }
+        }
+      }
+
+      for (let a = asteroids.length - 1; a >= 0; a--) {
+        const ast = asteroids[a];
+        ast.x -= ast.speed;
+        ast.rotation += ast.rotSpeed;
+
+        // Colisión con la nave espacial
+        const distSq = (ship.x - ast.x) * (ship.x - ast.x) + (ship.y - ast.y) * (ship.y - ast.y);
+        const colRadius = ship.radius + ast.radius * 0.82;
+        if (distSq < colRadius * colRadius) {
+          triggerGameOver();
+          return;
+        }
+
+        // Dibujar Asteroide con relieve rocoso
+        ctx.save();
+        ctx.translate(ast.x, ast.y);
+        ctx.rotate(ast.rotation);
+        ctx.fillStyle = '#141d2b';
+        ctx.strokeStyle = currentLevel.color;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        for (let v = 0; v < ast.vertices.length; v++) {
+          const pt = ast.vertices[v];
+          if (v === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Cráter superficial
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.beginPath();
+        ctx.arc(ast.radius * 0.25, -ast.radius * 0.2, ast.radius * 0.25, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Remover asteroides fuera de pantalla
+        if (ast.x + ast.radius < -30) {
+          asteroids.splice(a, 1);
+        }
+      }
+
       // 5. Barrera de energía del piso
       ctx.fillStyle = currentLevel.color;
       ctx.fillRect(0, floorY, canvasW, 2);
@@ -2231,7 +2455,7 @@
 
       ctx.restore();
 
-      // 7. Partículas activas
+      // 7. Partículas activas (Optimizado para 60 FPS)
       for (let pIdx = particles.length - 1; pIdx >= 0; pIdx--) {
         const pt = particles[pIdx];
         pt.x += pt.vx;
@@ -2250,14 +2474,12 @@
       }
       ctx.globalAlpha = 1;
 
-      // 8. Marcador flotante en pantalla de juego
+      // 8. Marcador flotante en pantalla de juego (Sin shadowBlur pesado)
       ctx.save();
       ctx.font = '900 24px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.fillStyle = '#ffffff';
-      ctx.shadowColor = currentLevel.color;
-      ctx.shadowBlur = 10;
       ctx.fillText(score.toString(), canvasW / 2, 14);
       ctx.restore();
 
@@ -2270,7 +2492,7 @@
         screenFlashOpacity -= 0.025;
       }
 
-      // 10. Cartel de Anuncio de Nivel
+      // 10. Cartel de Anuncio de Nivel (Ultra optimizado)
       if (levelBannerTimer > 0) {
         levelBannerTimer--;
         ctx.save();
@@ -2293,10 +2515,7 @@
 
         ctx.font = '900 15px sans-serif';
         ctx.fillStyle = levelBannerColor;
-        ctx.shadowColor = levelBannerColor;
-        ctx.shadowBlur = 10;
         ctx.fillText(levelBannerText, canvasW / 2, boxY + 20);
-        ctx.shadowBlur = 0;
 
         ctx.font = '700 11px sans-serif';
         ctx.fillStyle = '#ffffff';

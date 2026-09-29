@@ -621,6 +621,104 @@ const ORBITA_AI_KB = {
       singleReason: "Para telenovelas en español, series latinas y fútbol mexicano con **1 sola aplicación**, **ViX Premium** te da acceso sin cortes comerciales por solo $3.00 al mes.",
       comboReason: "Combina lo mejor de las novelas y fútbol latino de ViX con el catálogo mundial de series y películas de Netflix por solo $5.00 al mes."
     }
+  },
+
+  // Catálogo Curado de Películas y Series por Género
+  genres: {
+    terror: {
+      name: "Terror, Suspenso & Misterio",
+      titles: [
+        { name: "El Conjuro / Hereditary / La Monja", platform: "Max (HBO)", tag: "Terror de Culto" },
+        { name: "Smile / Bebé Reno / La Maldición de Hill House", platform: "Netflix", tag: "Suspenso Psicológico" },
+        { name: "Un Lugar en Silencio I & II", platform: "Paramount+", tag: "Tensión Pura" },
+        { name: "Saw X / Háblame", platform: "Prime Video", tag: "Sobrenatural" }
+      ],
+      idealPlatform: "hbomax",
+      idealCombo: ["hbomax", "netflix"],
+      answer: "👻 **¡Noche de terror asegurada!** Aquí tienes las mejores recomendaciones del cine de horror:\n\n• **Max (HBO):** El universo de *El Conjuro*, *Hereditary* y *La Monja* (las más perturbadoras y aclamadas).\n• **Netflix:** Fenómenos como *Smile*, *Bebé Reno*, *La Maldición de Hill House* y *Bird Box*.\n• **Paramount+:** La obra maestra de tensión *Un Lugar en Silencio*.\n• **Prime Video:** *Saw X* y *Háblame*.\n\n💡 **Recomendación:** Llévate **Max ($3/mes)** o el **Combo Dúo Max + Netflix ($5/mes)** para maratones de miedo sin pausa."
+    },
+    accion: {
+      name: "Acción, Adrenalina & Aventura",
+      titles: [
+        { name: "Top Gun: Maverick / Misión Imposible", platform: "Paramount+", tag: "Cine Taquillero" },
+        { name: "John Wick 4 / The Boys / Reacher", platform: "Prime Video", tag: "Adrenalina Pura" },
+        { name: "Extraction 1 y 2 / Alerta Roja", platform: "Netflix", tag: "Éxitos Virales" },
+        { name: "Marvel Studios / F1 en Vivo", platform: "Disney+", tag: "Superhéroes & Velocidad" }
+      ],
+      idealPlatform: "primevideo",
+      idealCombo: ["primevideo", "disneyplus"],
+      answer: "💥 **¡Adrenalina al máximo nivel!** Las mejores películas y series de acción pura:\n\n• **Paramount+:** *Top Gun: Maverick* y la saga completa de *Misión Imposible*.\n• **Prime Video:** *John Wick 4*, la serie de superhéroes más brutal *The Boys* y *Reacher*.\n• **Netflix:** *Extraction (Misión de Rescate)*, *Alerta Roja* y *El Hombre Gris*.\n• **Disney+ (ESPN):** Todo el Universo Marvel más las carreras de Fórmula 1 en vivo.\n\n💡 **Recomendación:** **Prime Video ($3/mes)** o el **Combo Dúo Prime + Disney+ ($5/mes)** para tener cine y deportes en vivo."
+    },
+    scifi: {
+      name: "Ciencia Ficción, Espacio & Fantasía",
+      titles: [
+        { name: "Dune Parte 1 y 2 / House of the Dragon", platform: "Max (HBO)", tag: "Épico Visual" },
+        { name: "Interstellar / Dark / Stranger Things", platform: "Netflix", tag: "Viajes en el Tiempo" },
+        { name: "Severance / Silo / Fundación", platform: "Apple TV+", tag: "Sci-Fi 4K Sublime" },
+        { name: "Star Wars: The Mandalorian / Andor", platform: "Disney+", tag: "Ópera Galáctica" }
+      ],
+      idealPlatform: "hbomax",
+      idealCombo: ["hbomax", "appletv"],
+      answer: "🚀 **¡Viajes interestelares y mundos futuristas!** Las joyas de la ciencia ficción moderna:\n\n• **Max (HBO):** *Dune (Parte 1 y 2)*, *The Last of Us* y *House of the Dragon*.\n• **Apple TV+:** *Severance* (fascinante thriller psicológico) y *Silo* en la más alta calidad 4K Dolby Vision.\n• **Netflix:** La magistral *Dark*, *Interstellar* y *Stranger Things*.\n• **Disney+:** La saga completa de *Star Wars*, *The Mandalorian* y *Andor*.\n\n💡 **Recomendación:** **Max ($3/mes)** o el **Combo Ultra 4K Max + Apple TV+ ($5/mes)**."
+    },
+    drama: {
+      name: "Cine Galardonado, Premiadas & Drama",
+      titles: [
+        { name: "Oppenheimer / Succession / Chernobyl", platform: "Max (HBO)", tag: "Ganadoras del Oscar & Emmy" },
+        { name: "The Bear / Shōgun", platform: "Disney+", tag: "Aclamación Mundial" },
+        { name: "Ted Lasso / Los Asesinos de la Luna", platform: "Apple TV+", tag: "Cine Scorsese" },
+        { name: "La Sociedad de la Nieve / Roma", platform: "Netflix", tag: "Impacto Emocional" }
+      ],
+      idealPlatform: "hbomax",
+      idealCombo: ["hbomax", "disneyplus"],
+      answer: "🏆 **¡Cine galardonado y producciones de culto!** Si buscas historias de gran profundidad:\n\n• **Max (HBO):** *Oppenheimer*, *Succession* (la mejor serie de la década) y *Chernobyl*.\n• **Disney+:** Los fenómenos premiados mundialmente *The Bear* y *Shōgun*.\n• **Apple TV+:** *Ted Lasso* y la cinta de Martin Scorsese *Los Asesinos de la Luna*.\n• **Netflix:** *La Sociedad de la Nieve* y *El Juicio de los 7 de Chicago*.\n\n💡 **Recomendación:** El **Combo Dúo Max + Disney+ ($5/mes)** reúne el 90% de los premios del cine actual."
+    },
+    comedia: {
+      name: "Comedia, Risas & Sitcoms",
+      titles: [
+        { name: "The Office / Friends / The Big Bang Theory", platform: "Max (HBO)", tag: "Sitcoms Legendarias" },
+        { name: "Modern Family / How I Met Your Mother", platform: "Disney+", tag: "Humor Familiar" },
+        { name: "Ted Lasso", platform: "Apple TV+", tag: "Humor y Corazón" },
+        { name: "Brooklyn Nine-Nine / Sex Education", platform: "Netflix", tag: "Risas Seguras" }
+      ],
+      idealPlatform: "hbomax",
+      idealCombo: ["hbomax", "netflix"],
+      answer: "😂 **¡Risas garantizadas para relajarte!** Las series de comedia más adictivas:\n\n• **Max (HBO):** Las tres reinas indiscutibles: *The Office*, *Friends* y *The Big Bang Theory* completas.\n• **Disney+:** *Modern Family*, *How I Met Your Mother* y *Malcolm in the Middle*.\n• **Apple TV+:** *Ted Lasso* (alegra el día como ninguna otra serie).\n• **Netflix:** *Brooklyn Nine-Nine*, *Seinfeld* y *Sex Education*.\n\n💡 **Recomendación:** Para maratonear riendo en Smart TV, **Max ($3/mes)** es insuperable."
+    },
+    anime: {
+      name: "Anime & Animación Japonesa",
+      titles: [
+        { name: "Demon Slayer / Attack on Titan / DanDaDan", platform: "Netflix", tag: "Shonen Épico" },
+        { name: "Jujutsu Kaisen / Vinland Saga", platform: "Netflix / Prime", tag: "Acción Sobrenatural" },
+        { name: "Bleach: Thousand-Year Blood War", platform: "Disney+", tag: "Exclusivo Disney" },
+        { name: "Invincible / Evangelion", platform: "Prime Video", tag: "Animación de Culto" }
+      ],
+      idealPlatform: "netflix",
+      idealCombo: ["netflix", "primevideo"],
+      answer: "⚔️ **¡El universo del anime a tus pies!** Para los amantes de la animación japonesa:\n\n• **Netflix:** *Demon Slayer (Kimetsu no Yaiba)*, *Attack on Titan*, *DanDaDan* y las películas de Studio Ghibli.\n• **Disney+:** Estreno simultáneo de *Bleach: Thousand-Year Blood War*.\n• **Prime Video:** *Vinland Saga*, las películas de *Evangelion* y series animadas adultas como *Invincible*.\n\n💡 **Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)** para un catálogo inagotable."
+    },
+    infantil: {
+      name: "Familia, Niños & Animación",
+      titles: [
+        { name: "Intensamente 2 / Moana 2 / Toy Story", platform: "Disney+", tag: "Pixar & Disney" },
+        { name: "Bob Esponja / Paw Patrol", platform: "Paramount+", tag: "Nickelodeon" },
+        { name: "Kung Fu Panda / Sing / Shrek", platform: "Netflix", tag: "DreamWorks" }
+      ],
+      idealPlatform: "disneyplus",
+      idealCombo: ["disneyplus", "paramount"],
+      answer: "🎈 **¡Diversión mágica y segura para los niños y la familia!**\n\n• **Disney+:** Todo Pixar (*Intensamente 2*, *Toy Story*, *Coco*), clásicos Disney (*Moana*, *Frozen*) y Marvel seguro.\n• **Paramount+:** El hogar oficial de Nickelodeon: *Paw Patrol*, *Bob Esponja*, *Las Tortugas Ninja* y *Dora*.\n• **Netflix:** *Peppa Pig*, películas de DreamWorks (*Kung Fu Panda*, *Shrek*).\n\n💡 **Recomendación:** El **Combo Familiar Disney+ & Paramount+ ($5/mes)** es la biblioteca infantil más completa con control parental y PIN."
+    },
+    romance: {
+      name: "Romance, Parejas & Historias de Amor",
+      titles: [
+        { name: "La La Land / Past Lives", platform: "Max / Prime", tag: "Cine Romántico" },
+        { name: "Orgullo y Prejuicio / Diario de una Pasión", platform: "Netflix", tag: "Clásicos del Amor" },
+        { name: "Culpa Mía / El Verano en que me Enamoré", platform: "Prime Video", tag: "Romance Juvenil" }
+      ],
+      idealPlatform: "netflix",
+      idealCombo: ["netflix", "primevideo"],
+      answer: "❤️ **¡Historias para suspirar y disfrutar en pareja!**\n\n• **Netflix:** *Orgullo y Prejuicio*, *Diario de una Pasión*, romances coreanos de gran éxito y *A Todos los Chicos de los que me Enamoré*.\n• **Prime Video:** Fenómenos como *Culpa Mía*, *La Idea de Ti* y *El Verano en que me Enamoré*.\n• **Max (HBO):** *La La Land* y *Vidas Pasadas (Past Lives)*.\n\n💡 **Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)**."
+    }
   }
 };
 

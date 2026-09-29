@@ -76,6 +76,9 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -84,6 +87,8 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
@@ -372,8 +377,8 @@ body::before {
 .cinematic-intro-overlay {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle at center, #07100a 0%, #030504 70%, #000000 100%);
   z-index: 99999;
   display: flex;
@@ -383,6 +388,7 @@ body::before {
   overflow: hidden;
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
   cursor: pointer;
+  will-change: opacity, transform;
 }
 
 .intro-warp-bg {
@@ -408,8 +414,10 @@ body::before {
   position: absolute;
   border-radius: 50%;
   border: 1.5px solid rgba(204, 255, 0, 0.45);
-  box-shadow: 0 0 25px rgba(204, 255, 0, 0.35);
+  box-shadow: 0 0 16px rgba(204, 255, 0, 0.25);
   animation: warpRingIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
 .warp-ring.ring-1 {
@@ -1170,18 +1178,13 @@ ul {
 /* Contenedor Global Three.js para la animación 3D de la Órbita Difuminada (Efecto Borroso / Bokeh Cósmico) */
 .hero-3d-bg {
   position: fixed;
-  top: -50px;
-  left: -50px;
-  right: -60px;
-  bottom: -60px;
-  width: calc(100vw + 120px);
-  height: calc(100vh + 120px);
+  inset: -30px;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
   filter: blur(28px);
   -webkit-filter: blur(28px);
-  transform: translate3d(0, 0, 0) scale(1.08);
+  transform: translate3d(0, 0, 0) scale(1.05);
   opacity: 0.88;
   will-change: transform;
   transition: opacity 0.5s ease;
@@ -1197,8 +1200,8 @@ ul {
 .cosmic-blur-backdrop {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(circle at 50% 35%, rgba(6, 9, 15, 0.4) 0%, rgba(6, 9, 15, 0.78) 65%, #05070a 100%);
@@ -3986,7 +3989,8 @@ ul {
     letter-spacing: 0.12em !important;
   }
   .header-actions {
-    gap: 0.3rem;
+    gap: 0.25rem;
+    flex-shrink: 0;
   }
   .currency-selector-wrap {
     padding: 0.18rem 0.35rem;
@@ -3999,18 +4003,37 @@ ul {
     font-size: 0.70rem;
   }
   .header-audio-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 0.8rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.78rem;
+    padding: 0;
+  }
+  .header-minigame-btn {
+    padding: 0.35rem 0.48rem !important;
+    font-size: 0.82rem !important;
+  }
+  .header-minigame-btn .game-text {
+    display: none !important;
+  }
+  .header-actions .header-cta-btn,
+  .header-actions .btn-cosmic-header {
+    display: inline-flex !important;
+    padding: 0.35rem 0.55rem !important;
+    font-size: 0.74rem !important;
+    gap: 0 !important;
+  }
+  .header-actions .header-cta-btn span,
+  .header-actions .btn-cosmic-header span {
+    display: none !important;
   }
   .mobile-toggle-btn {
     display: flex;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
   }
   .hamburger-line {
-    width: 17px;
+    width: 16px;
   }
   .hero-section {
     padding-top: calc(var(--header-height) + 0.75rem);
@@ -4078,163 +4101,6 @@ ul {
   backface-visibility: hidden;
 }
 
-/* =========================================================================
-   INTRO CINEMATOGRÁFICA INTERACTIVA & EXPERIENCIA 3D ORBITAL
-   ========================================================================= */
-
-.cinematic-intro-overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000000;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  overflow: hidden;
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Barras de Encuadre Cinematográfico 21:9 */
-.intro-letterbox {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: clamp(35px, 6vh, 65px);
-  background: #000000;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.intro-letterbox-top {
-  top: 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-}
-
-.intro-letterbox-bottom {
-  bottom: 0;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
-}
-
-/* Barra de Controles Superiores de la Intro */
-.intro-top-controls {
-  position: absolute;
-  top: clamp(15px, 3vh, 30px);
-  left: clamp(20px, 4vw, 50px);
-  right: clamp(20px, 4vw, 50px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-}
-
-.intro-ctrl-btn, .intro-skip-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.15rem;
-  background: rgba(14, 18, 40, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-full);
-  color: #e2e8f0;
-  font-family: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-}
-
-.intro-ctrl-btn:hover, .intro-skip-btn:hover {
-  background: rgba(26, 32, 70, 0.85);
-  border-color: var(--accent-cyan);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.35);
-}
-
-.intro-ctrl-btn .ctrl-icon {
-  font-size: 1rem;
-}
-
-/* Revelación de Marca Central (Fase 5) */
-.intro-brand-reveal {
-  position: relative;
-  z-index: 15;
-  text-align: center;
-  opacity: 0;
-  transform: scale(0.92) translateY(12px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  max-width: 90vw;
-}
-
-.intro-brand-reveal.visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.intro-brand-logo-wrap {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 1.25rem;
-  filter: drop-shadow(0 0 35px var(--accent-cyan));
-  animation: logoCoreBreath 3s infinite alternate ease-in-out;
-}
-
-.intro-logo-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.intro-brand-title {
-  font-size: clamp(2rem, 5.5vw, 3.8rem);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  background: linear-gradient(135deg, #ffffff 20%, var(--accent-cyan) 60%, var(--accent-purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.65rem;
-  filter: drop-shadow(0 0 40px rgba(138, 58, 254, 0.5));
-}
-
-.intro-brand-slogan {
-  font-size: clamp(0.95rem, 2vw, 1.25rem);
-  font-weight: 500;
-  color: #cbd5e1;
-  letter-spacing: 0.06em;
-  margin-bottom: 1.5rem;
-}
-
-.intro-telemetry-bar {
-  width: 140px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.15);
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
-}
-
-.telemetry-beam {
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
-  animation: telemetrySweep 2s infinite ease-in-out;
-}
-
-@keyframes telemetrySweep {
-  0% { left: -50%; }
-  100% { left: 100%; }
-}
 
 /* =========================================================================
    ZONA GRAVITACIONAL HUD PARA DRAG & DROP (DESKTOP)
@@ -4964,8 +4830,8 @@ ul {
 .orbit-ai-floating-window {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 10000;
   pointer-events: none;
   display: flex;
@@ -5775,11 +5641,10 @@ ul {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(3, 6, 4, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(3, 7, 5, 0.96);
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
 }
 
 .orbit-game-modal.active {
