@@ -531,31 +531,14 @@
       });
     }
 
-    if (!chipsContainer || !chatBox || !inputForm) return;
+    if (!chatBox || !inputForm) return;
 
-    // 1. Renderizar botones rápidos / chips con preguntas frecuentes
-    if (window.ORBITA_AI_KB && ORBITA_AI_KB.presets) {
-      chipsContainer.innerHTML = ORBITA_AI_KB.presets.map((preset, idx) => `
-        <button type="button" class="ai-chip-btn ${idx === 0 ? 'active' : ''}" data-preset-id="${preset.id}">
-          <span>${preset.label}</span>
-        </button>
-      `).join('');
-
-      chipsContainer.querySelectorAll('.ai-chip-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          chipsContainer.querySelectorAll('.ai-chip-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const presetId = btn.dataset.presetId;
-          const preset = ORBITA_AI_KB.presets.find(p => p.id === presetId);
-          if (preset) {
-            processAiQuery(preset.prompt, preset);
-          }
-        });
-      });
+    if (chipsContainer) {
+      chipsContainer.innerHTML = '';
+      chipsContainer.style.display = 'none';
     }
 
-    // 2. Manejador de formulario con consulta libre del usuario
+    // Manejador de formulario con consulta libre del usuario
     inputForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const query = textInput.value.trim();
@@ -589,6 +572,26 @@
       </div>
     `;
     chatBox.appendChild(userMsgEl);
+
+    // Indicador temporal de escritura
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'ai-message ai-bot-message ai-typing-indicator';
+    typingIndicator.id = 'ai-typing-temp';
+    typingIndicator.innerHTML = `
+      <div class="ai-bot-avatar">
+        <svg viewBox="0 0 100 100" class="ai-avatar-svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+          <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="ai-message-content">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    `;
+    chatBox.appendChild(typingIndicator);
     chatBox.scrollTop = chatBox.scrollHeight;
 
     // Pulso lumínico en la órbita 3D
@@ -954,73 +957,64 @@
       }
     }
 
-    if (!rec) return;
-
-    // Preparar elementos de renderizado
-    const recPlatforms = (rec.recommendIds || ['netflix']).map(id => STREAMING_PLATFORMS.find(p => p.id === id)).filter(Boolean);
-    const priceFormatted = formatPrice(rec.price || (recPlatforms.length === 1 ? recPlatforms[0].priceUSD : 5.00));
-    const periodLabel = rec.recommendIds && rec.recommendIds.includes('canva') && rec.recommendIds.length === 1 ? '/ año' : '/ mes';
-    const appsNames = recPlatforms.map(p => p.shortName || p.name).join(' + ');
-
-    const chipsHtml = recPlatforms.map(p => `
-      <span class="ai-rec-app-chip">
-        <img src="${p.iconUrl}" alt="${p.shortName}" onerror="this.style.display='none'">
-        <span>${p.shortName}</span>
-      </span>
-    `).join('');
-
-    // Mensaje dinámico y URL de WhatsApp
-    let waMsg = '';
-    if (!rec.isCombo && recPlatforms.length === 1) {
-      waMsg = `¡Hola Órbita Streaming! Deseo adquirir 1 pantalla privada de *${recPlatforms[0].name}* por *${priceFormatted}* (${periodLabel}). ¿Cuáles son los medios de pago para activarla de inmediato?`;
-    } else if (rec.isThree) {
-      waMsg = `¡Hola Órbita Streaming! Deseo solicitar el paquete de 3 aplicaciones: *${appsNames}* por *${priceFormatted}* (${periodLabel}). ¿Cuáles son los métodos de pago?`;
-    } else {
-      waMsg = `¡Hola Órbita Streaming! Orbit me recomendó: *${rec.title || appsNames}* por *${priceFormatted}* (${periodLabel}). Deseo activarlo de inmediato, ¿cuáles son los medios de pago?`;
+    if (!rec) {
+      const temp = document.getElementById('ai-typing-temp');
+      if (temp) temp.remove();
+      return;
     }
-    const waUrl = `https://wa.me/${ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
 
+    // Preparar botones de acción limpios
     let actionButtonsHtml = '';
-    if (!rec.isCombo && recPlatforms.length === 1) {
-      const p = recPlatforms[0];
-      const singleOrderText = p.id === 'canva' ? '📲 Activar Canva Pro ($4/año)' : `📲 Pedir ${p.shortName} por WhatsApp (${priceFormatted})`;
-      const secondaryBtn = p.id === 'canva'
-        ? `<button type="button" class="ai-btn-action-secondary" onclick="window.openPlatformDetails('canva')"><span>✨ Ver Detalles de Canva Pro</span></button>`
-        : `<button type="button" class="ai-btn-action-secondary" onclick="window.selectComboPlatforms(['${p.id}'])"><span>⚡ O armar Combo Dúo por $5</span></button>`;
+    if (rec.customActions) {
+      actionButtonsHtml = rec.customActions;
+    } else if (rec.showOrderBtn) {
+      const recPlatforms = (rec.recommendIds || ['netflix']).map(id => STREAMING_PLATFORMS.find(p => p.id === id)).filter(Boolean);
+      const priceFormatted = formatPrice(rec.price || (recPlatforms.length === 1 ? recPlatforms[0].priceUSD : 5.00));
+      const periodLabel = rec.recommendIds && rec.recommendIds.includes('canva') && rec.recommendIds.length === 1 ? '/ año' : '/ mes';
+      const appsNames = recPlatforms.map(p => p.shortName || p.name).join(' + ');
 
-      actionButtonsHtml = `
-        <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-btn-action-primary">
-          <span>${singleOrderText}</span>
-        </a>
-        ${secondaryBtn}
-      `;
-    } else if (rec.isThree) {
-      actionButtonsHtml = `
-        <button type="button" class="ai-btn-action-primary" onclick="window.selectComboPlatforms(${JSON.stringify(rec.recommendIds)})">
-          <span>⚡ Cargar 3 Apps en Configurador</span>
-        </button>
-        <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-btn-action-secondary">
-          <span>📲 Pedir Trío por WhatsApp (${priceFormatted})</span>
-        </a>
-      `;
-    } else {
-      actionButtonsHtml = `
-        <button type="button" class="ai-btn-action-primary" onclick="window.selectComboPlatforms(${JSON.stringify(rec.recommendIds)})">
-          <span>⚡ Cargar en Armar Combo ($5)</span>
-        </button>
-        <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-btn-action-secondary">
-          <span>📲 Pedir por WhatsApp (${priceFormatted})</span>
-        </a>
-      `;
+      let waMsg = '';
+      if (!rec.isCombo && recPlatforms.length === 1) {
+        waMsg = `¡Hola Órbita Streaming! Deseo adquirir 1 pantalla privada de *${recPlatforms[0].name}* por *${priceFormatted}* (${periodLabel}). ¿Cuáles son los métodos de pago?`;
+      } else {
+        waMsg = `¡Hola Órbita Streaming! Deseo solicitar el Combo Dúo: *${appsNames}* por *${priceFormatted}* (${periodLabel}). ¿Cuáles son los métodos de pago?`;
+      }
+      const waUrl = `https://wa.me/${ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
+
+      if (rec.isCombo) {
+        actionButtonsHtml = `
+          <div class="ai-chat-actions">
+            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-chat-btn ai-chat-btn-primary">
+              <span>📲 Pedir por WhatsApp (${priceFormatted})</span>
+            </a>
+            <button type="button" class="ai-chat-btn ai-chat-btn-secondary" onclick="window.selectComboPlatforms(${JSON.stringify(rec.recommendIds)})">
+              <span>⚡ Armar en Combo ($5)</span>
+            </button>
+          </div>
+        `;
+      } else {
+        const p = recPlatforms[0];
+        const singleOrderText = p.id === 'canva' ? '📲 Activar Canva Pro ($4/año)' : `📲 Pedir ${p.shortName} (${priceFormatted})`;
+        actionButtonsHtml = `
+          <div class="ai-chat-actions">
+            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-chat-btn ai-chat-btn-primary">
+              <span>${singleOrderText}</span>
+            </a>
+            <button type="button" class="ai-chat-btn ai-chat-btn-secondary" onclick="window.selectComboPlatforms(['${p.id}'])">
+              <span>⚡ O armar Combo Dúo ($5)</span>
+            </button>
+          </div>
+        `;
+      }
     }
 
-    const badgeClass = rec.isCombo ? 'badge-combo' : 'badge-single';
-    const badgeText = rec.badge || (rec.isCombo ? 'Combo Dúo (2 Pantallas)' : '1 Aplicación Individual');
-    const tipHtml = rec.tip ? `<div class="ai-rec-note">${rec.tip}</div>` : '';
     const formattedReason = formatAiText(rec.reason);
 
-    // 3. Respuesta con typing simulation (280ms)
+    // 3. Respuesta con typing simulation (250ms)
     setTimeout(() => {
+      const temp = document.getElementById('ai-typing-temp');
+      if (temp) temp.remove();
+
       const botMsgEl = document.createElement('div');
       botMsgEl.className = 'ai-message ai-bot-message';
       botMsgEl.innerHTML = `
@@ -1032,32 +1026,17 @@
           </svg>
         </div>
         <div class="ai-message-content">
-          <div class="ai-bot-name">Orbit ✦ Agente de Streaming IA</div>
+          <div class="ai-bot-name">Orbit ✦ Asistente Inteligente</div>
           <div class="ai-text-body">${formattedReason}</div>
-          <div class="ai-recommendation-card">
-            <div class="ai-rec-header">
-              <div>
-                <span class="ai-rec-badge ${badgeClass}">${badgeText}</span>
-                <div class="ai-rec-title">${rec.title || appsNames}</div>
-              </div>
-              <div class="ai-rec-price-box" style="text-align: right;">
-                <div class="ai-rec-price">${priceFormatted}</div>
-                <div style="font-size: 0.75rem; color: #cbd5e1; font-weight: 600;">${periodLabel}</div>
-              </div>
-            </div>
-            <div class="ai-rec-apps-row">
-              ${chipsHtml}
-            </div>
-            <div class="ai-rec-actions">
-              ${actionButtonsHtml}
-            </div>
-            ${tipHtml}
-          </div>
+          ${actionButtonsHtml}
         </div>
       `;
       chatBox.appendChild(botMsgEl);
       chatBox.scrollTop = chatBox.scrollHeight;
-    }, 280);
+      setTimeout(() => {
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 50);
+    }, 250);
   }
 
   function escapeHtml(text) {
