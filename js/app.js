@@ -34,6 +34,7 @@
     initFloatingWhatsApp();
     initScrollAnimations();
     initModalEvents();
+    initOrbitMiniGame();
   });
 
   function initAudioControls() {
@@ -1296,9 +1297,22 @@
 
     if (totalPriceEl) totalPriceEl.textContent = formatPrice(finalPriceUSD).replace('$', '');
 
-    // Descuento aplicado
-    if (discountUSD > 0) {
-      if (discountTag) discountTag.style.display = 'inline-block';
+    // Descuento aplicado y Promo Spotify GRATIS
+    const hasSpotifyPromo = streamingCount >= 2;
+    if (hasSpotifyPromo) {
+      if (discountTag) {
+        discountTag.style.display = 'inline-block';
+        discountTag.innerHTML = `🎉 ¡Descuento de Combo + 🎧 <strong>Cuenta SPOTIFY GRATIS</strong> Incluida!`;
+      }
+      if (regularPriceBox) {
+        regularPriceBox.style.display = 'block';
+        regularPriceBox.querySelector('span').textContent = formatPrice(regularTotalUSD);
+      }
+    } else if (discountUSD > 0) {
+      if (discountTag) {
+        discountTag.style.display = 'inline-block';
+        discountTag.textContent = '🎉 ¡Descuento de Combo Aplicado!';
+      }
       if (regularPriceBox) {
         regularPriceBox.style.display = 'block';
         regularPriceBox.querySelector('span').textContent = formatPrice(regularTotalUSD);
@@ -1311,7 +1325,11 @@
     // Actualizar botón de WhatsApp Ecuador (+593 998226756)
     if (ctaBtn) {
       const fullNames = selectedPlatforms.map(p => p.name).join(', ');
-      const msg = `¡Hola Órbita Streaming! Deseo activar mi combo personalizado con: *${fullNames}* por un total de *${formatPrice(finalPriceUSD)}*. ¿Cuáles son los métodos de pago para activarlo ya?`;
+      let msg = `¡Hola Órbita Streaming! Deseo activar mi combo personalizado con: *${fullNames}* por un total de *${formatPrice(finalPriceUSD)}*.`;
+      if (hasSpotifyPromo) {
+        msg += ` ¡Y quiero reclamar mi cuenta de *SPOTIFY GRATIS* de regalo! 🎁🎧`;
+      }
+      msg += ` ¿Cuáles son los métodos de pago para activarlo ya?`;
       ctaBtn.href = `https://wa.me/${ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
       ctaBtn.target = "_blank";
       ctaBtn.rel = "noopener noreferrer";
@@ -1509,6 +1527,531 @@
     toast._timeout = setTimeout(() => {
       toast.classList.remove('visible');
     }, 3000);
+  }
+
+  // =========================================================================
+  // --- 13. MINIJUEGO ORBITAL ARCADE: DEFENSOR DEL ESPACIO ---
+  // =========================================================================
+  function initOrbitMiniGame() {
+    const modal = document.getElementById('orbit-game-modal');
+    const canvas = document.getElementById('orbit-arcade-canvas');
+    if (!modal || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('og-score');
+    const comboEl = document.getElementById('og-combo');
+    const shieldsEl = document.getElementById('og-shields');
+    const highscoreEl = document.getElementById('og-highscore');
+    const overlayStart = document.getElementById('og-overlay-start');
+    const overlayVictory = document.getElementById('og-overlay-victory');
+    const overlayGameOver = document.getElementById('og-overlay-gameover');
+    const victoryScoreEl = document.getElementById('og-victory-score');
+    const finalScoreEl = document.getElementById('og-final-score');
+
+    // Botones
+    const btnStart = document.getElementById('og-btn-start');
+    const btnRetry = document.getElementById('og-btn-retry');
+    const btnReplayVic = document.getElementById('og-btn-replay-vic');
+    const btnTapAction = document.getElementById('og-btn-tap-action');
+    const closeBtn = document.getElementById('orbit-game-close-btn');
+
+    // Botones de apertura del modal
+    document.querySelectorAll('#open-minigame-btn, #hero-minigame-btn, #mobile-drawer-minigame-btn, [data-open-minigame]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMiniGameModal();
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeMiniGameModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeMiniGameModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeMiniGameModal();
+      }
+    });
+
+    // Estado del juego
+    let isRunning = false;
+    let animId = null;
+    let score = 0;
+    let combo = 1;
+    let comboTimer = 0;
+    let shields = 3;
+    let highscore = parseInt(localStorage.getItem('orbita_highscore') || '0', 10);
+    if (highscoreEl) highscoreEl.textContent = highscore;
+
+    // Configuración orbital
+    const INNER_R = 65;
+    const OUTER_R = 120;
+    let targetRadius = INNER_R;
+    let currentRadius = INNER_R;
+    let currentOrbit = 0; // 0 = inner, 1 = outer
+    let shipAngle = 0;
+    let shipSpeed = 0.038;
+
+    let items = [];
+    let asteroids = [];
+    let particles = [];
+    let stars = [];
+    let lastSpawnTime = 0;
+    let lastAsteroidTime = 0;
+
+    // Sintetizador simple de audio para efectos
+    function playBeep(freq, type = 'sine', duration = 0.1) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const actx = new AudioCtx();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, actx.currentTime);
+        gain.gain.setValueAtTime(0.15, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start();
+        osc.stop(actx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Inicializar campo estelar del canvas
+    for (let i = 0; i < 45; i++) {
+      stars.push({
+        x: Math.random() * 480,
+        y: Math.random() * 320,
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.7 + 0.3
+      });
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    function openMiniGameModal() {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      setTimeout(resizeCanvas, 50);
+      showOverlay(overlayStart);
+    }
+
+    function closeMiniGameModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      stopGame();
+    }
+
+    function showOverlay(overlayToShow) {
+      [overlayStart, overlayVictory, overlayGameOver].forEach(ov => {
+        if (ov) {
+          if (ov === overlayToShow) ov.classList.remove('hidden');
+          else ov.classList.add('hidden');
+        }
+      });
+    }
+
+    function switchOrbit() {
+      if (!isRunning) return;
+      currentOrbit = 1 - currentOrbit;
+      targetRadius = currentOrbit === 0 ? INNER_R : OUTER_R;
+      playBeep(440, 'triangle', 0.08);
+
+      // Partículas al cambiar de órbita
+      for (let i = 0; i < 8; i++) {
+        particles.push({
+          x: (canvas.width / (2 * (window.devicePixelRatio || 1))) + Math.cos(shipAngle) * currentRadius,
+          y: (canvas.height / (2 * (window.devicePixelRatio || 1))) + Math.sin(shipAngle) * currentRadius,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 4,
+          color: '#ccff00',
+          size: Math.random() * 3 + 1,
+          life: 1
+        });
+      }
+    }
+
+    function startGame() {
+      isRunning = true;
+      score = 0;
+      combo = 1;
+      shields = 3;
+      items = [];
+      asteroids = [];
+      particles = [];
+      targetRadius = INNER_R;
+      currentRadius = INNER_R;
+      currentOrbit = 0;
+      shipAngle = 0;
+
+      updateHUD();
+      showOverlay(null);
+      playBeep(523.25, 'sine', 0.15);
+
+      cancelAnimationFrame(animId);
+      lastSpawnTime = performance.now();
+      lastAsteroidTime = performance.now();
+      animId = requestAnimationFrame(gameLoop);
+    }
+
+    function stopGame() {
+      isRunning = false;
+      cancelAnimationFrame(animId);
+    }
+
+    function updateHUD() {
+      if (scoreEl) scoreEl.textContent = score;
+      if (comboEl) comboEl.textContent = `x${combo}`;
+      if (shieldsEl) {
+        let shieldIcons = '';
+        for (let s = 0; s < shields; s++) shieldIcons += '🛡️ ';
+        shieldsEl.textContent = shieldIcons.trim() || '💥 0';
+      }
+    }
+
+    // Input listeners
+    if (btnStart) btnStart.addEventListener('click', startGame);
+    if (btnRetry) btnRetry.addEventListener('click', startGame);
+    if (btnReplayVic) btnReplayVic.addEventListener('click', startGame);
+    if (btnTapAction) btnTapAction.addEventListener('click', switchOrbit);
+    canvas.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (!isRunning) return;
+      switchOrbit();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('active')) return;
+      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (isRunning) switchOrbit();
+        else if (!overlayStart.classList.contains('hidden')) startGame();
+      }
+    });
+
+    const PLATFORM_ORBS = [
+      { id: 'netflix', color: '#E50914', label: 'N', points: 50 },
+      { id: 'disney', color: '#00A3FF', label: 'D', points: 50 },
+      { id: 'max', color: '#8a3afe', label: 'M', points: 50 },
+      { id: 'prime', color: '#00d9ff', label: 'P', points: 50 },
+      { id: 'spotify', color: '#25D366', label: '★', points: 100, isSpotify: true }
+    ];
+
+    function spawnItem() {
+      const orbType = PLATFORM_ORBS[Math.floor(Math.random() * PLATFORM_ORBS.length)];
+      const orbit = Math.random() > 0.5 ? 1 : 0;
+      const radius = orbit === 0 ? INNER_R : OUTER_R;
+      // Aparece al otro lado de la nave
+      const angle = shipAngle + Math.PI + (Math.random() - 0.5) * 1.2;
+
+      items.push({
+        orbit,
+        radius,
+        angle,
+        speed: (Math.random() * 0.01 + 0.015) * (Math.random() > 0.5 ? 1 : -1),
+        type: orbType,
+        size: orbType.isSpotify ? 12 : 9.5
+      });
+    }
+
+    function spawnAsteroid() {
+      const orbit = Math.random() > 0.5 ? 1 : 0;
+      const radius = orbit === 0 ? INNER_R : OUTER_R;
+      const angle = shipAngle + Math.PI * 0.9;
+
+      asteroids.push({
+        orbit,
+        radius,
+        angle,
+        speed: (Math.random() * 0.012 + 0.02) * (Math.random() > 0.5 ? 1 : -1),
+        size: 11,
+        rot: 0,
+        rotSpeed: 0.03
+      });
+    }
+
+    function gameLoop(timestamp) {
+      if (!isRunning) return;
+
+      const logicalW = canvas.width / (window.devicePixelRatio || 1);
+      const logicalH = canvas.height / (window.devicePixelRatio || 1);
+      const cx = logicalW / 2;
+      const cy = logicalH / 2;
+
+      // 1. Spawning
+      if (timestamp - lastSpawnTime > 1400) {
+        if (items.length < 5) spawnItem();
+        lastSpawnTime = timestamp;
+      }
+      if (timestamp - lastAsteroidTime > 2600) {
+        if (asteroids.length < 4) spawnAsteroid();
+        lastAsteroidTime = timestamp;
+      }
+
+      // 2. Actualizar física
+      currentRadius += (targetRadius - currentRadius) * 0.16;
+      shipAngle += shipSpeed;
+
+      // Estela de motor
+      if (Math.random() > 0.3) {
+        particles.push({
+          x: cx + Math.cos(shipAngle - 0.18) * currentRadius,
+          y: cy + Math.sin(shipAngle - 0.18) * currentRadius,
+          vx: -Math.cos(shipAngle) * 1.5 + (Math.random() - 0.5),
+          vy: -Math.sin(shipAngle) * 1.5 + (Math.random() - 0.5),
+          color: '#ccff00',
+          size: Math.random() * 2.5 + 1,
+          life: 0.7
+        });
+      }
+
+      // Combo timer
+      if (combo > 1) {
+        comboTimer += 0.016;
+        if (comboTimer > 3.5) {
+          combo = 1;
+          comboTimer = 0;
+          updateHUD();
+        }
+      }
+
+      // 3. Render
+      ctx.clearRect(0, 0, logicalW, logicalH);
+
+      // Fondo Estrellas
+      ctx.fillStyle = '#ffffff';
+      stars.forEach(s => {
+        ctx.globalAlpha = s.alpha;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
+      ctx.globalAlpha = 1;
+
+      // Órbitas Concéntricas
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(204, 255, 0, 0.2)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, INNER_R, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(204, 255, 0, 0.35)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, OUTER_R, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Núcleo Central Órbita
+      const pulse = Math.sin(timestamp * 0.005) * 2;
+      const coreGrad = ctx.createRadialGradient(cx, cy, 3, cx, cy, 22 + pulse);
+      coreGrad.addColorStop(0, '#ffffff');
+      coreGrad.addColorStop(0.4, '#ccff00');
+      coreGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 22 + pulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Nave del Jugador
+      const shipX = cx + Math.cos(shipAngle) * currentRadius;
+      const shipY = cy + Math.sin(shipAngle) * currentRadius;
+
+      ctx.save();
+      ctx.translate(shipX, shipY);
+      ctx.rotate(shipAngle + Math.PI / 2);
+
+      // Escudo si está activo
+      ctx.strokeStyle = 'rgba(204, 255, 0, 0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(0, 0, 14, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Nave estilizada
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, -9);
+      ctx.lineTo(7, 7);
+      ctx.lineTo(0, 4);
+      ctx.lineTo(-7, 7);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = '#ccff00';
+      ctx.beginPath();
+      ctx.arc(0, -1, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      // Items / Esferas de Streaming
+      for (let i = items.length - 1; i >= 0; i--) {
+        const item = items[i];
+        item.angle += item.speed;
+        const ix = cx + Math.cos(item.angle) * item.radius;
+        const iy = cy + Math.sin(item.angle) * item.radius;
+
+        // Dibujar aura y esfera
+        ctx.fillStyle = item.type.color;
+        ctx.shadowColor = item.type.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(ix, iy, item.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Letra inicial
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(item.type.label, ix, iy + 0.5);
+
+        // Colisión con la nave
+        const dist = Math.hypot(shipX - ix, shipY - iy);
+        if (dist < 18) {
+          // Recolectado
+          const earned = item.type.points * combo;
+          score += earned;
+          combo = Math.min(combo + 1, 5);
+          comboTimer = 0;
+
+          if (item.type.isSpotify && shields < 3) {
+            shields++;
+            playBeep(784, 'sine', 0.2);
+          } else {
+            playBeep(587.33, 'triangle', 0.12);
+          }
+
+          // Partículas de recolección
+          for (let p = 0; p < 12; p++) {
+            particles.push({
+              x: ix,
+              y: iy,
+              vx: (Math.random() - 0.5) * 5,
+              vy: (Math.random() - 0.5) * 5,
+              color: item.type.color,
+              size: Math.random() * 3 + 1,
+              life: 1
+            });
+          }
+
+          items.splice(i, 1);
+          updateHUD();
+
+          // Condición de victoria / Promo secreta desbloqueada a los 300 pts
+          if (score >= 300) {
+            triggerVictory();
+            return;
+          }
+        }
+      }
+
+      // Asteroides / Amenazas
+      for (let a = asteroids.length - 1; a >= 0; a--) {
+        const ast = asteroids[a];
+        ast.angle += ast.speed;
+        ast.rot += ast.rotSpeed;
+        const ax = cx + Math.cos(ast.angle) * ast.radius;
+        const ay = cy + Math.sin(ast.angle) * ast.radius;
+
+        ctx.save();
+        ctx.translate(ax, ay);
+        ctx.rotate(ast.rot);
+
+        ctx.fillStyle = '#64748b';
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.rect(-ast.size / 2, -ast.size / 2, ast.size, ast.size);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.restore();
+
+        // Colisión con la nave
+        const aDist = Math.hypot(shipX - ax, shipY - ay);
+        if (aDist < 19) {
+          shields--;
+          combo = 1;
+          playBeep(140, 'sawtooth', 0.25);
+
+          // Explosión de impacto
+          for (let p = 0; p < 15; p++) {
+            particles.push({
+              x: ax,
+              y: ay,
+              vx: (Math.random() - 0.5) * 6,
+              vy: (Math.random() - 0.5) * 6,
+              color: '#ff4757',
+              size: Math.random() * 3 + 1.5,
+              life: 1
+            });
+          }
+
+          asteroids.splice(a, 1);
+          updateHUD();
+
+          if (shields <= 0) {
+            triggerGameOver();
+            return;
+          }
+        }
+      }
+
+      // Actualizar y dibujar partículas
+      for (let p = particles.length - 1; p >= 0; p--) {
+        const part = particles[p];
+        part.x += part.vx;
+        part.y += part.vy;
+        part.life -= 0.035;
+
+        if (part.life <= 0) {
+          particles.splice(p, 1);
+        } else {
+          ctx.globalAlpha = part.life;
+          ctx.fillStyle = part.color;
+          ctx.beginPath();
+          ctx.arc(part.x, part.y, part.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      animId = requestAnimationFrame(gameLoop);
+    }
+
+    function triggerVictory() {
+      stopGame();
+      if (score > highscore) {
+        highscore = score;
+        localStorage.setItem('orbita_highscore', highscore.toString());
+        if (highscoreEl) highscoreEl.textContent = highscore;
+      }
+      if (victoryScoreEl) victoryScoreEl.textContent = score;
+      showOverlay(overlayVictory);
+      playBeep(880, 'sine', 0.3);
+      if (window.Orbita3D && window.Orbita3D.triggerShockwave) {
+        window.Orbita3D.triggerShockwave('#25D366');
+      }
+    }
+
+    function triggerGameOver() {
+      stopGame();
+      if (score > highscore) {
+        highscore = score;
+        localStorage.setItem('orbita_highscore', highscore.toString());
+        if (highscoreEl) highscoreEl.textContent = highscore;
+      }
+      if (finalScoreEl) finalScoreEl.textContent = score;
+      showOverlay(overlayGameOver);
+    }
   }
 
   window.OrbitaApp = {

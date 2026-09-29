@@ -381,6 +381,18 @@ const ORBITA_AI_KB = {
   // Botones Rápidos (Chips) en la consola: Opciones individuales ($3 y $4) y Combos ($5)
   presets: [
     {
+      id: "promo_spotify_gratis",
+      label: "🎁 PROMO: 2 Apps + Spotify GRATIS",
+      prompt: "¿Cómo funciona la promo de comprar 2 aplicaciones y recibir Spotify gratis?",
+      recommendIds: ["netflix", "disneyplus"],
+      isCombo: true,
+      price: 5.00,
+      title: "Super Promo: Combo 2x$5 + SPOTIFY GRATIS",
+      badge: "Promoción Estrella de Regalo",
+      reason: "¡Es la mejor promoción de Órbita Streaming! Al ordenar cualquier **Combo de 2 aplicaciones por solo $5.00/mes** (como Netflix + Disney+ o tus 2 favoritas), te obsequiamos **1 cuenta de SPOTIFY PREMIUM totalmente GRATIS** durante el mes. ¡Disfrutas de streaming de video más toda la música sin pagar un centavo extra!",
+      tip: "🎁 Para activarla, solo di en WhatsApp que deseas tu Combo 2x$5 con el bono de Spotify de regalo."
+    },
+    {
       id: "single_cinema",
       label: "🍿 1 Sola: Series & Cine ($3)",
       prompt: "Quiero 1 sola aplicación para ver series y películas taquilleras",

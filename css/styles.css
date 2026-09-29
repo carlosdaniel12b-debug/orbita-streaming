@@ -1002,24 +1002,41 @@ ul {
   box-shadow: 0 0 16px var(--accent-cyan-glow);
 }
 
-/* Botón CTA Header */
-.header-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.15rem;
-  background: var(--gradient-cosmic);
-  color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 15px rgba(138, 58, 254, 0.35);
-  transition: all var(--transition-fast);
+/* Botón CTA Header WhatsApp (Universal y Visible en Todas las Páginas) */
+.header-cta-btn,
+.btn-cosmic-header {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  padding: 0.52rem 1.15rem !important;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: #ffffff !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  border-radius: var(--radius-full) !important;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45), 0 0 10px rgba(37, 211, 102, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: all var(--transition-fast) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
 }
 
-.header-cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 217, 255, 0.45);
+.header-cta-btn svg,
+.btn-cosmic-header svg {
+  width: 17px !important;
+  height: 17px !important;
+  fill: #ffffff !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25)) !important;
+  flex-shrink: 0 !important;
+}
+
+.header-cta-btn:hover,
+.btn-cosmic-header:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  background: linear-gradient(135deg, #2bf074 0%, #16a392 100%) !important;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.65), 0 0 16px rgba(37, 211, 102, 0.4) !important;
+  color: #ffffff !important;
 }
 
 /* Botón Hamburguesa Móvil */
@@ -2471,8 +2488,11 @@ ul {
 }
 
 .summary-left-info {
-  flex: 1;
-  min-width: 250px;
+  flex: 1 1 200px;
+  min-width: 0;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .summary-combo-title {
@@ -2480,6 +2500,7 @@ ul {
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 0.3rem;
+  word-break: break-word;
 }
 
 .summary-combo-apps {
@@ -2487,6 +2508,8 @@ ul {
   color: #a3e635;
   font-weight: 600;
   margin-bottom: 0.4rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .summary-discount-tag {
@@ -2498,13 +2521,16 @@ ul {
   font-weight: 800;
   padding: 0.2rem 0.65rem;
   border-radius: var(--radius-full);
+  word-break: break-word;
 }
 
 .summary-right-pricing {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .summary-price-total {
@@ -3725,8 +3751,12 @@ ul {
     flex-shrink: 0;
   }
 
-  .header-actions .header-cta-btn {
-    display: none;
+  .header-actions .header-cta-btn,
+  .header-actions .btn-cosmic-header {
+    display: inline-flex !important;
+    padding: 0.42rem 0.75rem !important;
+    font-size: 0.78rem !important;
+    gap: 0.35rem !important;
   }
 
   .hero-section {
@@ -4468,6 +4498,20 @@ ul {
   font-size: 0.92rem;
   line-height: 1.55;
   color: var(--text-main);
+  min-width: 0;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+.ai-message-content p,
+.ai-message-content ul,
+.ai-message-content ol,
+.ai-message-content li {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
 }
 
 .ai-user-message .ai-message-content {
@@ -5164,11 +5208,28 @@ ul {
   .ai-message {
     margin-bottom: 0.75rem;
     gap: 0.5rem;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .ai-message-content {
-    padding: 0.65rem 0.8rem;
+    padding: 0.65rem 0.85rem;
     font-size: 0.84rem;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    box-sizing: border-box !important;
+  }
+
+  .ai-message-content p,
+  .ai-message-content ul,
+  .ai-message-content ol,
+  .ai-message-content li {
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    max-width: 100% !important;
   }
 
   .ai-bot-avatar {
@@ -5189,6 +5250,9 @@ ul {
     padding: 0.5rem 0.65rem max(0.5rem, env(safe-area-inset-bottom));
     flex-shrink: 0;
     box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .ai-input-wrap {
@@ -5196,9 +5260,11 @@ ul {
     align-items: center;
     gap: 0.45rem;
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
-  /* Texto del input: 16px exactos para evitar que iOS/Android hagan zoom que rompe la vista */
+  /* Texto del input: 16px exactos y flex adaptativo para que NADA se desborde */
   .ai-text-input {
     font-size: 16px !important;
     padding: 0.6rem 0.95rem !important;
@@ -5209,7 +5275,9 @@ ul {
     border-radius: 999px !important;
     line-height: 1.2;
     -webkit-text-fill-color: #ffffff !important;
-    width: 100% !important;
+    flex: 1 1 0% !important;
+    width: 0 !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
   }
 
@@ -5457,5 +5525,504 @@ ul {
     text-align: left;
   }
 }
+
+/* ==========================================================================
+   TIRA PROMOCIONAL CÓSMICA SUPERIOR (PROMO SPOTIFY GRATIS)
+   ========================================================================== */
+.cosmic-promo-strip {
+  width: 100%;
+  background: linear-gradient(90deg, #07100b 0%, #0d2417 30%, #153823 50%, #0d2417 70%, #07100b 100%);
+  border-bottom: 1px solid rgba(37, 211, 102, 0.35);
+  box-shadow: 0 2px 14px rgba(37, 211, 102, 0.2);
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 105;
+  overflow: hidden;
+}
+
+.cosmic-promo-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(204, 255, 0, 0.25), transparent);
+  animation: cosmicShimmer 4s infinite linear;
+}
+
+@keyframes cosmicShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.promo-strip-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.promo-strip-tag {
+  background: #ccff00;
+  color: #060b08;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+}
+
+.promo-strip-text {
+  font-weight: 500;
+}
+
+.promo-strip-text strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.promo-strip-btn {
+  background: rgba(37, 211, 102, 0.18);
+  border: 1px solid #25D366;
+  color: #2bf074;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.promo-strip-btn:hover {
+  background: #25D366;
+  color: #041209;
+  box-shadow: 0 0 14px rgba(37, 211, 102, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Botón Minijuego en Header */
+.header-minigame-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  background: rgba(204, 255, 0, 0.08);
+  border: 1.5px solid rgba(204, 255, 0, 0.45);
+  border-radius: var(--radius-full);
+  color: #ccff00;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 12px rgba(204, 255, 0, 0.15);
+}
+
+.header-minigame-btn:hover {
+  background: rgba(204, 255, 0, 0.2);
+  border-color: #ccff00;
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(204, 255, 0, 0.4);
+}
+
+@media (max-width: 640px) {
+  .header-minigame-btn .game-text {
+    display: none;
+  }
+  .header-minigame-btn {
+    padding: 0.45rem 0.6rem;
+  }
+}
+
+/* ==========================================================================
+   MODAL MINIJUEGO ORBITAL: DEFENSOR DEL ESPACIO (HTML5 CANVAS ARCADE)
+   ========================================================================== */
+.orbit-game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(3, 6, 4, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orbit-game-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.orbit-game-dialog {
+  background: linear-gradient(165deg, #09130c 0%, #050b07 100%);
+  border: 1.5px solid rgba(204, 255, 0, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(204, 255, 0, 0.25);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: gamePopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes gamePopIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.orbit-game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(204, 255, 0, 0.2);
+}
+
+.orbit-game-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orbit-game-title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.orbit-game-title span.badge {
+  background: #ccff00;
+  color: #000000;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.orbit-game-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.orbit-game-close-btn:hover {
+  background: rgba(255, 80, 80, 0.25);
+  border-color: #ff4757;
+  color: #ff4757;
+  transform: rotate(90deg);
+}
+
+/* HUD Estadísticas del Minijuego */
+.orbit-game-hud {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.hud-item-label {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hud-item-val {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #ccff00;
+}
+
+.hud-item-val.shields {
+  color: #ff4757;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+/* Área de Canvas del Juego */
+.orbit-game-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: radial-gradient(circle at center, #0c1c13 0%, #040906 100%);
+  overflow: hidden;
+}
+
+#orbit-arcade-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+/* Overlay de Inicio / Pausa / Game Over / Victoria */
+.orbit-game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 8, 6, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.orbit-game-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.overlay-hero-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  animation: floatOrb 2s infinite ease-in-out;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.overlay-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.overlay-desc {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  max-width: 380px;
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+}
+
+.overlay-desc strong {
+  color: #ccff00;
+}
+
+.overlay-btn-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-arcade-play {
+  background: linear-gradient(135deg, #ccff00 0%, #9be212 100%);
+  color: #040c06;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(204, 255, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-arcade-play:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 25px rgba(204, 255, 0, 0.6);
+}
+
+.btn-arcade-reward {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-arcade-reward:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+  color: #ffffff;
+}
+
+/* Barra de Control Táctil Inferior */
+.orbit-game-footer {
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.game-instructions-text {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.btn-game-tap-action {
+  background: rgba(204, 255, 0, 0.15);
+  border: 1.5px solid #ccff00;
+  color: #ccff00;
+  font-weight: 800;
+  font-size: 0.84rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.btn-game-tap-action:active {
+  background: #ccff00;
+  color: #040a06;
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   EFECTOS ORBITALES ADICIONALES (CSS COSMIC GLOW & BADGES)
+   ========================================================================== */
+.orbit-pulse-ring {
+  position: relative;
+}
+
+.orbit-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 1.5px dashed rgba(204, 255, 0, 0.45);
+  animation: spinSlow 14s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Banner de Promo Especial Hero */
+.hero-promo-glow-card {
+  margin: 1.25rem auto 1.5rem;
+  max-width: 640px;
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.14) 0%, rgba(204, 255, 0, 0.1) 100%);
+  border: 1.5px solid rgba(37, 211, 102, 0.45);
+  border-radius: 16px;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(37, 211, 102, 0.2);
+  flex-wrap: wrap;
+}
+
+.hero-promo-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.hero-promo-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+}
+
+.hero-promo-text-wrap {
+  min-width: 0;
+}
+
+.hero-promo-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+  word-break: break-word;
+}
+
+.hero-promo-subtitle {
+  font-size: 0.8rem;
+  color: #a7f3d0;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.hero-promo-action-btn {
+  background: #25D366;
+  color: #041209;
+  font-weight: 900;
+  font-size: 0.82rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.45);
+  transition: all 0.2s ease;
+}
+
+.hero-promo-action-btn:hover {
+  background: #2bf074;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.65);
+}
+
 
 

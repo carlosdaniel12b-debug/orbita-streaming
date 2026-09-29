@@ -291,6 +291,21 @@
     const celestialMesh = new THREE.Mesh(celestialGeo, celestialMat);
     celestialMesh.rotation.x = 0.15;
     orbitSystemGroup.add(celestialMesh);
+
+    // --- Anillo 4: Astrolabio Girosférico Cósmico Inclinado (Efecto Órbita 3D Profundo) ---
+    const gyroRadius = baseRadius * 1.75;
+    const gyroGeo = new THREE.TorusGeometry(gyroRadius, isMobile ? 0.75 : 1.1, 12, isMobile ? 50 : 90);
+    const gyroMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffd5,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending
+    });
+    const gyroMesh = new THREE.Mesh(gyroGeo, gyroMat);
+    gyroMesh.rotation.x = Math.PI / 3.8;
+    gyroMesh.rotation.y = Math.PI / 5.5;
+    orbitSystemGroup.add(gyroMesh);
+    window._gyroOrbitalMesh = gyroMesh;
   }
 
   // Núcleo Radiante Central
@@ -593,9 +608,21 @@
       orbitSystemGroup.rotation.x = (Math.PI / 3.4) + mouseY * 0.22;
       orbitSystemGroup.rotation.y = (-Math.PI / 10) + mouseX * 0.28;
 
-      // Rotación de los anillos en sentidos opuestos
-      if (outerRingMesh) outerRingMesh.rotation.z += delta * 0.25;
-      if (innerRingMesh) innerRingMesh.rotation.z -= delta * 0.35;
+      // Rotación de los anillos en sentidos opuestos y respiración armónica
+      if (outerRingMesh) {
+        outerRingMesh.rotation.z += delta * 0.25;
+        const breathOut = 1.0 + Math.sin(elapsedTime * 1.8) * 0.022;
+        outerRingMesh.scale.set(breathOut, breathOut, 1.0 + Math.cos(elapsedTime * 1.8) * 0.018);
+      }
+      if (innerRingMesh) {
+        innerRingMesh.rotation.z -= delta * 0.35;
+        const breathIn = 1.0 + Math.cos(elapsedTime * 2.1) * 0.028;
+        innerRingMesh.scale.set(breathIn, breathIn, 1.0 + Math.sin(elapsedTime * 2.1) * 0.018);
+      }
+      if (window._gyroOrbitalMesh) {
+        window._gyroOrbitalMesh.rotation.z += delta * 0.16;
+        window._gyroOrbitalMesh.rotation.y += delta * 0.06;
+      }
     }
 
     // 2. Movimiento orbital de satélites
