@@ -9,6 +9,7 @@ echo ================================================================
 echo.
 
 set "GIT_CMD=C:\Users\yoyo1\.gemini\antigravity\scratch\mingit\cmd\git.exe"
+if not exist "%GIT_CMD%" set "GIT_CMD=C:\Users\yoyo1\AppData\Local\GitHubDesktop\app-3.6.6\resources\app\git\cmd\git.exe"
 if not exist "%GIT_CMD%" set "GIT_CMD=git"
 
 echo [1/3] Detectando archivos modificados o agregados...
@@ -16,7 +17,7 @@ echo [1/3] Detectando archivos modificados o agregados...
 
 set "MSG=%~1"
 if "%MSG%"=="" (
-    set /p MSG="Escribe una breve descripción de lo que cambiaste (o presiona ENTER para usar la fecha): "
+    set /p MSG="Escribe una breve descripción de lo que cambiaste (o presiona ENTER para usar la fecha actual): "
 )
 if "%MSG%"=="" (
     set "MSG=Actualización de Órbita Streaming %date% %time%"
@@ -40,7 +41,7 @@ if %ERRORLEVEL% EQU 0 (
 ) else (
     echo.
     echo [ERROR] Hubo un problema al subir los cambios a GitHub.
-    echo Verifica tu conexión a internet o tus permisos.
+    echo Puedes abrir GitHub Desktop y presionar "Push origin".
 )
 
 echo.
