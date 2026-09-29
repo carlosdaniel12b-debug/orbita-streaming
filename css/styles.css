@@ -5079,25 +5079,180 @@ ul {
   color: #ccff00;
 }
 
-/* Responsive Móvil para Ventana Flotante */
+/* ==========================================================================
+   RESPONSIVE MÓVIL PERFECCIONADO PARA ORBIT AI (VENTANA FLOTANTE & TECLADO)
+   ========================================================================== */
 @media (max-width: 768px) {
   .orbit-ai-floating-window {
     padding: 0;
     align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    height: 100dvh;
   }
 
   .orbit-ai-window-dialog {
     width: 100%;
     max-width: 100%;
-    height: 86vh;
-    max-height: 86vh;
-    border-radius: 22px 22px 0 0;
+    /* Altura adaptada y compacta para celular */
+    height: min(68dvh, 520px);
+    max-height: 70dvh;
+    border-radius: 20px 20px 0 0;
     border-bottom: none;
+    border-left: 1px solid rgba(204, 255, 0, 0.4);
+    border-right: 1px solid rgba(204, 255, 0, 0.4);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(204, 255, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #090f0c;
+  }
+
+  /* Encabezado compacto */
+  .orbit-ai-win-header {
+    padding: 0.65rem 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .orbit-ai-win-title {
+    font-size: 0.95rem;
+  }
+
+  .orbit-ai-win-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .orbit-ai-win-avatar svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Barra de tarifas compacta */
+  .orbit-ai-win-subbar {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+
+  /* Chips desplazables horizontalmente sin apilarse */
+  .orbit-ai-chips-wrap {
+    padding: 0.45rem 0.65rem;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .orbit-ai-chips-wrap .ai-prompt-chips {
+    gap: 0.35rem;
+    padding-bottom: 0.15rem;
+  }
+
+  .orbit-ai-chips-wrap .ai-chip-btn {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* Cuerpo del Chat fluido */
+  .orbit-ai-window-dialog .ai-chat-box {
+    flex: 1 1 auto;
+    min-height: 80px;
+    padding: 0.65rem 0.8rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-message {
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .ai-message-content {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.84rem;
+  }
+
+  .ai-bot-avatar {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Formulario de Entrada SIEMPRE anclado y visible sobre el teclado */
+  .orbit-ai-window-dialog .ai-input-form,
+  .orbit-ai-window-dialog .orbit-ai-input-dock {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #070b09;
+    border-top: 1.5px solid rgba(204, 255, 0, 0.4);
+    padding: 0.5rem 0.65rem max(0.5rem, env(safe-area-inset-bottom));
+    flex-shrink: 0;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.8);
+  }
+
+  .ai-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: 100%;
+  }
+
+  /* Texto del input: 16px exactos para evitar que iOS/Android hagan zoom que rompe la vista */
+  .ai-text-input {
+    font-size: 16px !important;
+    padding: 0.6rem 0.95rem !important;
+    height: 44px !important;
+    color: #ffffff !important;
+    background: rgba(18, 28, 20, 0.98) !important;
+    border: 1.5px solid rgba(204, 255, 0, 0.45) !important;
+    border-radius: 999px !important;
+    line-height: 1.2;
+    -webkit-text-fill-color: #ffffff !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .ai-text-input:focus {
+    border-color: #ccff00 !important;
+    background: #0f1811 !important;
+    box-shadow: 0 0 14px rgba(204, 255, 0, 0.35) !important;
+  }
+
+  .ai-text-input::placeholder {
+    color: #94a3b8 !important;
+    font-size: 0.8rem;
+  }
+
+  /* Botón de envío táctil */
+  .ai-submit-btn {
+    height: 44px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    background: #ccff00 !important;
+    color: #050805 !important;
+  }
+
+  .ai-submit-btn span {
+    display: none !important;
+  }
+
+  .ai-submit-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #050805;
+    fill: none;
   }
 
   .floating-orbit-ai-container {
-    bottom: 24px;
-    left: 18px;
+    bottom: 20px;
+    left: 16px;
   }
 
   .floating-orbit-ai-btn .orbit-ai-btn-content {
@@ -5107,14 +5262,6 @@ ul {
   .floating-orbit-ai-btn {
     padding: 0.65rem;
     border-radius: 50%;
-  }
-
-  .ai-submit-btn span {
-    display: none;
-  }
-
-  .ai-submit-btn {
-    padding: 0.85rem 1.1rem;
   }
 }
 

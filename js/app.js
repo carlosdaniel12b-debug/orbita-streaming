@@ -437,7 +437,10 @@
 
     const input = document.getElementById('ai-user-query');
     if (input) {
-      setTimeout(() => input.focus(), 150);
+      // En dispositivos de escritorio se autoenfoca; en móviles evitamos abrir el teclado de golpe
+      if (window.innerWidth > 768) {
+        setTimeout(() => input.focus(), 150);
+      }
     }
 
     if (window.Orbita3D && window.Orbita3D.triggerShockwave) {
@@ -450,6 +453,11 @@
     if (!win) return;
     win.classList.remove('active');
     win.setAttribute('aria-hidden', 'true');
+    const dialog = win.querySelector('.orbit-ai-window-dialog');
+    if (dialog) {
+      dialog.style.height = '';
+      dialog.style.maxHeight = '';
+    }
   }
 
   window.openOrbitAi = openOrbitAiWindow;
@@ -486,6 +494,41 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeOrbitAiWindow();
     });
+
+    // Ajuste dinámico de viewport visual para teclados en teléfonos móviles
+    if (window.visualViewport) {
+      const handleMobileViewport = () => {
+        const dialog = document.querySelector('.orbit-ai-window-dialog');
+        if (!dialog) return;
+        if (window.innerWidth <= 768) {
+          const vh = window.visualViewport.height;
+          // Si el teclado virtual está desplegado (la altura visual es notablemente menor)
+          if (vh < window.innerHeight * 0.82) {
+            dialog.style.height = `${Math.floor(vh)}px`;
+            dialog.style.maxHeight = `${Math.floor(vh)}px`;
+            if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+          } else {
+            dialog.style.height = '';
+            dialog.style.maxHeight = '';
+          }
+        } else {
+          dialog.style.height = '';
+          dialog.style.maxHeight = '';
+        }
+      };
+
+      window.visualViewport.addEventListener('resize', handleMobileViewport);
+      window.visualViewport.addEventListener('scroll', handleMobileViewport);
+    }
+
+    if (textInput) {
+      textInput.addEventListener('focus', () => {
+        setTimeout(() => {
+          textInput.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        }, 280);
+      });
+    }
 
     if (!chipsContainer || !chatBox || !inputForm) return;
 
