@@ -53,15 +53,6 @@
   <!-- Capa Difusora de Fondo Cósmico (Profundidad Atmosférica y Desenfoque Suave) -->
   <div class="cosmic-blur-backdrop" aria-hidden="true"></div>
 
-  <!-- ==================== TIRA PROMOCIONAL CÓSMICA ==================== -->
-  <aside class="cosmic-promo-strip" aria-label="Promoción especial">
-    <div class="promo-strip-content">
-      <span class="promo-strip-tag">🔥 PROMO ESTELAR</span>
-      <span class="promo-strip-text">¡Arma cualquier <strong>Combo de 2 aplicaciones ($5/mes)</strong> y recibe <strong>1 cuenta de Spotify ¡TOTALMENTE GRATIS!</strong> 🎧</span>
-      <a href="#configurador" class="promo-strip-btn">Armar mi Combo ⚡</a>
-    </div>
-  </aside>
-
   <!-- ==================== HEADER FLOTANTE ==================== -->
   <div class="header-wrapper">
     <header class="main-header" id="main-header">
@@ -81,8 +72,8 @@
       <!-- Menú de Navegación Multi-Página -->
       <nav class="nav-menu" aria-label="Navegación principal">
         <a href="index.html" class="nav-link">Inicio</a>
-        <a href="catalogo.html" class="nav-link">Catálogo ($3)</a>
-        <a href="combos.html" class="nav-link active">Armar Combo (2 x $5)</a>
+        <a href="catalogo.html" class="nav-link">Catálogo</a>
+        <a href="combos.html" class="nav-link active">Combos</a>
         <button type="button" class="nav-link nav-link-ai" id="nav-open-orbit-ai" data-open-orbit-ai aria-label="Abrir asistente Orbit AI">
           <span class="ai-spark-dot"></span>
           <span>Orbit AI ✦</span>
@@ -155,10 +146,10 @@
     </div>
     <div class="mobile-nav-list">
       <a href="index.html" class="mobile-nav-link">🏠 Inicio <span>→</span></a>
-      <a href="catalogo.html" class="mobile-nav-link">🍿 Catálogo Individual ($3) <span>→</span></a>
-      <a href="combos.html" class="mobile-nav-link active">⚡ Armar Combo (2 x $5) <span>→</span></a>
+      <a href="catalogo.html" class="mobile-nav-link">🍿 Catálogo <span>→</span></a>
+      <a href="combos.html" class="mobile-nav-link active">⚡ Combos <span>→</span></a>
       <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">🤖 Asistente Orbit (IA) <span>⚡</span></a>
-      <button type="button" class="mobile-nav-link" id="mobile-drawer-minigame-btn" style="background: none; border: none; text-align: left; width: 100%; cursor: pointer; color: #ccff00; font-weight: 700; padding: 0.85rem 1rem;">🎮 Minijuego Orbital <span>⚡</span></button>
+      <button type="button" class="mobile-nav-link" id="mobile-drawer-minigame-btn" style="background: none; border: none; text-align: left; width: 100%; cursor: pointer; color: #00f0ff; font-weight: 700; padding: 0.85rem 1rem;">🎮 Minijuego Flappy Space <span>⚡</span></button>
     </div>
     <div class="mobile-drawer-footer">
       <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="justify-content: center; width: 100%;">
@@ -173,7 +164,7 @@
       <div class="subpage-breadcrumb">
         <a href="index.html">Inicio</a>
         <span>/</span>
-        <span style="color: var(--accent-lime);">Armar Combo (2 x $5)</span>
+        <span style="color: var(--accent-lime);">Combos</span>
       </div>
 
       <div class="hero-cosmic-badge">
@@ -425,8 +416,8 @@
           <h4 class="footer-heading">Páginas</h4>
           <ul class="footer-links-list">
             <li><a href="index.html">🏠 Inicio</a></li>
-            <li><a href="catalogo.html">🍿 Catálogo de Plataformas ($3)</a></li>
-            <li><a href="combos.html" style="color: var(--accent-lime); font-weight: 700;">⚡ Armar Combo (2 x $5)</a></li>
+            <li><a href="catalogo.html">🍿 Catálogo</a></li>
+            <li><a href="combos.html" style="color: var(--accent-lime); font-weight: 700;">⚡ Combos</a></li>
             <li><a href="index.html#ventajas">🛡️ Ventajas & Garantía</a></li>
             <li><a href="index.html#faq">❓ Preguntas Frecuentes</a></li>
           </ul>
@@ -473,7 +464,7 @@
     </div>
   </footer>
 
-  <!-- ==================== MODAL MINIJUEGO ORBITAL ARCADE ==================== -->
+  <!-- ==================== MODAL MINIJUEGO FLAPPY SPACE ==================== -->
   <div class="orbit-game-modal" id="orbit-game-modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="orbit-game-dialog">
       <!-- Encabezado del Minijuego -->
@@ -481,7 +472,7 @@
         <div class="orbit-game-title-group">
           <span style="font-size: 1.3rem;">🚀</span>
           <div class="orbit-game-title">
-            Piloto Orbital <span class="badge">ARCADE 60FPS</span>
+            Flappy Space <span class="badge">ARCADE 60FPS</span>
           </div>
         </div>
         <button type="button" class="orbit-game-close-btn" id="orbit-game-close-btn" aria-label="Cerrar juego">✕</button>
@@ -494,69 +485,53 @@
           <div class="hud-item-val" id="og-score">0</div>
         </div>
         <div>
-          <div class="hud-item-label">Combo</div>
-          <div class="hud-item-val" id="og-combo">x1</div>
-        </div>
-        <div>
-          <div class="hud-item-label">Escudos</div>
-          <div class="hud-item-val shields" id="og-shields">🛡️ 🛡️ 🛡️</div>
+          <div class="hud-item-label">Nivel</div>
+          <div class="hud-item-val level" id="og-level">Nv. 1: Órbita</div>
         </div>
         <div>
           <div class="hud-item-label">Récord</div>
-          <div class="hud-item-val" id="og-highscore">0</div>
+          <div class="hud-item-val record" id="og-highscore">0</div>
         </div>
       </div>
 
       <!-- Lienzo Interactivo del Minijuego -->
       <div class="orbit-game-canvas-wrap">
-        <canvas id="orbit-arcade-canvas" width="480" height="320"></canvas>
+        <canvas id="orbit-arcade-canvas" width="480" height="350"></canvas>
 
         <!-- Pantalla de Inicio -->
         <div class="orbit-game-overlay" id="og-overlay-start">
-          <div class="overlay-hero-icon">🛸</div>
-          <div class="overlay-title">Misión: Piloto Orbital</div>
+          <div class="overlay-hero-icon">🚀</div>
+          <div class="overlay-title">Flappy Space</div>
           <div class="overlay-desc">
-            Pilotea tu nave en las órbitas de <strong>Órbita Streaming</strong>. Recolecta las esferas de plataformas y esquiva los asteroides. ¡Llega a <strong>300 pts</strong> y desbloquea el <strong>Combo 2x$5 con Spotify GRATIS</strong>!
+            Pilotea tu nave espacial y esquiva las compuertas de plasma cósmicas. ¡Supera cada nivel y alcanza el Núcleo Galáctico!
+          </div>
+          <div class="overlay-levels-badge">
+            <span>Nv. 1: Órbita</span>
+            <span>Nv. 2: Asteroides</span>
+            <span>Nv. 3: Hiperespacio</span>
+            <span>Nv. 4: Núcleo</span>
           </div>
           <button type="button" class="btn-arcade-play" id="og-btn-start">
-            🚀 Iniciar Vuelo Cósmico
+            🚀 Iniciar Vuelo
           </button>
-        </div>
-
-        <!-- Pantalla de Victoria / Recompensa Galáctica -->
-        <div class="orbit-game-overlay hidden" id="og-overlay-victory">
-          <div class="overlay-hero-icon">🏆</div>
-          <div class="overlay-title" style="color: #ccff00;">¡MISIÓN CUMPLIDA!</div>
-          <div class="overlay-desc">
-            ¡Felicitaciones Piloto! Has dominado la órbita con <strong id="og-victory-score">0</strong> puntos y desbloqueaste la promo: <br>
-            <strong style="color: #2bf074; font-size: 1rem;">🔥 Combo 2x$5 + SPOTIFY GRATIS</strong>
-          </div>
-          <div class="overlay-btn-group">
-            <a href="https://wa.me/593998226756?text=Hola%20Órbita%20Streaming,%20gané%20el%20Minijuego%20Orbital%20y%20quiero%20reclamar%20mi%20Combo%20de%202%20apps%20por%20$5%20con%20mi%20cuenta%20de%20SPOTIFY%20GRATIS!" 
-               target="_blank" rel="noopener noreferrer" class="btn-arcade-reward">
-              <span>🎁 Reclamar Promo por WhatsApp</span>
-            </a>
-            <button type="button" class="btn-arcade-play" id="og-btn-replay-vic" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
-              Jugar de nuevo ↺
-            </button>
-          </div>
         </div>
 
         <!-- Pantalla de Game Over -->
         <div class="orbit-game-overlay hidden" id="og-overlay-gameover">
           <div class="overlay-hero-icon">💥</div>
-          <div class="overlay-title" style="color: #ff4757;">Impacto en la Órbita</div>
+          <div class="overlay-title" style="color: #ff4757;">¡Impacto Espacial!</div>
           <div class="overlay-desc">
-            Tu escudo colapsó con <strong id="og-final-score">0</strong> puntos. <br>
-            ¡Inténtalo de nuevo para desbloquear tu promo especial!
+            Puntaje obtenido: <strong id="og-final-score">0</strong> puntos. <br>
+            Nivel alcanzado: <strong id="og-final-level" style="color: #00f0ff;">Nv. 1: Órbita</strong>.
+            <div id="og-record-alert" style="color: #fbbf24; font-weight: 800; margin-top: 0.5rem; display: none;"></div>
           </div>
           <div class="overlay-btn-group">
             <button type="button" class="btn-arcade-play" id="og-btn-retry">
               Reintentar Vuelo ↺
             </button>
-            <a href="combos.html" class="btn-arcade-reward" style="background: rgba(204,255,0,0.2); color: #ccff00; border: 1px solid #ccff00;">
-              Ir a Combos ($5) ⚡
-            </a>
+            <button type="button" class="btn-arcade-secondary" id="og-btn-exit">
+              Salir ✕
+            </button>
           </div>
         </div>
       </div>
@@ -564,10 +539,10 @@
       <!-- Pie de Control Táctil -->
       <div class="orbit-game-footer">
         <div class="game-instructions-text">
-          🎮 <strong>Controles:</strong> Toca la pantalla o presiona <strong>Espacio</strong> para cambiar entre órbita interior y exterior.
+          🎮 <strong>Controles:</strong> Toca la pantalla o presiona <strong>Espacio / Flecha Arriba</strong> para elevar la nave.
         </div>
         <button type="button" class="btn-game-tap-action" id="og-btn-tap-action">
-          🚀 Cambiar Órbita
+          🚀 Elevar Nave
         </button>
       </div>
     </div>
@@ -625,6 +600,21 @@
         </div>
       </form>
     </div>
+  </div>
+
+  <!-- ==================== BOTÓN FLOTANTE MINIJUEGO ARCADE (BOTTOM-LEFT) ==================== -->
+  <div class="floating-minigame-container" id="floating-minigame-wrap">
+    <button type="button" class="floating-minigame-btn" id="floating-minigame-btn" data-open-minigame aria-label="Abrir Minijuego Espacial">
+      <span class="game-btn-halo"></span>
+      <div class="game-btn-icon-wrap">
+        <span class="game-btn-emoji">🎮</span>
+        <span class="game-live-dot"></span>
+      </div>
+      <div class="game-btn-content">
+        <span class="game-btn-title">Flappy Space</span>
+        <span class="game-btn-sub">Arcade Espacial</span>
+      </div>
+    </button>
   </div>
 
   <!-- Botón Flotante para Lanzar Orbit AI -->

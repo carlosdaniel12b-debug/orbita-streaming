@@ -178,8 +178,8 @@
       stencil: false,
       depth: true
     });
-    // Limitar pixel ratio a 1.5 para evitar saturación en pantallas retina móviles
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    // Limitar pixel ratio a 1.0 en móviles y 1.25 en escritorio para fluidez 60 FPS garantizada
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.25));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
 
@@ -595,7 +595,7 @@
   function animate() {
     animFrameId = requestAnimationFrame(animate);
 
-    if (!isVisible) return; // Ahorro de GPU cuando no está en pantalla
+    if (!isVisible || window._orbitCanvasPaused) return; // Ahorro total de GPU cuando no está visible o juego activo
 
     const delta = clock.getDelta();
     const elapsedTime = clock.getElapsedTime();
@@ -715,6 +715,12 @@
     },
     skipIntro() {
       skipIntro();
+    },
+    pause() {
+      window._orbitCanvasPaused = true;
+    },
+    resume() {
+      window._orbitCanvasPaused = false;
     }
   };
 

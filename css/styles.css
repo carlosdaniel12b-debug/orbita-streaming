@@ -1179,12 +1179,10 @@ ul {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  filter: blur(20px);
-  -webkit-filter: blur(20px);
-  transform: translate3d(0, 0, 0) scale(1.04);
-  will-change: transform, filter;
-  opacity: 0.92;
-  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.88;
+  will-change: opacity;
+  transition: opacity 0.5s ease;
 }
 
 .hero-3d-bg canvas {
@@ -1193,7 +1191,7 @@ ul {
   height: 100% !important;
 }
 
-/* Capa Difusora de Fondo Cósmico (Profundidad Atmosférica y Suavizado) */
+/* Capa Difusora de Fondo Cósmico (Profundidad Atmosférica y Suavizado Ultra-Ligero) */
 .cosmic-blur-backdrop {
   position: fixed;
   inset: 0;
@@ -1201,9 +1199,7 @@ ul {
   height: 100vh;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 40%, rgba(7, 10, 9, 0.32) 0%, rgba(7, 10, 9, 0.65) 65%, rgba(7, 10, 9, 0.94) 100%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: radial-gradient(circle at 50% 35%, rgba(6, 9, 15, 0.4) 0%, rgba(6, 9, 15, 0.78) 65%, #05070a 100%);
 }
 
 .hero-content {
@@ -1213,10 +1209,10 @@ ul {
   max-width: 960px;
   margin: 0 auto;
   padding: 2.75rem 2rem;
-  background: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(5, 7, 20, 0.84) 0%, rgba(5, 7, 20, 0.5) 70%, transparent 100%);
+  background: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(8, 12, 20, 0.94) 0%, rgba(6, 9, 16, 0.86) 70%, rgba(5, 7, 14, 0.6) 100%);
   border-radius: var(--radius-lg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
 }
 
 /* Badge Estelar Superior */
@@ -4729,6 +4725,106 @@ ul {
 }
 
 /* ==========================================================================
+   BOTÓN FLOTANTE: MINIJUEGO ARCADE (FLAPPY SPACE)
+   ========================================================================== */
+.floating-minigame-container {
+  position: fixed;
+  bottom: 96px;
+  left: 24px;
+  z-index: 997;
+}
+
+.floating-minigame-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, rgba(8, 20, 26, 0.96) 0%, rgba(5, 12, 18, 0.98) 100%);
+  border: 1.5px solid rgba(0, 240, 255, 0.55);
+  color: #ffffff;
+  padding: 0.65rem 1.25rem 0.65rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 22px rgba(0, 240, 255, 0.3);
+  transition: all var(--transition-smooth);
+  position: relative;
+  font-family: inherit;
+  outline: none;
+}
+
+.floating-minigame-btn:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 240, 255, 0.6);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.game-btn-halo {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  animation: gameHaloPulse 2.5s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes gameHaloPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.15, 1.35); opacity: 0; }
+}
+
+.game-btn-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(0, 0, 0, 0.6) 100%);
+  border: 1.5px solid #00f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.game-btn-emoji {
+  font-size: 1.25rem;
+  filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.7));
+}
+
+.game-live-dot {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 8px;
+  height: 8px;
+  background: #ccff00;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ccff00;
+  border: 1.5px solid #050b07;
+}
+
+.game-btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.game-btn-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.game-btn-sub {
+  font-size: 0.68rem;
+  color: #00f0ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ==========================================================================
    BOTÓN FLOTANTE: ORBIT AI (BOTTOM-LEFT)
    ========================================================================== */
 .floating-orbit-ai-container {
@@ -5318,6 +5414,20 @@ ul {
     fill: none;
   }
 
+  .floating-minigame-container {
+    bottom: 84px;
+    left: 16px;
+  }
+
+  .floating-minigame-btn .game-btn-content {
+    display: none;
+  }
+
+  .floating-minigame-btn {
+    padding: 0.65rem;
+    border-radius: 50%;
+  }
+
   .floating-orbit-ai-container {
     bottom: 20px;
     left: 16px;
@@ -5330,6 +5440,12 @@ ul {
   .floating-orbit-ai-btn {
     padding: 0.65rem;
     border-radius: 50%;
+  }
+
+  /* Optimización ultra-ligera en móviles: desactivar animaciones infinitas de fondo */
+  .cosmic-floating-dust,
+  .shooting-stars-field {
+    display: none !important;
   }
 }
 
@@ -5747,11 +5863,11 @@ ul {
 /* HUD Estadísticas del Minijuego */
 .orbit-game-hud {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  background: rgba(0, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
 }
 
@@ -5760,6 +5876,7 @@ ul {
   color: #94a3b8;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .hud-item-val {
@@ -5768,18 +5885,21 @@ ul {
   color: #ccff00;
 }
 
-.hud-item-val.shields {
-  color: #ff4757;
-  letter-spacing: 0.1em;
-  font-size: 0.9rem;
+.hud-item-val.level {
+  color: #00f0ff;
+  font-size: 0.88rem;
+}
+
+.hud-item-val.record {
+  color: #fbbf24;
 }
 
 /* Área de Canvas del Juego */
 .orbit-game-canvas-wrap {
   position: relative;
   width: 100%;
-  height: 320px;
-  background: radial-gradient(circle at center, #0c1c13 0%, #040906 100%);
+  height: 350px;
+  background: radial-gradient(circle at center, #071720 0%, #03080e 100%);
   overflow: hidden;
 }
 
@@ -5790,12 +5910,11 @@ ul {
   cursor: pointer;
 }
 
-/* Overlay de Inicio / Pausa / Game Over / Victoria */
+/* Overlay de Inicio / Pausa / Game Over */
 .orbit-game-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(4, 8, 6, 0.85);
-  backdrop-filter: blur(4px);
+  background: rgba(3, 8, 14, 0.88);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -5803,7 +5922,7 @@ ul {
   padding: 1.5rem;
   text-align: center;
   z-index: 10;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .orbit-game-overlay.hidden {
@@ -5814,7 +5933,7 @@ ul {
 
 .overlay-hero-icon {
   font-size: 2.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   animation: floatOrb 2s infinite ease-in-out;
 }
 
@@ -5824,10 +5943,11 @@ ul {
 }
 
 .overlay-title {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 900;
   color: #ffffff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
 }
 
 .overlay-desc {
@@ -5840,6 +5960,23 @@ ul {
 
 .overlay-desc strong {
   color: #ccff00;
+}
+
+.overlay-levels-badge {
+  display: inline-flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.overlay-levels-badge span {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .overlay-btn-group {
@@ -5867,27 +6004,22 @@ ul {
   box-shadow: 0 6px 25px rgba(204, 255, 0, 0.6);
 }
 
-.btn-arcade-reward {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: #ffffff;
-  font-weight: 900;
-  font-size: 0.95rem;
-  padding: 0.7rem 1.5rem;
+.btn-arcade-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.35rem;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   transition: all 0.2s ease;
 }
 
-.btn-arcade-reward:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+.btn-arcade-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 /* Barra de Control Táctil Inferior */
