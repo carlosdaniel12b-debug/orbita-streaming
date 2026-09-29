@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Órbita Streaming | Tu Universo de Streaming & Entretenimiento Digital</title>
+  <meta name="description" content="Plataformas de streaming premium con perfiles 100% privados, activación inmediata y garantía continua. Netflix, Disney+, Prime Video, Max, Apple TV+, Spotify, Canva Pro Anual y combos galácticos.">
+  <meta name="theme-color" content="#070a09">
+
+  <!-- Open Graph / Meta Compartir -->
+  <meta property="og:title" content="Órbita Streaming | Entretenimiento en una Sola Órbita">
+  <meta property="og:description" content="Accede a tus plataformas de streaming favoritas con perfiles privados, máxima calidad 4K y soporte 24/7.">
+  <meta property="og:type" content="website">
+
+  <!-- Tipografía Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Estilos Principales -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon SVG oficial con temática orbital (Verde Lima Neón) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='41' fill='none' stroke='%23ccff00' stroke-width='8'/><circle cx='50' cy='50' r='23' fill='none' stroke='%23ccff00' stroke-width='13'/><circle cx='50' cy='9' r='5' fill='%23ffffff'/></svg>">
+</head>
+<body>
+
+  <!-- ==================== INTRO CÓSMICA RÁPIDA: ENTRANDO A LA ÓRBITA ==================== -->
+  <div class="cinematic-intro-overlay" id="cinematic-intro-overlay" aria-label="Entrando a la Órbita">
+    <div class="intro-warp-bg">
+      <div class="warp-speed-rays"></div>
+      <div class="warp-ring ring-1"></div>
+      <div class="warp-ring ring-2"></div>
+      <div class="warp-ring ring-3"></div>
+      <div class="warp-ring ring-4"></div>
+    </div>
+    <div class="intro-center-pod" id="intro-brand-reveal">
+      <div class="intro-orbit-glyph-wrap">
+        <svg viewBox="0 0 100 100" class="intro-orbit-glyph" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="intro-ring-outer"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="intro-ring-inner"/>
+          <circle cx="50" cy="9" r="5" fill="#ffffff" class="intro-satellite"/>
+        </svg>
+      </div>
+      <div class="intro-brand-text">
+        <span class="intro-title-main">ÓRBITA</span>
+        <span class="intro-title-sub">STREAMING</span>
+      </div>
+      <div class="intro-status-badge">
+        <span class="intro-pulse-dot"></span>
+        <span class="intro-status-label">ENTRANDO A LA ÓRBITA...</span>
+      </div>
+    </div>
+    <button type="button" class="btn-skip-intro" id="btn-skip-intro" aria-label="Saltar introducción">
+      <span>Saltar</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Nebulosas Cósmicas Reactivas de Fondo con Animación Cromática -->
+  <div class="cosmic-nebula-glow-1" aria-hidden="true"></div>
+  <div class="cosmic-nebula-glow-2" aria-hidden="true"></div>
+
+  <!-- Meteoros / Estrellas Fugaces Animadas en el Fondo -->
+  <div class="cosmic-shooting-stars" aria-hidden="true">
+    <div class="shooting-star s1"></div>
+    <div class="shooting-star s2"></div>
+    <div class="shooting-star s3"></div>
+    <div class="shooting-star s4"></div>
+  </div>
+
+  <!-- Polvo Cósmico Flotante Bioluminiscente -->
+  <div class="cosmic-floating-dust" aria-hidden="true">
+    <div class="dust-particle d1"></div>
+    <div class="dust-particle d2"></div>
+    <div class="dust-particle d3"></div>
+    <div class="dust-particle d4"></div>
+    <div class="dust-particle d5"></div>
+    <div class="dust-particle d6"></div>
+  </div>
+
+  <!-- Contenedor Global Three.js para la animación 3D de planetas y órbitas cósmicas (Difuminada / Borrosa) -->
+  <div class="hero-3d-bg" id="hero-3d-canvas-container" aria-hidden="true"></div>
+
+  <!-- Capa Difusora de Fondo Cósmico (Profundidad Atmosférica y Desenfoque Suave) -->
+  <div class="cosmic-blur-backdrop" aria-hidden="true"></div>
+
+  <!-- ==================== HEADER FLOTANTE ==================== -->
+  <div class="header-wrapper">
+    <header class="main-header" id="main-header">
+      <!-- Logo Órbita Streaming Oficial (Anillos Concéntricos Verde Lima) -->
+      <a href="#" class="brand-logo-link" aria-label="Ir al inicio de Órbita Streaming">
+        <svg viewBox="0 0 100 100" class="brand-orbit-glyph" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="orbit-ring-outer"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="orbit-ring-inner"/>
+          <circle cx="50" cy="9" r="4" fill="#ffffff" class="orbit-satellite-dot"/>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-text-title">ÓRBITA</span>
+          <span class="brand-text-sub">STREAMING</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav class="nav-menu" aria-label="Navegación principal">
+        <button type="button" class="nav-link nav-link-ai" id="nav-open-orbit-ai" data-open-orbit-ai aria-label="Abrir asistente Orbit AI">
+          <span class="ai-spark-dot"></span>
+          <span>Orbit AI ✦</span>
+        </button>
+        <a href="#plataformas" class="nav-link">Plataformas ($3)</a>
+        <a href="#armar-combo" class="nav-link">Armar Combo (2 x $5)</a>
+        <a href="#ventajas" class="nav-link">Ventajas</a>
+        <a href="#testimonios" class="nav-link">Testimonios</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <!-- Selector de Moneda Dinámico -->
+        <div class="currency-selector-wrap" title="Cambiar divisa de precios">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <select id="currency-selector" class="currency-select" aria-label="Seleccionar moneda">
+            <option value="USD">USD ($)</option>
+            <option value="COP">COP ($)</option>
+            <option value="MXN">MXN ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+        </div>
+
+        <!-- Botón Audio Cósmico Header -->
+        <button id="header-audio-toggle" class="header-audio-btn" title="Alternar audio ambiental sintético" aria-label="Alternar sonido">
+          <span id="header-audio-icon">🔇</span>
+        </button>
+
+        <!-- Botón Contacto Header -->
+        <a href="https://wa.me/593998226756?text=Hola%20Órbita%20Streaming,%20deseo%20consultar%20sobre%20sus%20servicios" 
+           target="_blank" rel="noopener noreferrer" class="header-cta-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+          </svg>
+          <span>Asesor WhatsApp</span>
+        </a>
+
+        <!-- Botón Móvil Hamburguesa -->
+        <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Drawer Menú Móvil -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="brand-logo-link">
+        <svg viewBox="0 0 100 100" class="brand-orbit-glyph" style="width: 36px; height: 36px;" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-text-title" style="font-size: 1.2rem;">ÓRBITA</span>
+          <span class="brand-text-sub" style="font-size: 0.55rem;">STREAMING</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Cerrar menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-list">
+      <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">🤖 Asistente Orbit (IA) <span>⚡</span></a>
+      <a href="#plataformas" class="mobile-nav-link">Plataformas ($3) <span>→</span></a>
+      <a href="#armar-combo" class="mobile-nav-link">Armar Combo (2 x $5) <span>→</span></a>
+      <a href="#ventajas" class="mobile-nav-link">Ventajas & Garantía <span>→</span></a>
+      <a href="#testimonios" class="mobile-nav-link">Testimonios <span>→</span></a>
+      <a href="#faq" class="mobile-nav-link">Preguntas Frecuentes <span>→</span></a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="justify-content: center; width: 100%;">
+        <span>Chatear por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================== HERO PRINCIPAL CON FONDO 3D ==================== -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-content">
+      <!-- Barra de Telemetría Cósmica y Sintonizador de Color -->
+      <div>
+        <div class="orbit-telemetry-hud">
+          <span class="hud-dot"></span>
+          <span class="hud-orbit-label" id="hud-orbit-theme">FRECUENCIA: ÓRBITA STREAMING</span>
+          <button class="hud-reset-btn" id="hud-theme-reset" title="Restablecer color predeterminado">↺ Reset</button>
+        </div>
+      </div>
+
+      <!-- Badge Cósmico -->
+      <div class="hero-cosmic-badge">
+        <span class="cosmic-sparkle">✦</span>
+        <span>STREAMING PREMIUM • PERFILES PRIVADOS CON PIN</span>
+        <span class="cosmic-sparkle">✦</span>
+      </div>
+
+      <!-- Título Principal Impactante (Con alto contraste luminoso garantizado) -->
+      <h1 class="hero-main-title">
+        Todo tu Entretenimiento <br>
+        <span class="title-gradient-block">en una Sola Órbita</span>
+      </h1>
+
+      <!-- Subtítulo Claro y Directo -->
+      <p class="hero-subtitle">
+        Cuentas oficiales con activación en menos de <strong>5 minutos</strong>. 
+        Tarifas fijas de <strong>$3 / mes</strong> por aplicación individual o lleva tu <strong>Combo Dúo por solo $5</strong>. 
+        ¡Además, <strong>Canva Pro Anual a solo $4/año</strong>!
+      </p>
+
+      <!-- ==================== SISTEMA ORBITAL INTERACTIVO DE APLICACIONES ==================== -->
+      <div class="hero-orbit-stage" id="hero-orbit-stage" aria-label="Aplicaciones en órbita viva">
+        <div class="orbit-live-beacon-bar">
+          <span class="orbit-beacon-dot"></span>
+          <span class="orbit-beacon-title">APLICACIONES EN TRASLACIÓN ORBITAL ACTIVA</span>
+        </div>
+
+        <div class="orbit-system-arena" id="orbit-system-arena">
+          <!-- Núcleo Central: Emblema Oficial Órbita Streaming -->
+          <div class="orbit-sun-hub" id="orbit-sun-hub" title="Órbita Streaming">
+            <svg viewBox="0 0 100 100" class="orbit-sun-glyph" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="orbit-ring-outer"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="orbit-ring-inner"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff" class="orbit-satellite-dot"/>
+            </svg>
+            <div class="orbit-sun-flare"></div>
+            <span class="orbit-sun-label">ÓRBITA</span>
+          </div>
+
+          <!-- Pistas orbitales elípticas concéntricas con estelas -->
+          <div class="orbit-ellipse-track orbit-track-outer"></div>
+          <div class="orbit-ellipse-track orbit-track-inner"></div>
+
+          <!-- Capa interactiva de las 9 aplicaciones en órbita continua -->
+          <div class="orbit-nodes-layer" id="orbit-nodes-layer"></div>
+        </div>
+
+        <!-- Indicador de Plataforma Activa al pasar cursor / toque -->
+        <div class="orbit-active-platform-hud" id="orbit-active-platform-hud">
+          <span class="hud-pill-tag">Órbita Activa</span>
+          <span class="hud-platform-name" id="hud-platform-name">Toca cualquier aplicación para sintonizar</span>
+          <span class="hud-platform-rate" id="hud-platform-rate">$3.00 / mes</span>
+        </div>
+      </div>
+
+      <!-- Botones de Acción CTA -->
+      <div class="hero-cta-group">
+        <button type="button" class="btn-cosmic-ai-hero" id="hero-open-orbit-ai" data-open-orbit-ai aria-label="Abrir asistente Orbit AI">
+          <span class="btn-ai-icon">🤖</span>
+          <span>¿Qué ver? Preguntar a Orbit</span>
+        </button>
+
+        <a href="#armar-combo" class="btn-cosmic-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>Armar Combo (2 x $5)</span>
+        </a>
+
+        <a href="#plataformas" class="btn-cosmic-glass">
+          <span>Ver Catálogo ($3)</span>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Ribbon de Métricas de Confianza -->
+      <div class="hero-stats-ribbon">
+        <div class="stat-item">
+          <span class="stat-value highlight-lime">$3.00 <small>/ mes</small></span>
+          <span class="stat-label">Cualquier Plataforma</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value highlight-lime">2 x $5.00</span>
+          <span class="stat-label">Combo Dúo Ahorro</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value highlight-cyan">$4.00 <small>/ año</small></span>
+          <span class="stat-label">Canva Pro Anual</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value highlight-white">&lt; 5 Minutos</span>
+          <span class="stat-label">Entrega Inmediata</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PLATAFORMAS DISPONIBLES ==================== -->
+  <section class="section-padding" id="plataformas">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ TARIFAS FIJAS & TRANSPARENTES ✦</span>
+        <h2 class="section-title">Plataformas Individuales a $3</h2>
+        <p class="section-description">
+          Disfruta de las mejores plataformas con perfil privado con clave PIN, calidad 4K HDR y soporte continuo. O combina 2 cualesquiera por solo $5.
+        </p>
+      </div>
+
+      <!-- Filtro por categorías -->
+      <div class="platforms-filter-bar reveal-on-scroll">
+        <button class="platform-filter-btn active" data-filter="all">Todas las Apps</button>
+        <button class="platform-filter-btn" data-filter="cinema">Series & Películas</button>
+        <button class="platform-filter-btn" data-filter="music">Música</button>
+        <button class="platform-filter-btn" data-filter="tools">Diseño (Canva Pro)</button>
+      </div>
+
+      <!-- Grid de Tarjetas con Logos Oficiales Vectoriales -->
+      <div class="platforms-grid" id="platforms-grid">
+        <!-- Generado dinámicamente desde app.js con STREAMING_PLATFORMS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ARMAR TU COMBO PERSONALIZADO (2 x $5) ==================== -->
+  <section class="section-padding custom-combo-studio-section" id="armar-combo">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ CONFIGURADOR INTERACTIVO ✦</span>
+        <h2 class="section-title">Arma tu Combo a Tu Medida</h2>
+        <p class="section-description">
+          Tarifa fija: <strong>$3 por aplicación individual</strong> o combina <strong>2 aplicaciones por solo $5</strong>. Además, <strong>Canva Pro Anual a solo $4/año</strong>. Selecciona tus apps y el descuento se calculará en vivo automáticamente.
+        </p>
+      </div>
+
+      <div class="custom-combo-studio-card reveal-on-scroll">
+        <div class="studio-header">
+          <div class="studio-title-wrap">
+            <span class="studio-badge">DESCUENTO AUTOMÁTICO</span>
+            <h3 class="studio-main-heading">Selecciona 2 Plataformas para activar el Combo Dúo ($5)</h3>
+            <p class="studio-subtext">Haz clic en las tarjetas de abajo para sumarlas a tu paquete. Puedes elegir cualquiera:</p>
+          </div>
+          <div class="studio-selected-counter">
+            <span id="custom-selected-count">0</span> seleccionadas
+          </div>
+        </div>
+
+        <!-- Selector interactivo de aplicaciones disponibles -->
+        <div class="custom-app-selector-grid" id="custom-app-selector-grid">
+          <!-- Generado dinámicamente desde app.js -->
+        </div>
+
+        <!-- Resumen de cotización en vivo -->
+        <div class="custom-combo-summary-box">
+          <div class="summary-left-info">
+            <div class="summary-combo-title" id="summary-combo-title">Combo Personalizado Órbita</div>
+            <div class="summary-combo-apps" id="summary-combo-apps">Selecciona al menos 1 aplicación</div>
+            <div class="summary-discount-tag" id="summary-discount-tag" style="display: none;">
+              🎉 ¡Descuento de Combo Aplicado!
+            </div>
+          </div>
+          <div class="summary-right-pricing">
+            <div class="summary-price-total">
+              <span class="currency-symbol">$</span>
+              <span id="custom-total-price">0.00</span>
+              <span class="period-text" id="custom-price-period">/ mes</span>
+            </div>
+            <div class="summary-regular-price" id="custom-regular-price" style="display: none;">
+              Precio regular: <span>$6.00</span>
+            </div>
+            <a href="#" id="btn-order-custom-combo" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary btn-combo-order">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+              </svg>
+              <span>Pedir Combo por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VENTAJAS DEL SERVICIO ==================== -->
+  <section class="section-padding bg-surface-alt" id="ventajas">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ LA EXPERIENCIA ÓRBITA ✦</span>
+        <h2 class="section-title">¿Por Qué Elegir Órbita Streaming?</h2>
+        <p class="section-description">
+          Dile adiós a las cuentas caídas, perfiles sobreocupados y demoras eternas de soporte. Disfruta de un servicio profesional y garantizado.
+        </p>
+      </div>
+
+      <div class="advantages-grid" id="advantages-grid">
+        <!-- Generado dinámicamente desde app.js con ADVANTAGES -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIOS REALES ==================== -->
+  <section class="section-padding" id="testimonios">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ CLIENTES SATISFECHOS ✦</span>
+        <h2 class="section-title">Comentarios de Nuestra Comunidad</h2>
+        <p class="section-description">
+          Más de 12,000 usuarios activos disfrutan de sus plataformas sin interrupciones mes a mes.
+        </p>
+      </div>
+
+      <div class="testimonials-grid" id="testimonials-grid">
+        <!-- Generado dinámicamente desde app.js con TESTIMONIALS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PREGUNTAS FRECUENTES (FAQ) ==================== -->
+  <section class="section-padding bg-surface-alt" id="faq">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">✦ RESOLVEMOS TUS DUDAS ✦</span>
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-description">
+          Todo lo que necesitas saber sobre las cuentas, métodos de pago, garantías y perfiles privados.
+        </p>
+      </div>
+
+      <div class="faq-accordion-wrap" id="faq-accordion-wrap">
+        <!-- Generado dinámicamente desde app.js con FAQS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MODAL DE DETALLE DE PLATAFORMA ==================== -->
+  <div class="modal-overlay" id="platform-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Contenido generado dinámicamente al abrir modal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BOTÓN FLOTANTE ORBIT AI (BOTTOM-LEFT) ==================== -->
+  <div class="floating-orbit-ai-container" id="floating-orbit-ai-wrap">
+    <button type="button" class="floating-orbit-ai-btn" id="floating-orbit-ai-btn" data-open-orbit-ai aria-label="Abrir asistente inteligente Orbit">
+      <span class="orbit-ai-halo-pulse"></span>
+      <div class="orbit-ai-btn-avatar">
+        <svg viewBox="0 0 100 100" class="orbit-ai-glyph">
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="8"/>
+          <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+          <circle cx="50" cy="9" r="5" fill="#ffffff"/>
+        </svg>
+        <span class="orbit-live-badge-dot"></span>
+      </div>
+      <div class="orbit-ai-btn-content">
+        <span class="orbit-ai-btn-title">Orbit AI</span>
+        <span class="orbit-ai-btn-sub">¿Qué ver hoy?</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- ==================== BOTÓN FLOTANTE WHATSAPP (BOTTOM-RIGHT) ==================== -->
+  <div class="floating-whatsapp-container">
+    <span class="wa-tooltip-tag">¿Dudas? Habla con un Asesor</span>
+    <button class="floating-whatsapp-btn" id="floating-whatsapp" aria-label="Abrir chat de WhatsApp">
+      <span class="wa-pulse-wave"></span>
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.449.741.964 1.2 1.05 1.077 1.77 1.267 2.015 1.4.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.086.289.13.332.202.043.072.043.419-.101.824z"/>
+      </svg>
+    </button>
+
+    <!-- Popup de Atención Directa -->
+    <div class="whatsapp-quick-popup" id="whatsapp-quick-popup">
+      <div class="popup-header">
+        <div class="popup-header-info">
+          <div class="popup-avatar">Ó</div>
+          <div>
+            <div class="popup-title">Soporte Órbita</div>
+            <div class="popup-status">En línea • Tiempo de respuesta &lt; 2 min</div>
+          </div>
+        </div>
+        <button class="popup-close-btn" id="whatsapp-popup-close" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="popup-body">
+        <div class="popup-agent-bubble">
+          ¡Hola! 👋 Bienvenido a <strong>Órbita Streaming</strong>. ¿Buscas una plataforma individual ($3), un combo de 2 por $5 o Canva Pro Anual ($4)?
+        </div>
+        <a href="https://wa.me/593998226756?text=Hola%20Órbita%20Streaming,%20quiero%20más%20información%20sobre%20las%20cuentas" 
+           target="_blank" rel="noopener noreferrer" class="popup-direct-link">
+          <span>Abrir Conversación</span>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER COMPLETO ==================== -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Columna 1: Marca Oficial y Bio -->
+        <div class="footer-brand-col">
+          <div class="brand-logo-link">
+            <svg viewBox="0 0 100 100" class="brand-orbit-glyph" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7" class="orbit-ring-outer"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12" class="orbit-ring-inner"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+            </svg>
+            <div class="brand-text-block">
+              <span class="brand-text-title">ÓRBITA</span>
+              <span class="brand-text-sub">STREAMING</span>
+            </div>
+          </div>
+          <p class="footer-slogan">
+            Ecosistema digital de entretenimiento. Disfruta de tus contenidos favoritos sin complicaciones, con perfiles privados y activación inmediata en menos de 5 minutos.
+          </p>
+          <div class="footer-status-pill">
+            <span class="status-dot-blink"></span>
+            <span>Servidores & Cuentas 100% Operativos</span>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div>
+          <h4 class="footer-col-title">Navegación</h4>
+          <ul class="footer-links-list">
+            <li><a href="#hero" class="footer-link">Inicio</a></li>
+            <li><button type="button" class="footer-link footer-btn-link" data-open-orbit-ai>Orbit AI (Asistente)</button></li>
+            <li><a href="#plataformas" class="footer-link">Plataformas ($3)</a></li>
+            <li><a href="#armar-combo" class="footer-link">Armar Combo (2 x $5)</a></li>
+            <li><a href="#ventajas" class="footer-link">Ventajas del Servicio</a></li>
+            <li><a href="#faq" class="footer-link">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicios Destacados -->
+        <div>
+          <h4 class="footer-col-title">Plataformas</h4>
+          <ul class="footer-links-list">
+            <li><a href="#plataformas" class="footer-link">Netflix Premium 4K ($3)</a></li>
+            <li><a href="#plataformas" class="footer-link">Disney+ & ESPN ($3)</a></li>
+            <li><a href="#plataformas" class="footer-link">HBO Max ($3)</a></li>
+            <li><a href="#plataformas" class="footer-link">Amazon Prime Video ($3)</a></li>
+            <li><a href="#plataformas" class="footer-link">Spotify Premium ($3)</a></li>
+            <li><a href="#plataformas" class="footer-link">Canva Pro Anual ($4)</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Medios de Pago & Contacto -->
+        <div class="payment-methods-box">
+          <h4 class="footer-col-title">Medios de Pago</h4>
+          <p class="payment-methods-desc">Múltiples opciones seguras de pago internacional y local:</p>
+          <div class="payment-badges-wrap">
+            <span class="pay-badge">Bancolombia</span>
+            <span class="pay-badge">Nequi</span>
+            <span class="pay-badge">Daviplata</span>
+            <span class="pay-badge">MercadoPago</span>
+            <span class="pay-badge">SPEI / OXXO</span>
+            <span class="pay-badge">Zelle</span>
+            <span class="pay-badge">Binance Pay (USDT)</span>
+            <span class="pay-badge">PayPal</span>
+            <span class="pay-badge">Tarjetas Crédito/Débito</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Copyright, Firma de Creador y Descargo Legal -->
+      <div class="footer-bottom-bar">
+        <div class="footer-creator-box">
+          <span class="creator-sparkle">✦</span>
+          <span class="creator-text">Creada por <strong>Carlos Daniel</strong></span>
+          <span class="creator-sparkle">✦</span>
+        </div>
+
+        <p class="footer-disclaimer">
+          <strong>Aviso de Independencia:</strong> Órbita Streaming es un intermediario digital independiente que facilita servicios de acceso y gestión de perfiles de entretenimiento. Todas las marcas registradas, logotipos y nombres comerciales de plataformas (Netflix, Disney+, HBO Max, Prime Video, Apple TV+, Spotify, Canva, etc.) son propiedad exclusiva de sus respectivos titulares y se utilizan únicamente con fines ilustrativos e informativos.
+        </p>
+
+        <p class="footer-copyright">
+          &copy; 2026 <strong>Órbita Streaming</strong> • Creada por <strong>Carlos Daniel</strong>. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== VENTANA FLOTANTE: ORBIT AI ==================== -->
+  <div class="orbit-ai-floating-window" id="orbit-ai-window" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="orbit-ai-window-backdrop" id="orbit-ai-backdrop"></div>
+    <div class="orbit-ai-window-dialog">
+      <!-- Encabezado de la Ventana Flotante Orbit AI -->
+      <div class="orbit-ai-win-header">
+        <div class="orbit-ai-win-profile">
+          <div class="orbit-ai-win-avatar">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+              <circle cx="50" cy="9" r="5" fill="#ffffff"/>
+            </svg>
+            <span class="status-online-dot"></span>
+          </div>
+          <div>
+            <div class="orbit-ai-win-title">Orbit <span class="ai-pill-tag">✦ IA</span></div>
+            <div class="orbit-ai-win-status">Copiloto Inteligente • En línea</div>
+          </div>
+        </div>
+        <div class="orbit-ai-win-actions">
+          <button type="button" class="orbit-ai-win-close-btn" id="orbit-ai-close-btn" aria-label="Cerrar ventana Orbit AI">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra Informativa de Tarifas -->
+      <div class="orbit-ai-win-subbar">
+        <span>💡 Pide <strong>1 sola app ($3)</strong> o un <strong>Combo Dúo (2 x $5)</strong></span>
+      </div>
+
+      <!-- Chips de Preguntas / Filtros Rápidos -->
+      <div class="orbit-ai-chips-wrap">
+        <div class="ai-prompt-chips" id="ai-prompt-chips">
+          <!-- Generados dinámicamente desde data.js / app.js -->
+        </div>
+      </div>
+
+      <!-- Consola de Conversación Interactiva -->
+      <div class="ai-chat-box" id="ai-chat-box">
+        <div class="ai-message ai-bot-message">
+          <div class="ai-bot-avatar">
+            <svg viewBox="0 0 100 100" class="ai-avatar-svg">
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#ccff00" stroke-width="7"/>
+              <circle cx="50" cy="50" r="23" fill="none" stroke="#ccff00" stroke-width="12"/>
+              <circle cx="50" cy="9" r="4" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="ai-message-content">
+            <div class="ai-bot-name">Orbit ✦ Asistente</div>
+            <p>¡Hola! Soy <strong>Orbit</strong>, tu copiloto en <strong>Órbita Streaming</strong>. ¿Buscas <strong>1 sola aplicación ($3.00/mes)</strong> o prefieres armar un <strong>Combo Dúo de 2 aplicaciones ($5.00/mes)</strong>? Cuéntame qué te gustaría ver o pulsa cualquiera de los botones rápidos de arriba.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Entrada Libre para el Usuario -->
+      <form class="ai-input-form" id="ai-input-form">
+        <div class="ai-input-wrap">
+          <input type="text" id="ai-user-query" class="ai-text-input" placeholder="Pregunta a Orbit: ej. Solo Netflix, o 1 para fútbol..." autocomplete="off">
+          <button type="submit" class="ai-submit-btn" id="ai-submit-btn" aria-label="Enviar pregunta a Orbit">
+            <span>Preguntar</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <!-- 1. GSAP para transiciones fluidas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- 2. Three.js para la animación espacial 3D orbital -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- 3. Base de Datos Central & Knowledge Base -->
+  <script src="js/data.js"></script>
+
+  <!-- 4. Sistema Orbital 3D Concéntrico (60 FPS Cero Lag) -->
+  <script src="js/orbit-canvas.js"></script>
+
+  <!-- 5. Lógica de Aplicación, Asistente Flotante Orbit y Modales -->
+  <script src="js/app.js"></script>
+</body>
+</html>
