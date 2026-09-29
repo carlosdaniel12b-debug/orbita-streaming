@@ -345,12 +345,21 @@
         </div>
         <div>
           <div class="hud-item-label">Nivel</div>
-          <div class="hud-item-val level" id="og-level">Nv. 1: Órbita</div>
+          <div class="hud-item-val level" id="og-level">Nv. 1: Tierra</div>
         </div>
         <div>
           <div class="hud-item-label">Récord</div>
           <div class="hud-item-val record" id="og-highscore">0</div>
         </div>
+      </div>
+
+      <!-- Barra de Progreso del Nivel -->
+      <div class="orbit-game-level-bar">
+        <span class="level-bar-label" id="og-level-name">Nv. 1: Tierra</span>
+        <div class="level-progress-track">
+          <div class="level-progress-fill" id="og-level-progress" style="width: 0%;"></div>
+        </div>
+        <span class="level-bar-pts" id="og-level-pts">0 / 15 pts</span>
       </div>
 
       <!-- Lienzo Interactivo del Minijuego -->
@@ -362,13 +371,15 @@
           <div class="overlay-hero-icon">🚀</div>
           <div class="overlay-title">Flappy Space</div>
           <div class="overlay-desc">
-            Pilotea tu nave espacial y esquiva las compuertas de plasma cósmicas. ¡Supera cada nivel y alcanza el Núcleo Galáctico!
+            Viaje espacial interestelar de <strong>6 Niveles</strong>. Esquiva las compuertas de plasma cósmicas y llega al Agujero Negro.
           </div>
           <div class="overlay-levels-badge">
-            <span>Nv. 1: Órbita</span>
-            <span>Nv. 2: Asteroides</span>
-            <span>Nv. 3: Hiperespacio</span>
-            <span>Nv. 4: Núcleo</span>
+            <span>Nv. 1: Tierra</span>
+            <span>Nv. 2: Luna</span>
+            <span>Nv. 3: Marte</span>
+            <span>Nv. 4: Saturno</span>
+            <span>Nv. 5: Hiperespacio</span>
+            <span>Nv. 6: Agujero Negro</span>
           </div>
           <button type="button" class="btn-arcade-play" id="og-btn-start">
             🚀 Iniciar Vuelo
@@ -381,7 +392,7 @@
           <div class="overlay-title" style="color: #ff4757;">¡Impacto Espacial!</div>
           <div class="overlay-desc">
             Puntaje obtenido: <strong id="og-final-score">0</strong> puntos. <br>
-            Nivel alcanzado: <strong id="og-final-level" style="color: #00f0ff;">Nv. 1: Órbita</strong>.
+            Nivel alcanzado: <strong id="og-final-level" style="color: #00f0ff;">Nv. 1: Tierra</strong>.
             <div id="og-record-alert" style="color: #fbbf24; font-weight: 800; margin-top: 0.5rem; display: none;"></div>
           </div>
           <div class="overlay-btn-group">
@@ -395,13 +406,13 @@
         </div>
       </div>
 
-      <!-- Pie de Control Táctil -->
+      <!-- Pie de Control Táctil (Optimizado para Celulares) -->
       <div class="orbit-game-footer">
         <div class="game-instructions-text">
-          🎮 <strong>Controles:</strong> Toca la pantalla o presiona <strong>Espacio / Flecha Arriba</strong> para elevar la nave.
+          🎮 <strong>En PC:</strong> Tecla Espacio o Flecha Arriba. <strong>En Celular:</strong> Toca la pantalla o el botón.
         </div>
-        <button type="button" class="btn-game-tap-action" id="og-btn-tap-action">
-          🚀 Elevar Nave
+        <button type="button" class="btn-game-tap-action" id="og-btn-tap-action" aria-label="Propulsar nave espacial">
+          🚀 TOCAR PARA PROPULSAR NAVE
         </button>
       </div>
     </div>

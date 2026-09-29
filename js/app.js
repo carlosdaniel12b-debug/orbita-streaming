@@ -1530,7 +1530,7 @@
   }
 
   // =========================================================================
-  // --- 13. MINIJUEGO ARCADE: FLAPPY SPACE (PILOTO GALÁCTICO CON NIVELES) ---
+  // --- 13. MINIJUEGO ARCADE: FLAPPY SPACE (EXPANSIVO 6 NIVELES • MÓVIL Y PC) ---
   // =========================================================================
   function initOrbitMiniGame() {
     const modal = document.getElementById('orbit-game-modal');
@@ -1541,6 +1541,10 @@
     const scoreEl = document.getElementById('og-score');
     const levelEl = document.getElementById('og-level');
     const highscoreEl = document.getElementById('og-highscore');
+    const levelNameEl = document.getElementById('og-level-name');
+    const levelProgressEl = document.getElementById('og-level-progress');
+    const levelPtsEl = document.getElementById('og-level-pts');
+
     const overlayStart = document.getElementById('og-overlay-start');
     const overlayGameOver = document.getElementById('og-overlay-gameover');
     const finalScoreEl = document.getElementById('og-final-score');
@@ -1574,12 +1578,82 @@
       }
     });
 
-    // Niveles Progresivos de Flappy Space
+    // =======================================================================
+    // 6 NIVELES PROGRESIVOS Y EXTENSOS DE FLAPPY SPACE
+    // =======================================================================
     const LEVELS = [
-      { id: 1, name: 'Nv. 1: Órbita', minScore: 0, speed: 2.3, gap: 135, color: '#00f0ff', pylonColor: '#0a2533', osc: 0 },
-      { id: 2, name: 'Nv. 2: Asteroides', minScore: 5, speed: 2.9, gap: 120, color: '#ccff00', pylonColor: '#202e07', osc: 0 },
-      { id: 3, name: 'Nv. 3: Hiperespacio', minScore: 15, speed: 3.5, gap: 110, color: '#c084fc', pylonColor: '#2b0d3d', osc: 1.3 },
-      { id: 4, name: 'Nv. 4: Núcleo', minScore: 30, speed: 4.2, gap: 98, color: '#f43f5e', pylonColor: '#3d0714', osc: 2.2 }
+      {
+        id: 1,
+        name: 'Nv. 1: Tierra',
+        sector: 'Órbita Terrestre',
+        minScore: 0,
+        maxScore: 15,
+        speed: 2.2,
+        gap: 142,
+        color: '#00f0ff',
+        pylonColor: '#071d28',
+        osc: 0
+      },
+      {
+        id: 2,
+        name: 'Nv. 2: Luna',
+        sector: 'Órbita Lunar & Satélites',
+        minScore: 15,
+        maxScore: 35,
+        speed: 2.8,
+        gap: 130,
+        color: '#ccff00',
+        pylonColor: '#1b2805',
+        osc: 0
+      },
+      {
+        id: 3,
+        name: 'Nv. 3: Marte',
+        sector: 'Cinturón de Asteroides',
+        minScore: 35,
+        maxScore: 60,
+        speed: 3.4,
+        gap: 120,
+        color: '#ff9900',
+        pylonColor: '#331b05',
+        osc: 0
+      },
+      {
+        id: 4,
+        name: 'Nv. 4: Saturno',
+        sector: 'Anillos de Saturno & Júpiter',
+        minScore: 60,
+        maxScore: 90,
+        speed: 4.0,
+        gap: 112,
+        color: '#c084fc',
+        pylonColor: '#280a38',
+        osc: 1.4
+      },
+      {
+        id: 5,
+        name: 'Nv. 5: Hiperespacio',
+        sector: 'Hiperespacio Cuántico',
+        minScore: 90,
+        maxScore: 130,
+        speed: 4.6,
+        gap: 104,
+        color: '#f43f5e',
+        pylonColor: '#380512',
+        osc: 2.2
+      },
+      {
+        id: 6,
+        name: 'Nv. 6: Agujero Negro',
+        sector: 'Núcleo Galáctico',
+        minScore: 130,
+        maxScore: Infinity,
+        speed: 5.2,
+        gap: 98,
+        color: '#fbbf24',
+        pylonColor: '#3d2800',
+        osc: 2.8
+      }
     ];
 
     let isRunning = false;
@@ -1589,14 +1663,14 @@
     let highscore = parseInt(localStorage.getItem('flappy_space_highscore') || '0', 10);
     if (highscoreEl) highscoreEl.textContent = highscore;
 
-    // Física de la Nave Espacial
+    // Física de la Nave Espacial (Flappy Shuttle)
     const ship = {
       x: 75,
       y: 160,
       vy: 0,
-      gravity: 0.36,
-      jump: -6.5,
-      radius: 11,
+      gravity: 0.32,
+      jump: -6.2,
+      radius: 10.5,
       tilt: 0
     };
 
@@ -1607,33 +1681,54 @@
     let canvasW = 480;
     let canvasH = 350;
 
-    // Generar campo de estrellas de fondo
+    // Efectos de transición de nivel
+    let levelBannerText = '';
+    let levelBannerSector = '';
+    let levelBannerTimer = 0;
+    let levelBannerColor = '#00f0ff';
+    let screenFlashOpacity = 0;
+    let screenFlashColor = '#00f0ff';
+
+    // Generar campo de estrellas de fondo (con estelas de velocidad)
     function initStars() {
       stars = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 48; i++) {
         stars.push({
           x: Math.random() * canvasW,
           y: Math.random() * canvasH,
-          size: Math.random() * 1.8 + 0.5,
-          speed: Math.random() * 0.8 + 0.4,
+          size: Math.random() * 2 + 0.6,
+          speed: Math.random() * 0.9 + 0.3,
           alpha: Math.random() * 0.7 + 0.3
         });
       }
     }
     initStars();
 
-    // Sintetizador Web Audio API
-    function playBeep(freq, type = 'sine', duration = 0.08) {
+    // =======================================================================
+    // SINTETIZADOR DE AUDIO (WEB AUDIO API - CERO ARCHIVOS EXTERNOS)
+    // =======================================================================
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playBeep(freq, type = 'sine', duration = 0.08, gainVal = 0.12) {
       try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        const actx = new AudioCtx();
+        const actx = getAudioContext();
+        if (!actx) return;
         const osc = actx.createOscillator();
         const gain = actx.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, actx.currentTime);
-        gain.gain.setValueAtTime(0.12, actx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + duration);
+        gain.gain.setValueAtTime(gainVal, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + duration);
         osc.connect(gain);
         gain.connect(actx.destination);
         osc.start();
@@ -1641,9 +1736,18 @@
       } catch (e) {}
     }
 
-    function playLevelUpChime() {
-      playBeep(587.33, 'triangle', 0.1);
-      setTimeout(() => playBeep(880, 'sine', 0.18), 110);
+    // Melodía triunfal de cambio de nivel (Acorde arpegiado galáctico)
+    function playLevelUpFanfare() {
+      try {
+        const actx = getAudioContext();
+        if (!actx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // Do, Mi, Sol, Do alto
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            playBeep(freq, 'triangle', 0.22, 0.16);
+          }, idx * 95);
+        });
+      } catch (e) {}
     }
 
     function resizeCanvas() {
@@ -1653,16 +1757,18 @@
       canvasH = rect.height || 350;
       canvas.width = canvasW * dpr;
       canvas.height = canvasH * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
 
     function openMiniGameModal() {
+      getAudioContext();
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
       if (window.Orbita3D && window.Orbita3D.pause) {
         window.Orbita3D.pause();
       }
-      setTimeout(resizeCanvas, 40);
+      setTimeout(resizeCanvas, 30);
       showOverlay(overlayStart);
     }
 
@@ -1684,7 +1790,8 @@
       });
     }
 
-    function updateLevel() {
+    // Actualizar nivel, barra de progreso y HUD
+    function updateLevelAndHUD() {
       let nextLevel = LEVELS[0];
       for (let i = LEVELS.length - 1; i >= 0; i--) {
         if (score >= LEVELS[i].minScore) {
@@ -1692,45 +1799,84 @@
           break;
         }
       }
+
+      // Comprobar cambio de nivel
       if (nextLevel.id !== currentLevel.id) {
         currentLevel = nextLevel;
-        playLevelUpChime();
-        for (let i = 0; i < 20; i++) {
+        playLevelUpFanfare();
+
+        // Disparar anuncio espectacular en pantalla
+        levelBannerText = `¡NIVEL ${currentLevel.id}: ${currentLevel.name.split(':')[1].trim().toUpperCase()}!`;
+        levelBannerSector = `Sector: ${currentLevel.sector}`;
+        levelBannerTimer = 95; // ~1.6 segundos a 60fps
+        levelBannerColor = currentLevel.color;
+        screenFlashColor = currentLevel.color;
+        screenFlashOpacity = 0.55;
+
+        // Explosión de partículas cósmicas con el nuevo color
+        for (let i = 0; i < 35; i++) {
           particles.push({
             x: ship.x,
             y: ship.y,
-            vx: (Math.random() - 0.5) * 6,
-            vy: (Math.random() - 0.5) * 6,
+            vx: (Math.random() - 0.5) * 8,
+            vy: (Math.random() - 0.5) * 8,
             color: currentLevel.color,
-            size: Math.random() * 3 + 1.5,
-            life: 1
+            size: Math.random() * 4 + 1.8,
+            life: 1.2
           });
         }
       }
-      if (levelEl) levelEl.textContent = currentLevel.name;
+
+      // Actualizar texto y números
+      if (scoreEl) scoreEl.textContent = score;
+      if (levelEl) {
+        levelEl.textContent = currentLevel.name;
+        levelEl.style.color = currentLevel.color;
+      }
+      if (highscoreEl) highscoreEl.textContent = highscore;
+
+      // Actualizar barra de progreso del nivel
+      if (levelNameEl) levelNameEl.textContent = currentLevel.name;
+      if (levelProgressEl) {
+        if (currentLevel.maxScore === Infinity) {
+          levelProgressEl.style.width = '100%';
+          levelProgressEl.style.background = currentLevel.color;
+          if (levelPtsEl) levelPtsEl.textContent = '★ MODO MAESTRO';
+        } else {
+          const levelPointsSpan = currentLevel.maxScore - currentLevel.minScore;
+          const currentProgressPoints = score - currentLevel.minScore;
+          const percent = Math.min(100, Math.max(0, (currentProgressPoints / levelPointsSpan) * 100));
+          levelProgressEl.style.width = `${percent}%`;
+          levelProgressEl.style.background = `linear-gradient(90deg, #00f0ff, ${currentLevel.color})`;
+          if (levelPtsEl) levelPtsEl.textContent = `${score} / ${currentLevel.maxScore} pts`;
+        }
+      }
     }
 
+    // Acción de salto / propulsión
     function flap() {
+      getAudioContext();
       if (!isRunning) return;
       ship.vy = ship.jump;
       playBeep(420, 'sine', 0.08);
 
-      for (let i = 0; i < 5; i++) {
+      // Partículas reactivas de motor
+      for (let i = 0; i < 6; i++) {
         particles.push({
           x: ship.x - 14,
-          y: ship.y + (Math.random() - 0.5) * 6,
-          vx: -(Math.random() * 3 + 2),
+          y: ship.y + (Math.random() - 0.5) * 7,
+          vx: -(Math.random() * 3.5 + 2.5),
           vy: (Math.random() - 0.5) * 2,
-          color: Math.random() > 0.4 ? '#00f0ff' : '#ccff00',
-          size: Math.random() * 2.5 + 1,
-          life: 0.8
+          color: Math.random() > 0.4 ? currentLevel.color : '#ffffff',
+          size: Math.random() * 2.8 + 1,
+          life: 0.75
         });
       }
     }
 
     function spawnBarrier(startX) {
       const gapH = currentLevel.gap;
-      const margin = 40;
+      const margin = 45;
       const minY = gapH / 2 + margin;
       const maxY = canvasH - gapH / 2 - margin;
       const gapY = minY + Math.random() * (maxY - minY);
@@ -1749,24 +1895,29 @@
     }
 
     function startGame() {
+      getAudioContext();
       resizeCanvas();
       isRunning = true;
       score = 0;
       currentLevel = LEVELS[0];
       barriers = [];
       particles = [];
+      levelBannerTimer = 0;
+      screenFlashOpacity = 0;
+
       ship.x = 75;
       ship.y = canvasH / 2;
       ship.vy = -3;
       ship.tilt = 0;
 
-      updateHUD();
+      updateLevelAndHUD();
       showOverlay(null);
       playBeep(520, 'triangle', 0.12);
 
-      spawnBarrier(canvasW + 60);
-      spawnBarrier(canvasW + 270);
-      spawnBarrier(canvasW + 480);
+      // Generar compuertas iniciales espaciadas
+      spawnBarrier(canvasW + 70);
+      spawnBarrier(canvasW + 285);
+      spawnBarrier(canvasW + 500);
 
       cancelAnimationFrame(animId);
       animId = requestAnimationFrame(gameLoop);
@@ -1777,25 +1928,20 @@
       cancelAnimationFrame(animId);
     }
 
-    function updateHUD() {
-      if (scoreEl) scoreEl.textContent = score;
-      if (levelEl) levelEl.textContent = currentLevel.name;
-      if (highscoreEl) highscoreEl.textContent = highscore;
-    }
-
     function triggerGameOver() {
       stopGame();
-      playBeep(110, 'sawtooth', 0.28);
+      playBeep(110, 'sawtooth', 0.32);
 
-      for (let i = 0; i < 28; i++) {
+      // Explosión de colisión
+      for (let i = 0; i < 32; i++) {
         particles.push({
           x: ship.x,
           y: ship.y,
-          vx: (Math.random() - 0.5) * 8,
-          vy: (Math.random() - 0.5) * 8,
+          vx: (Math.random() - 0.5) * 8.5,
+          vy: (Math.random() - 0.5) * 8.5,
           color: Math.random() > 0.5 ? '#ff4757' : (Math.random() > 0.5 ? '#ffa502' : '#ffffff'),
-          size: Math.random() * 4 + 1.5,
-          life: 1.2
+          size: Math.random() * 4.5 + 1.5,
+          life: 1.3
         });
       }
 
@@ -1807,7 +1953,10 @@
       }
 
       if (finalScoreEl) finalScoreEl.textContent = score;
-      if (finalLevelEl) finalLevelEl.textContent = currentLevel.name;
+      if (finalLevelEl) {
+        finalLevelEl.textContent = currentLevel.name;
+        finalLevelEl.style.color = currentLevel.color;
+      }
       if (recordAlertEl) {
         if (isNewRecord && score > 0) {
           recordAlertEl.textContent = '⭐ ¡NUEVO RÉCORD GALÁCTICO! ⭐';
@@ -1820,53 +1969,64 @@
       showOverlay(overlayGameOver);
     }
 
-    // Input handlers
-    if (btnStart) btnStart.addEventListener('click', startGame);
-    if (btnRetry) btnRetry.addEventListener('click', startGame);
-    if (btnTapAction) btnTapAction.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!isRunning) startGame();
-      else flap();
-    });
-
-    canvas.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
+    // =======================================================================
+    // MANEJADORES DE ENTRADA TÁCTIL Y TECLADO (CELULARES & ESCRITORIO)
+    // =======================================================================
+    function handleFlapInput(e) {
+      if (e) {
+        if (e.cancelable) e.preventDefault();
+        e.stopPropagation();
+      }
       if (!isRunning) {
         if (overlayStart && !overlayStart.classList.contains('hidden')) startGame();
+        else if (overlayGameOver && !overlayGameOver.classList.contains('hidden')) startGame();
       } else {
         flap();
       }
-    });
+    }
+
+    if (btnStart) btnStart.addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
+    if (btnRetry) btnRetry.addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
+
+    if (btnTapAction) {
+      btnTapAction.addEventListener('pointerdown', handleFlapInput);
+      btnTapAction.addEventListener('touchstart', handleFlapInput, { passive: false });
+    }
+
+    canvas.addEventListener('pointerdown', handleFlapInput);
+    canvas.addEventListener('touchstart', handleFlapInput, { passive: false });
 
     document.addEventListener('keydown', (e) => {
       if (!modal.classList.contains('active')) return;
       if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
         e.preventDefault();
-        if (!isRunning) {
-          if (overlayStart && !overlayStart.classList.contains('hidden')) startGame();
-          else if (overlayGameOver && !overlayGameOver.classList.contains('hidden')) startGame();
-        } else {
-          flap();
-        }
+        handleFlapInput(null);
       }
     });
 
-    // Bucle Principal de Flappy Space (60 FPS)
+    // =======================================================================
+    // BUCLE PRINCIPAL DE ANIMACIÓN Y FÍSICA FLAPPY SPACE (60 FPS)
+    // =======================================================================
     function gameLoop(timestamp) {
       if (!isRunning) return;
 
       ctx.clearRect(0, 0, canvasW, canvasH);
 
-      // 1. Estrellas de fondo
-      ctx.fillStyle = '#ffffff';
+      // 1. Dibujar y mover estrellas de fondo (Parallax interestelar)
+      ctx.fillStyle = currentLevel.color;
       stars.forEach(st => {
         st.x -= st.speed * (currentLevel.speed * 0.45);
         if (st.x < 0) {
           st.x = canvasW;
           st.y = Math.random() * canvasH;
         }
-        ctx.globalAlpha = st.alpha;
-        ctx.fillRect(st.x, st.y, st.size, st.size);
+        ctx.globalAlpha = st.alpha * 0.85;
+        // En niveles altos, las estrellas se estiran como estelas de hiperespacio
+        if (currentLevel.id >= 5) {
+          ctx.fillRect(st.x, st.y, st.size * 3.5, st.size * 0.8);
+        } else {
+          ctx.fillRect(st.x, st.y, st.size, st.size);
+        }
       });
       ctx.globalAlpha = 1;
 
@@ -1874,23 +2034,25 @@
       ship.vy += ship.gravity;
       ship.y += ship.vy;
 
-      const targetTilt = Math.max(-0.45, Math.min(0.85, (ship.vy * 0.08)));
-      ship.tilt += (targetTilt - ship.tilt) * 0.2;
+      // Inclinación aerodinámica
+      const targetTilt = Math.max(-0.48, Math.min(0.85, (ship.vy * 0.085)));
+      ship.tilt += (targetTilt - ship.tilt) * 0.22;
 
-      if (Math.random() > 0.4) {
+      // Partículas continuas de llama trasera
+      if (Math.random() > 0.35) {
         particles.push({
           x: ship.x - 14,
           y: ship.y,
           vx: -(currentLevel.speed + Math.random() * 2),
           vy: (Math.random() - 0.5) * 1.5,
           color: currentLevel.color,
-          size: Math.random() * 2 + 0.8,
-          life: 0.5
+          size: Math.random() * 2.2 + 0.8,
+          life: 0.55
         });
       }
 
-      // 3. Barreras de Plasma
-      const barrierSpacing = 210;
+      // 3. Generación y movimiento de Barreras de Plasma
+      const barrierSpacing = 215;
       if (canvasW - lastBarrierX >= barrierSpacing) {
         spawnBarrier(canvasW);
       }
@@ -1899,25 +2061,26 @@
         const b = barriers[i];
         b.x -= currentLevel.speed;
 
+        // Oscilación vertical en niveles 4, 5 y 6
         if (currentLevel.osc > 0) {
-          b.gapY = b.baseGapY + Math.sin(timestamp * 0.003 + b.oscPhase) * (currentLevel.osc * 22);
+          b.gapY = b.baseGapY + Math.sin(timestamp * 0.0032 + b.oscPhase) * (currentLevel.osc * 20);
         }
 
         const topPylonBottom = b.gapY - b.gapH / 2;
         const bottomPylonTop = b.gapY + b.gapH / 2;
 
-        // Pilón Superior
+        // --- Pilón Superior ---
         ctx.fillStyle = currentLevel.pylonColor;
         ctx.fillRect(b.x, 0, b.width, topPylonBottom);
         ctx.strokeStyle = currentLevel.color;
         ctx.lineWidth = 2;
         ctx.strokeRect(b.x, -2, b.width, topPylonBottom + 2);
 
-        // Cabezal láser superior
+        // Cabezal láser superior emisor de energía
         ctx.fillStyle = currentLevel.color;
-        ctx.fillRect(b.x - 3, topPylonBottom - 8, b.width + 6, 8);
+        ctx.fillRect(b.x - 3, topPylonBottom - 9, b.width + 6, 9);
 
-        // Pilón Inferior
+        // --- Pilón Inferior ---
         ctx.fillStyle = currentLevel.pylonColor;
         ctx.fillRect(b.x, bottomPylonTop, b.width, canvasH - bottomPylonTop);
         ctx.strokeStyle = currentLevel.color;
@@ -1926,23 +2089,22 @@
 
         // Cabezal láser inferior
         ctx.fillStyle = currentLevel.color;
-        ctx.fillRect(b.x - 3, bottomPylonTop, b.width + 6, 8);
+        ctx.fillRect(b.x - 3, bottomPylonTop, b.width + 6, 9);
 
-        // Haz luminoso de energía
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        // Haz luminoso de energía central
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
         ctx.fillRect(b.x + b.width / 2 - 1, 0, 2, topPylonBottom);
         ctx.fillRect(b.x + b.width / 2 - 1, bottomPylonTop, 2, canvasH - bottomPylonTop);
 
-        // Puntuación
+        // Puntuación al cruzar limpiamente
         if (!b.passed && b.x + b.width < ship.x) {
           b.passed = true;
           score++;
           playBeep(880, 'sine', 0.1);
-          updateLevel();
-          updateHUD();
+          updateLevelAndHUD();
         }
 
-        // Colisión con pilones
+        // Colisión con los pilones superior e inferior
         if (ship.x + ship.radius > b.x && ship.x - ship.radius < b.x + b.width) {
           if (ship.y - ship.radius < topPylonBottom || ship.y + ship.radius > bottomPylonTop) {
             triggerGameOver();
@@ -1950,61 +2112,62 @@
           }
         }
 
-        if (b.x + b.width < -10) {
+        // Retirar compuertas que salen de pantalla
+        if (b.x + b.width < -15) {
           barriers.splice(i, 1);
         }
       }
 
-      // Colisión con techo o piso
+      // Colisión con techo o piso cósmico
       if (ship.y - ship.radius < 0 || ship.y + ship.radius > canvasH) {
         triggerGameOver();
         return;
       }
 
-      // 4. Dibujar Nave Espacial (Flappy Shuttle)
+      // 4. Dibujar Nave Espacial (Flappy Shuttle Vectorial)
       ctx.save();
       ctx.translate(ship.x, ship.y);
       ctx.rotate(ship.tilt);
 
-      // Llama propulsora trasera
+      // Fuego de motor propulsor reactivo
       ctx.beginPath();
       ctx.moveTo(-12, -4);
-      ctx.lineTo(-24 - Math.random() * 8, 0);
+      ctx.lineTo(-24 - Math.random() * 9, 0);
       ctx.lineTo(-12, 4);
       ctx.closePath();
-      ctx.fillStyle = Math.random() > 0.5 ? '#00f0ff' : '#ccff00';
+      ctx.fillStyle = Math.random() > 0.5 ? currentLevel.color : '#ffffff';
       ctx.fill();
 
-      // Fuselaje de la nave
+      // Fuselaje principal de la nave
       ctx.beginPath();
-      ctx.moveTo(18, 0);
-      ctx.lineTo(-12, -9);
-      ctx.lineTo(-7, 0);
-      ctx.lineTo(-12, 9);
+      ctx.moveTo(18, 0);       // Punta delantera
+      ctx.lineTo(-12, -9);     // Ala superior
+      ctx.lineTo(-7, 0);       // Centro motor
+      ctx.lineTo(-12, 9);      // Ala inferior
       ctx.closePath();
       ctx.fillStyle = '#0f172a';
       ctx.fill();
       ctx.strokeStyle = currentLevel.color;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.2;
       ctx.stroke();
 
-      // Cabina brillante
+      // Cabina de mando brillante con destello
       ctx.beginPath();
       ctx.ellipse(3, 0, 6, 2.5, 0, 0, Math.PI * 2);
-      ctx.fillStyle = '#00f0ff';
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 8;
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = currentLevel.color;
+      ctx.shadowBlur = 10;
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      // Destellos en las alas
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(-6, -7, 2, 2);
-      ctx.fillRect(-6, 5, 2, 2);
+      // Luces de posición en las alas
+      ctx.fillStyle = currentLevel.color;
+      ctx.fillRect(-6, -7, 2.5, 2.5);
+      ctx.fillRect(-6, 5, 2.5, 2.5);
 
       ctx.restore();
 
-      // 5. Partículas
+      // 5. Partículas activas
       for (let p = particles.length - 1; p >= 0; p--) {
         const pt = particles[p];
         pt.x += pt.vx;
@@ -2022,6 +2185,52 @@
         }
       }
       ctx.globalAlpha = 1;
+
+      // 6. Resplandor / Destello de cambio de nivel
+      if (screenFlashOpacity > 0) {
+        ctx.fillStyle = screenFlashColor;
+        ctx.globalAlpha = screenFlashOpacity;
+        ctx.fillRect(0, 0, canvasW, canvasH);
+        ctx.globalAlpha = 1;
+        screenFlashOpacity -= 0.025;
+      }
+
+      // 7. Cartel Central de Anuncio de Cambio de Nivel
+      if (levelBannerTimer > 0) {
+        levelBannerTimer--;
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Caja luminosa
+        ctx.fillStyle = 'rgba(5, 12, 22, 0.88)';
+        ctx.strokeStyle = levelBannerColor;
+        ctx.lineWidth = 2.5;
+        const boxW = Math.min(canvasW - 40, 360);
+        const boxH = 64;
+        const boxX = (canvasW - boxW) / 2;
+        const boxY = (canvasH - boxH) / 2 - 20;
+
+        ctx.beginPath();
+        ctx.roundRect ? ctx.roundRect(boxX, boxY, boxW, boxH, 12) : ctx.rect(boxX, boxY, boxW, boxH);
+        ctx.fill();
+        ctx.stroke();
+
+        // Título del nuevo nivel
+        ctx.font = '900 16px sans-serif';
+        ctx.fillStyle = levelBannerColor;
+        ctx.shadowColor = levelBannerColor;
+        ctx.shadowBlur = 12;
+        ctx.fillText(levelBannerText, canvasW / 2, boxY + 22);
+        ctx.shadowBlur = 0;
+
+        // Subtítulo del sector
+        ctx.font = '700 11px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(levelBannerSector, canvasW / 2, boxY + 44);
+
+        ctx.restore();
+      }
 
       animId = requestAnimationFrame(gameLoop);
     }
