@@ -1,22 +1,22 @@
-/**
- * Órbita Streaming — Motor de Aplicación y Experiencia de Usuario
+﻿/**
+ * Ã“rbita Streaming â€” Motor de AplicaciÃ³n y Experiencia de Usuario
  * 
- * - Intro espacial cinematográfica con salto fluido
+ * - Intro espacial cinematogrÃ¡fica con salto fluido
  * - Navbar flotante con Glassmorphism y ScrollSpy
- * - Carruseles interactivos con contenido real, arrastre táctil y filtros
- * - Espacio visual dinámico por plataforma
+ * - Carruseles interactivos con contenido real, arrastre tÃ¡ctil y filtros
+ * - Espacio visual dinÃ¡mico por plataforma
  * - Asistente IA "Orbit" con recomendaciones visuales (Posters, Metadata, WhatsApp)
  * - Minijuego espacial "Void Raider 2.0" con disparo 100% manual por el usuario
  * - Conversor de divisas en tiempo real (USD, COP, MXN, EUR, PEN)
- * - Modal cinematográfico de detalles de películas/series y plataformas
- * - Integración con WhatsApp directo (+593 99 822 6756)
+ * - Modal cinematogrÃ¡fico de detalles de pelÃ­culas/series y plataformas
+ * - IntegraciÃ³n con WhatsApp directo (+593 99 822 6756)
  */
 
 (function () {
   'use strict';
 
   // =========================================================================
-  // 1. ESTADO GLOBAL DE LA APLICACIÓN
+  // 1. ESTADO GLOBAL DE LA APLICACIÃ“N
   // =========================================================================
   const state = {
     currentCurrency: 'USD',
@@ -29,7 +29,7 @@
   };
 
   // =========================================================================
-  // 2. INICIALIZACIÓN AL CARGAR EL DOM
+  // 2. INICIALIZACIÃ“N AL CARGAR EL DOM
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
     initIntroAnimation();
@@ -51,7 +51,7 @@
   });
 
   // =========================================================================
-  // 3. INTRO CINEMATOGRÁFICA CON SALTO FLUIDO
+  // 3. INTRO CINEMATOGRÃFICA CON SALTO FLUIDO
   // =========================================================================
   function initIntroAnimation() {
     const introOverlay = document.getElementById('cinematic-intro-overlay');
@@ -69,7 +69,7 @@
       setTimeout(() => {
         introOverlay.style.display = 'none';
         introOverlay.remove();
-        // Disparar onda de choque cósmica inicial
+        // Disparar onda de choque cÃ³smica inicial
         if (window.Orbita3D && window.Orbita3D.triggerShockwave) {
           window.Orbita3D.triggerShockwave('#8b5cf6');
         }
@@ -91,7 +91,7 @@
       }
     });
 
-    // Auto-transición fluida después de 1.8 segundos
+    // Auto-transiciÃ³n fluida despuÃ©s de 1.8 segundos
     setTimeout(exitIntro, 1800);
   }
 
@@ -131,7 +131,7 @@
       }
     });
 
-    // Actualizar sección de plataformas dinámicas
+    // Actualizar secciÃ³n de plataformas dinÃ¡micas
     renderPlatformShowcase(state.activeShowcasePlatform);
   }
 
@@ -212,7 +212,7 @@
         e.preventDefault();
         if (window.Orbita3D && window.Orbita3D.toggleAudio) {
           const isMuted = window.Orbita3D.toggleAudio();
-          showToast(isMuted ? 'Audio ambiental silenciado' : 'Audio ambiental activado ✦');
+          showToast(isMuted ? 'Audio ambiental silenciado' : 'Audio ambiental activado âœ¦');
         }
       });
     }
@@ -228,7 +228,7 @@
     const btnPrev = document.getElementById('carousel-btn-prev');
     const btnNext = document.getElementById('carousel-btn-next');
 
-    // Manejo de tabs de categorías (Estrenos, Películas, Series, Tendencias, etc.)
+    // Manejo de tabs de categorÃ­as (Estrenos, PelÃ­culas, Series, Tendencias, etc.)
     categoryTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         categoryTabs.forEach(t => t.classList.remove('active'));
@@ -248,7 +248,7 @@
       });
     });
 
-    // Flechas de navegación suave
+    // Flechas de navegaciÃ³n suave
     if (btnPrev && carouselTrack) {
       btnPrev.addEventListener('click', () => {
         carouselTrack.scrollBy({ left: -340, behavior: 'smooth' });
@@ -261,7 +261,7 @@
       });
     }
 
-    // Drag-to-scroll en escritorio y swipe en móviles
+    // Drag-to-scroll en escritorio y swipe en mÃ³viles
     initDragToScroll(carouselTrack);
 
     // Render inicial
@@ -274,7 +274,7 @@
 
     let items = window.STREAMING_CATALOG;
 
-    // Filtrar por categoría
+    // Filtrar por categorÃ­a
     if (state.activeCategory !== 'todos') {
       items = items.filter(item => item.categories && item.categories.includes(state.activeCategory));
     }
@@ -289,9 +289,9 @@
     if (items.length === 0) {
       track.innerHTML = `
         <div class="carousel-empty-notice">
-          <div class="empty-icon">🪐</div>
-          <h4>No se encontraron títulos en esta categoría</h4>
-          <p>Prueba seleccionando otra plataforma o categoría de estreno.</p>
+          <div class="empty-icon">ðŸª</div>
+          <h4>No se encontraron tÃ­tulos en esta categorÃ­a</h4>
+          <p>Prueba seleccionando otra plataforma o categorÃ­a de estreno.</p>
         </div>
       `;
       return;
@@ -316,14 +316,14 @@
 
     card.innerHTML = `
       <div class="movie-poster-wrap">
-        <img src="${movie.posterUrl}" alt="${movie.title}" class="movie-poster-img" loading="lazy" onerror="this.src='assets/icons/og-preview.png'">
+        <img src="${movie.posterUrl}" alt="${movie.title}" class="movie-poster-img" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/poster-fallback.svg';">
         <div class="movie-poster-glow" style="background: radial-gradient(circle at 50% 100%, ${platColor}55, transparent 70%);"></div>
         <div class="movie-top-badges">
           <span class="movie-platform-pill" style="border-color: ${platColor}; color: #ffffff; background: ${platColor}cc;">
             ${movie.platformName}
           </span>
           <span class="movie-rating-pill">
-            ★ ${movie.rating}
+            â˜… ${movie.rating}
           </span>
         </div>
         <div class="movie-quality-badge">${movie.quality}</div>
@@ -331,16 +331,16 @@
       <div class="movie-card-info">
         <div class="movie-meta-line">
           <span class="movie-year">${movie.year}</span>
-          <span class="movie-dot">•</span>
+          <span class="movie-dot">â€¢</span>
           <span class="movie-duration">${movie.duration || 'HD'}</span>
         </div>
         <h3 class="movie-title">${movie.title}</h3>
-        <p class="movie-genres">${(movie.genres || []).slice(0, 2).join(' • ')}</p>
+        <p class="movie-genres">${(movie.genres || []).slice(0, 2).join(' â€¢ ')}</p>
         <p class="movie-synopsis-snippet">${movie.synopsis}</p>
         <div class="movie-card-footer">
-          <span class="movie-price-tag">$3.00 <small>/ mes</small></span>
+          <span class="movie-badge-pill">${movie.badge || '4K Ultra HD'}</span>
           <button type="button" class="btn-movie-detail">
-            <span>Ver con Órbita</span>
+            <span>Ver Ficha</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -395,7 +395,7 @@
   }
 
   // =========================================================================
-  // 7. ESPACIO VISUAL DINÁMICO POR PLATAFORMAS (SHOWCASE)
+  // 7. ESPACIO VISUAL DINÃMICO POR PLATAFORMAS (SHOWCASE)
   // =========================================================================
   function initPlatformShowcase() {
     const tabs = document.querySelectorAll('[data-showcase-platform]');
@@ -419,7 +419,7 @@
     const platform = window.STREAMING_PLATFORMS.find(p => p.id === platformId) || window.STREAMING_PLATFORMS[0];
     const platformTitles = (window.STREAMING_CATALOG || []).filter(item => item.platforms.includes(platform.id)).slice(0, 4);
 
-    const waText = `Hola Órbita Streaming, deseo activar mi cuenta de ${platform.name} por ${formatPrice(platform.priceUSD)} con perfil privado y PIN.`;
+    const waText = `Hola Ã“rbita Streaming, deseo activar mi cuenta de ${platform.name} por ${formatPrice(platform.priceUSD)} con perfil privado y PIN.`;
     const waUrl = `https://wa.me/${window.ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waText)}`;
 
     container.style.opacity = '0';
@@ -462,16 +462,16 @@
 
           <div class="showcase-right-titles">
             <div class="showcase-titles-header">
-              <span>Títulos Insignia en ${platform.shortName}</span>
+              <span>TÃ­tulos Insignia en ${platform.shortName}</span>
               <span class="showcase-stream-ready">4K UHD Listo</span>
             </div>
             <div class="showcase-titles-grid">
               ${platformTitles.map(t => `
                 <div class="showcase-mini-movie" onclick="window.OrbitaApp.openMovieById('${t.id}')">
-                  <img src="${t.posterUrl}" alt="${t.title}" loading="lazy">
+                  <img src="${t.posterUrl}" alt="${t.title}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/poster-fallback.svg';">
                   <div class="showcase-mini-info">
                     <div class="showcase-mini-title">${t.title}</div>
-                    <div class="showcase-mini-rating">★ ${t.rating}</div>
+                    <div class="showcase-mini-rating">â˜… ${t.rating}</div>
                   </div>
                 </div>
               `).join('')}
@@ -494,7 +494,7 @@
     const textInput = document.getElementById('ai-user-query');
     const chips = document.querySelectorAll('[data-ai-preset]');
 
-    // Botones de activación global del modal de Orbit
+    // Botones de activaciÃ³n global del modal de Orbit
     document.querySelectorAll('[data-open-orbit-ai]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -515,7 +515,7 @@
       }
     });
 
-    // Chips de consulta rápida
+    // Chips de consulta rÃ¡pida
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         const prompt = chip.getAttribute('data-ai-preset');
@@ -532,6 +532,22 @@
         if (!query) return;
         textInput.value = '';
         processAiQuery(query);
+      });
+    }
+
+    // Formulario en la secciÃ³n de la pÃ¡gina principal (abre modal + consulta)
+    const pageForm = document.getElementById('ai-page-form');
+    const pageInput = document.getElementById('ai-page-query');
+    if (pageForm && pageInput) {
+      pageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = pageInput.value.trim();
+        pageInput.value = '';
+        if (query) {
+          processAiQuery(query);
+        } else {
+          openOrbitAiWindow();
+        }
       });
     }
   }
@@ -580,12 +596,12 @@
     chatBox.appendChild(typing);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Pulso lumínico en Three.js
+    // Pulso lumÃ­nico en Three.js
     if (window.Orbita3D && window.Orbita3D.triggerShockwave) {
       window.Orbita3D.triggerShockwave('#d946ef');
     }
 
-    // 3. Procesamiento semántico
+    // 3. Procesamiento semÃ¡ntico
     setTimeout(() => {
       typing.remove();
       const response = analyzeAndRecommend(userText);
@@ -600,7 +616,7 @@
     let matchedPlatforms = [];
     let isCombo = false;
     let answerText = "";
-    let badgeText = "Recomendación Orbit AI";
+    let badgeText = "RecomendaciÃ³n Orbit AI";
 
     const allMovies = window.STREAMING_CATALOG || [];
 
@@ -621,43 +637,43 @@
       };
     }
 
-    // Análisis de Intención
+    // AnÃ¡lisis de IntenciÃ³n
     if (/ciencia ficcion|scifi|sci fi|espacio|interestelar|interstellar|dune|silo|severance/.test(query)) {
-      matchedMovies = allMovies.filter(m => m.genres.includes("Ciencia Ficción") || m.id === "dune-2" || m.id === "interstellar" || m.id === "severance-2");
+      matchedMovies = allMovies.filter(m => m.genres.includes("Ciencia FicciÃ³n") || m.id === "dune-2" || m.id === "interstellar" || m.id === "severance-2");
       matchedPlatforms = ["hbomax", "appletv"];
-      answerText = "¡Para amantes de la **ciencia ficción cinematográfica**, te recomiendo estas joyas en 4K Ultra HD y audio espacial. Puedes verlas en Max y Apple TV+ con perfil privado con PIN por solo $3.00/mes cada una o ambas por $5.00/mes en Combo Dúo.";
-      badgeText = "Ciencia Ficción Épica";
+      answerText = "Â¡Para amantes de la **ciencia ficciÃ³n cinematogrÃ¡fica**, te recomiendo estas joyas en 4K Ultra HD y audio espacial. Puedes verlas en Max y Apple TV+ con perfil privado con PIN por solo $3.00/mes cada una o ambas por $5.00/mes en Combo DÃºo.";
+      badgeText = "Ciencia FicciÃ³n Ã‰pica";
     } else if (/serie corta|corta|miniserie|fin de semana/.test(query)) {
       matchedMovies = allMovies.filter(m => m.duration && (m.duration.includes("Miniserie") || m.duration.includes("1 Temporada") || m.id === "baby-reindeer"));
       matchedPlatforms = ["netflix", "disneyplus"];
-      answerText = "Si buscas **series cortas y adictivas** de altísimo impacto que puedas terminar en un fin de semana:";
+      answerText = "Si buscas **series cortas y adictivas** de altÃ­simo impacto que puedas terminar en un fin de semana:";
       badgeText = "Miniseries Aclamadas";
     } else if (/pareja|cita|novios|romance|juntos/.test(query)) {
       matchedMovies = allMovies.filter(m => m.id === "dune-2" || m.id === "the-bear-3" || m.id === "inside-out-2" || m.id === "interstellar");
       matchedPlatforms = ["netflix", "disneyplus"];
-      answerText = "Para disfrutar **en pareja**, una mezcla perfecta de espectáculo visual, comedia dramática y emoción garantizada:";
+      answerText = "Para disfrutar **en pareja**, una mezcla perfecta de espectÃ¡culo visual, comedia dramÃ¡tica y emociÃ³n garantizada:";
       badgeText = "Recomendadas en Pareja";
     } else if (/netflix/.test(query)) {
       matchedMovies = allMovies.filter(m => m.platforms.includes("netflix"));
       matchedPlatforms = ["netflix"];
-      answerText = "Aquí tienes los **estrenos más virales y aclamados de Netflix** disponibles con perfil privado 4K:";
+      answerText = "AquÃ­ tienes los **estrenos mÃ¡s virales y aclamados de Netflix** disponibles con perfil privado 4K:";
       badgeText = "Lo Mejor de Netflix";
     } else if (/anime|otaku|japon|simulcast/.test(query)) {
       matchedMovies = allMovies.filter(m => m.genres.includes("Anime"));
       matchedPlatforms = ["crunchyroll", "netflix"];
-      answerText = "El mejor **universo del anime** con estrenos directos desde Japón 1 hora después de su emisión:";
+      answerText = "El mejor **universo del anime** con estrenos directos desde JapÃ³n 1 hora despuÃ©s de su emisiÃ³n:";
       badgeText = "Simulcast Anime";
     } else if (/deporte|futbol|champions|liga|espn|f1/.test(query)) {
       matchedPlatforms = ["disneyplus", "vix"];
-      answerText = "Para **fútbol y deportes en vivo**, **Disney+ con ESPN** te da la Champions League, Premier League y F1, mientras que **ViX Premium** te da la Liga MX. ¡Llévalas en Combo Dúo por solo $5/mes!";
+      answerText = "Para **fÃºtbol y deportes en vivo**, **Disney+ con ESPN** te da la Champions League, Premier League y F1, mientras que **ViX Premium** te da la Liga MX. Â¡LlÃ©valas en Combo DÃºo por solo $5/mes!";
       badgeText = "Deportes en Vivo";
     } else if (/combo|duo|2 apps|dos aplicaciones/.test(query)) {
       matchedPlatforms = ["netflix", "disneyplus"];
       isCombo = true;
-      answerText = "Con nuestro **Combo Dúo eliges cualquiera de tus 2 plataformas favoritas por solo $5.00/mes** (ahorras $1/mes) y te regalamos **1 cuenta de Spotify Premium GRATIS**. ¡Todo con perfiles privados con PIN!";
-      badgeText = "Combo Dúo Especial";
+      answerText = "Con nuestro **Combo DÃºo eliges cualquiera de tus 2 plataformas favoritas por solo $5.00/mes** (ahorras $1/mes) y te regalamos **1 cuenta de Spotify Premium GRATIS**. Â¡Todo con perfiles privados con PIN!";
+      badgeText = "Combo DÃºo Especial";
     } else {
-      // Búsqueda libre en catálogo por título o palabras clave
+      // BÃºsqueda libre en catÃ¡logo por tÃ­tulo o palabras clave
       matchedMovies = allMovies.filter(m => {
         return m.title.toLowerCase().includes(query) || 
                m.synopsis.toLowerCase().includes(query) ||
@@ -668,7 +684,7 @@
         matchedMovies = allMovies.slice(0, 3);
       }
       matchedPlatforms = ["netflix", "hbomax"];
-      answerText = `Aquí tienes las opciones más recomendadas para ti en Órbita Streaming con calidad 4K UHD y activación inmediata:`;
+      answerText = `AquÃ­ tienes las opciones mÃ¡s recomendadas para ti en Ã“rbita Streaming con calidad 4K UHD y activaciÃ³n inmediata:`;
     }
 
     return {
@@ -693,14 +709,14 @@
         <div class="ai-recommendation-cards">
           ${res.movies.map(m => `
             <div class="ai-movie-card" onclick="window.OrbitaApp.openMovieById('${m.id}')">
-              <img src="${m.posterUrl}" alt="${m.title}" loading="lazy">
+              <img src="${m.posterUrl}" alt="${m.title}" loading="lazy" onerror="this.onerror=null; this.src='assets/icons/poster-fallback.svg';">
               <div class="ai-movie-card-body">
                 <div class="ai-card-platform">${m.platformName}</div>
                 <div class="ai-card-title">${m.title}</div>
-                <div class="ai-card-meta">★ ${m.rating} • ${m.year}</div>
+                <div class="ai-card-meta">â˜… ${m.rating} â€¢ ${m.year}</div>
                 <p class="ai-card-synopsis">${m.synopsis}</p>
                 <div class="ai-card-action">
-                  <span>Ver con Órbita ($3)</span>
+                  <span>Ver con Ã“rbita ($3)</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
               </div>
@@ -710,7 +726,7 @@
       `;
     }
 
-    const waText = `Hola Órbita Streaming, hablé con el asistente Orbit y deseo contratar ${res.isCombo ? 'un Combo de 2 por $5' : 'una pantalla privada ($3/mes)'}.`;
+    const waText = `Hola Ã“rbita Streaming, hablÃ© con el asistente Orbit y deseo contratar ${res.isCombo ? 'un Combo de 2 por $5' : 'una pantalla privada ($3/mes)'}.`;
     const waUrl = `https://wa.me/${window.ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waText)}`;
 
     botMsg.innerHTML = `
@@ -725,7 +741,7 @@
         <div class="ai-bot-badge">${res.badge}</div>
         <p>${res.answer}</p>
         ${cardsHtml}
-        ${res.tip ? `<p class="ai-tip-note">💡 <em>${res.tip}</em></p>` : ''}
+        ${res.tip ? `<p class="ai-tip-note">ðŸ’¡ <em>${res.tip}</em></p>` : ''}
         <div class="ai-response-actions">
           <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-btn-wa">
             <span>Pedir en WhatsApp</span>
@@ -740,7 +756,7 @@
   }
 
   // =========================================================================
-  // 9. MINIJUEGO "VOID RAIDER 2.0" (SHOOTER ESPACIAL • DISPARO 100% MANUAL)
+  // 9. MINIJUEGO "VOID RAIDER 2.0" (SHOOTER ESPACIAL â€¢ DISPARO 100% MANUAL)
   // =========================================================================
   function initVoidRaiderGame() {
     const modal = document.getElementById('orbit-game-modal');
@@ -768,10 +784,10 @@
     const closeBtn = document.getElementById('orbit-game-close-btn');
 
     const SECTORS = [
-      { id: 1, name: 'Sector 1: Cinturón Órbita', sector: 'Cinturón de Asteroides', minScore: 0, targetScore: 300, speed: 2.1, color: '#8b5cf6' },
-      { id: 2, name: 'Sector 2: Nebulosa Neón', sector: 'Espacio Profundo & Drones', minScore: 300, targetScore: 750, speed: 2.7, color: '#d946ef' },
-      { id: 3, name: 'Sector 3: Tormenta de Plasma', sector: 'Nebulosa Electromagnética', minScore: 750, targetScore: 1400, speed: 3.3, color: '#f97316' },
-      { id: 4, name: 'Sector 4: Agujero Negro', sector: 'Horizonte de Sucesos Infinito', minScore: 1400, targetScore: Infinity, speed: 3.9, color: '#00f0ff' }
+      { id: 1, name: 'Sector 1: CinturÃ³n Ã“rbita', sector: 'CinturÃ³n de Asteroides', minScore: 0, targetScore: 300, speed: 2.1, color: '#8b5cf6' },
+      { id: 2, name: 'Sector 2: Nebulosa NeÃ³n', sector: 'Espacio Profundo & Drones', minScore: 300, targetScore: 750, speed: 2.7, color: '#d946ef' },
+      { id: 3, name: 'Sector 3: Tormenta de Plasma', sector: 'Nebulosa ElectromagnÃ©tica', minScore: 750, targetScore: 1400, speed: 3.3, color: '#f97316' },
+      { id: 4, name: 'Sector 4: Agujero Negro', sector: 'Horizonte de Sucesos Infinito', minScore: 1400, targetScore: Infinity, speed: 3.9, color: '#06b6d4' }
     ];
 
     let isRunning = false;
@@ -924,7 +940,7 @@
         lasers.push({ x: ship.x + 7, y: ship.y - 12, vx: 0, vy: -11, color: '#8b5cf6' });
       }
 
-      // Destello del cañón
+      // Destello del caÃ±Ã³n
       particles.push({
         x: ship.x,
         y: ship.y - 14,
@@ -1023,7 +1039,9 @@
       if (levelNameEl) levelNameEl.textContent = currentSector.name;
 
       if (levelProgressEl && currentSector.targetScore !== Infinity) {
-        const pct = Math.min(1, Math.max(0, cur / span));
+        const span = currentSector.targetScore - currentSector.minScore;
+        const cur = score - currentSector.minScore;
+        const pct = span > 0 ? Math.min(1, Math.max(0, cur / span)) : 1;
         levelProgressEl.style.transform = `scaleX(${pct})`;
         if (levelPtsEl) levelPtsEl.textContent = `${score} / ${currentSector.targetScore} pts`;
       }
@@ -1053,21 +1071,21 @@
       keys[e.key] = false;
     });
 
-    // Movimiento con el ratón sobre el canvas
+    // Movimiento con el ratÃ³n sobre el canvas
     canvas.addEventListener('pointermove', (e) => {
       const rect = canvas.getBoundingClientRect();
       const relX = e.clientX - rect.left;
       ship.targetX = Math.max(20, Math.min(canvasW - 20, relX));
     });
 
-    // Disparo con Click del ratón sobre el canvas (NO automático)
+    // Disparo con Click del ratÃ³n sobre el canvas (NO automÃ¡tico)
     canvas.addEventListener('pointerdown', (e) => {
       e.preventDefault();
       if (!isRunning) startGame();
       else shootLasersManual();
     });
 
-    // Botón de disparo explícito en móvil
+    // BotÃ³n de disparo explÃ­cito en mÃ³vil
     if (btnFire) {
       btnFire.addEventListener('pointerdown', (e) => {
         e.preventDefault();
@@ -1106,14 +1124,14 @@
       ship.x += dx * 0.22;
       ship.tilt = Math.max(-0.45, Math.min(0.45, dx * 0.04));
 
-      // Spawn de obstáculos
+      // Spawn de obstÃ¡culos
       spawnTimer++;
       if (spawnTimer > 42) {
         spawnAsteroid();
         spawnTimer = 0;
       }
 
-      // Actualizar Láseres
+      // Actualizar LÃ¡seres
       for (let i = lasers.length - 1; i >= 0; i--) {
         const l = lasers[i];
         l.x += l.vx;
@@ -1121,12 +1139,12 @@
         if (l.y < -10) lasers.splice(i, 1);
       }
 
-      // Actualizar Obstáculos
+      // Actualizar ObstÃ¡culos
       for (let i = obstacles.length - 1; i >= 0; i--) {
         const obs = obstacles[i];
         obs.y += obs.speed;
 
-        // Colisión láser vs asteroide
+        // ColisiÃ³n lÃ¡ser vs asteroide
         for (let j = lasers.length - 1; j >= 0; j--) {
           const l = lasers[j];
           const dist = Math.hypot(l.x - obs.x, l.y - obs.y);
@@ -1139,7 +1157,7 @@
               score += 20 * combo;
               updateHUD();
 
-              // Partículas de explosión
+              // PartÃ­culas de explosiÃ³n
               for (let p = 0; p < 10; p++) {
                 particles.push({
                   x: obs.x,
@@ -1158,7 +1176,7 @@
           }
         }
 
-        // Colisión con la nave del jugador
+        // ColisiÃ³n con la nave del jugador
         if (obs) {
           const shipDist = Math.hypot(ship.x - obs.x, ship.y - obs.y);
           if (shipDist < obs.radius + 14) {
@@ -1172,7 +1190,7 @@
         }
       }
 
-      // Actualizar partículas
+      // Actualizar partÃ­culas
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx;
@@ -1184,7 +1202,7 @@
       // DIBUJADO EN CANVAS
       ctx.clearRect(0, 0, canvasW, canvasH);
 
-      // Fondo cósmico
+      // Fondo cÃ³smico
       ctx.fillStyle = '#06050b';
       ctx.fillRect(0, 0, canvasW, canvasH);
 
@@ -1198,7 +1216,7 @@
         ctx.fill();
       });
 
-      // Láseres
+      // LÃ¡seres
       lasers.forEach(l => {
         ctx.strokeStyle = l.color;
         ctx.lineWidth = 3;
@@ -1208,7 +1226,7 @@
         ctx.stroke();
       });
 
-      // Obstáculos (Asteroides con estética neón)
+      // ObstÃ¡culos (Asteroides con estÃ©tica neÃ³n)
       obstacles.forEach(obs => {
         ctx.strokeStyle = obs.color;
         ctx.fillStyle = 'rgba(18, 14, 34, 0.85)';
@@ -1219,7 +1237,7 @@
         ctx.stroke();
       });
 
-      // Partículas
+      // PartÃ­culas
       particles.forEach(p => {
         ctx.fillStyle = p.color;
         ctx.globalAlpha = Math.max(0, p.life);
@@ -1268,7 +1286,7 @@
   }
 
   // =========================================================================
-  // 10. MODAL DE DETALLE DE PELÍCULAS Y PLATAFORMAS
+  // 10. MODAL DE DETALLE DE PELÃCULAS Y PLATAFORMAS
   // =========================================================================
   function initModalEvents() {
     const modal = document.getElementById('platform-modal');
@@ -1297,26 +1315,26 @@
 
     const plat = (window.STREAMING_PLATFORMS || []).find(p => movie.platforms.includes(p.id));
     const platColor = plat ? plat.color : '#8b5cf6';
-    const waText = `Hola Órbita Streaming, quiero contratar una cuenta de ${movie.platformName} para ver ${movie.title}.`;
+    const waText = `Hola Ã“rbita Streaming, quiero contratar una cuenta de ${movie.platformName} para ver ${movie.title}.`;
     const waUrl = `https://wa.me/${window.ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waText)}`;
 
     content.innerHTML = `
       <div class="modal-movie-layout">
         <div class="modal-poster-col">
-          <img src="${movie.posterUrl}" alt="${movie.title}" class="modal-poster-img" onerror="this.src='assets/icons/og-preview.png'">
+          <img src="${movie.posterUrl}" alt="${movie.title}" class="modal-poster-img" onerror="this.onerror=null; this.src='assets/icons/poster-fallback.svg';">
         </div>
         <div class="modal-info-col">
           <div class="modal-badges-row">
             <span class="modal-platform-badge" style="background: ${platColor}; color: #ffffff;">${movie.platformName}</span>
             <span class="modal-quality-badge">${movie.quality}</span>
-            <span class="modal-rating-badge">★ ${movie.rating}</span>
+            <span class="modal-rating-badge">â˜… ${movie.rating}</span>
           </div>
           <h2 class="modal-movie-title">${movie.title}</h2>
           <div class="modal-meta-row">
             <span>${movie.year}</span>
-            <span>•</span>
+            <span>â€¢</span>
             <span>${movie.duration}</span>
-            <span>•</span>
+            <span>â€¢</span>
             <span>${(movie.genres || []).join(', ')}</span>
           </div>
           <p class="modal-synopsis">${movie.synopsis}</p>
@@ -1369,14 +1387,14 @@
       `).join('');
     }
 
-    // FAQs con acordeón suave
+    // FAQs con acordeÃ³n suave
     const faqContainer = document.getElementById('faq-accordion-wrap');
     if (faqContainer && window.FAQS) {
       faqContainer.innerHTML = window.FAQS.map((faq, idx) => `
         <div class="faq-item ${idx === 0 ? 'active' : ''}">
           <button type="button" class="faq-question-btn" aria-expanded="${idx === 0}">
             <span>${faq.question}</span>
-            <span class="faq-chevron">↓</span>
+            <span class="faq-chevron">â†“</span>
           </button>
           <div class="faq-answer-body">
             <p>${faq.answer}</p>
@@ -1409,7 +1427,7 @@
       grid.innerHTML = window.TESTIMONIALS.map(t => `
         <div class="testimonial-card">
           <div class="testi-header">
-            <div class="testi-stars">★★★★★</div>
+            <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
             <span class="testi-date">${t.date}</span>
           </div>
           <p class="testi-comment">"${t.comment}"</p>
@@ -1417,7 +1435,7 @@
             <div class="testi-avatar">${t.name.charAt(0)}</div>
             <div>
               <div class="testi-name">${t.name}</div>
-              <div class="testi-city">${t.city} • <span class="testi-plan">${t.plan}</span></div>
+              <div class="testi-city">${t.city} â€¢ <span class="testi-plan">${t.plan}</span></div>
             </div>
           </div>
         </div>
@@ -1426,7 +1444,7 @@
   }
 
   // =========================================================================
-  // 12. BOTÓN FLOTANTE DE WHATSAPP CON POPUP
+  // 12. BOTÃ“N FLOTANTE DE WHATSAPP CON POPUP
   // =========================================================================
   function initFloatingWhatsApp() {
     const waBtn = document.getElementById('floating-whatsapp');
@@ -1436,15 +1454,25 @@
     if (waBtn && popup) {
       waBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        popup.classList.toggle('active');
+        popup.classList.toggle('popup-open');
       });
     }
 
     if (closeBtn && popup) {
       closeBtn.addEventListener('click', () => {
-        popup.classList.remove('active');
+        popup.classList.remove('popup-open');
       });
     }
+
+    // Click fuera cierra el popup
+    document.addEventListener('click', (e) => {
+      if (popup && popup.classList.contains('popup-open')) {
+        const container = document.querySelector('.floating-whatsapp-container');
+        if (container && !container.contains(e.target)) {
+          popup.classList.remove('popup-open');
+        }
+      }
+    });
   }
 
   // =========================================================================
@@ -1495,7 +1523,7 @@
   }
 
   // =========================================================================
-  // 15. SUBPÁGINA CATÁLOGO: RENDERIZADOR Y FILTROS
+  // 15. SUBPÃGINA CATÃLOGO: RENDERIZADOR Y FILTROS
   // =========================================================================
   function initCatalogoPlatforms() {
     const grid = document.getElementById('platforms-grid');
@@ -1511,9 +1539,9 @@
       });
 
       grid.innerHTML = platforms.map(plat => {
-        const isAnnual = plat.pricePeriod && plat.pricePeriod.includes('año');
-        const priceLabel = isAnnual ? `${formatPrice(plat.priceUSD)} <small>/ año</small>` : `${formatPrice(plat.priceUSD)} <small>/ mes</small>`;
-        const waText = `Hola Órbita Streaming, quiero contratar una cuenta de ${plat.name} (${formatPrice(plat.priceUSD)}).`;
+        const isAnnual = plat.pricePeriod && plat.pricePeriod.includes('aÃ±o');
+        const priceLabel = isAnnual ? `${formatPrice(plat.priceUSD)} <small>/ aÃ±o</small>` : `${formatPrice(plat.priceUSD)} <small>/ mes</small>`;
+        const waText = `Hola Ã“rbita Streaming, quiero contratar una cuenta de ${plat.name} (${formatPrice(plat.priceUSD)}).`;
         const waUrl = `https://wa.me/${window.ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waText)}`;
 
         return `
@@ -1528,7 +1556,7 @@
               <span class="platform-price-amount" data-price-usd="${plat.priceUSD}">${priceLabel}</span>
             </div>
             <ul class="platform-features-list">
-              ${(plat.features || []).map(f => `<li><span class="feature-bullet">✓</span> ${f}</li>`).join('')}
+              ${(plat.features || []).map(f => `<li><span class="feature-bullet">âœ“</span> ${f}</li>`).join('')}
             </ul>
             <div class="platform-card-actions">
               <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="width: 100%; justify-content: center;">
@@ -1553,7 +1581,7 @@
   }
 
   // =========================================================================
-  // 16. SUBPÁGINA COMBOS: CONFIGURADOR INTERACTIVO 2x$5
+  // 16. SUBPÃGINA COMBOS: CONFIGURADOR INTERACTIVO 2x$5
   // =========================================================================
   function initCombosConfigurator() {
     const selectorGrid = document.getElementById('custom-app-selector-grid');
@@ -1595,19 +1623,19 @@
       if (regularPriceEl) {
         regularPriceEl.innerHTML = count >= 2 
           ? `Precio regular: <span style="text-decoration: line-through;">$${regularUSD.toFixed(2)}</span> (Ahorras $${(regularUSD - totalUSD).toFixed(2)})`
-          : `Tarifa estándar: $${totalUSD.toFixed(2)}`;
+          : `Tarifa estÃ¡ndar: $${totalUSD.toFixed(2)}`;
       }
 
       if (summaryAppsEl) {
         summaryAppsEl.textContent = count > 0 
-          ? selectedList.map(p => p.name).join(' + ') + (count >= 2 ? ' + 🎁 Spotify Gratis' : '')
+          ? selectedList.map(p => p.name).join(' + ') + (count >= 2 ? ' + ðŸŽ Spotify Gratis' : '')
           : 'Selecciona al menos 1 plataforma';
       }
 
       if (discountTagEl) {
         if (count >= 2) {
           discountTagEl.style.display = 'inline-block';
-          discountTagEl.textContent = '¡Descuento 2x$5 + Spotify GRATIS Aplicado!';
+          discountTagEl.textContent = 'Â¡Descuento 2x$5 + Spotify GRATIS Aplicado!';
         } else {
           discountTagEl.style.display = 'none';
         }
@@ -1616,8 +1644,8 @@
       if (btnOrderEl) {
         const appsText = selectedList.map(p => p.name).join(' + ');
         const waText = count >= 2
-          ? `Hola Órbita Streaming, quiero pedir mi Combo Especial de [${appsText}] por $${totalUSD.toFixed(2)}/mes + mi beneficio de Spotify.`
-          : `Hola Órbita Streaming, quiero contratar [${appsText}] por $${totalUSD.toFixed(2)}/mes.`;
+          ? `Hola Ã“rbita Streaming, quiero pedir mi Combo Especial de [${appsText}] por $${totalUSD.toFixed(2)}/mes + mi beneficio de Spotify.`
+          : `Hola Ã“rbita Streaming, quiero contratar [${appsText}] por $${totalUSD.toFixed(2)}/mes.`;
         btnOrderEl.href = `https://wa.me/${window.ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(waText)}`;
       }
 
@@ -1633,7 +1661,7 @@
 
     selectorGrid.innerHTML = availableApps.map(plat => `
       <button type="button" class="custom-app-item ${state.selectedCustomPlatforms.has(plat.id) ? 'selected' : ''}" data-app-id="${plat.id}">
-        <div class="app-item-check">✓</div>
+        <div class="app-item-check">âœ“</div>
         <div class="app-item-icon" style="background: ${plat.color}15;">
           ${plat.logoSvg}
         </div>
@@ -1667,13 +1695,13 @@
       updateSummary();
       const studio = document.querySelector('.custom-combo-studio-card');
       if (studio) studio.scrollIntoView({ behavior: 'smooth' });
-      showToast(`¡Combo cargado en el configurador!`);
+      showToast(`Â¡Combo cargado en el configurador!`);
     };
 
     updateSummary();
   }
 
-  // API pública
+  // API pÃºblica
   window.OrbitaApp = {
     openMovieById: (id) => {
       const movie = (window.STREAMING_CATALOG || []).find(m => m.id === id);
@@ -1684,3 +1712,4 @@
   };
 
 })();
+

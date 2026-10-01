@@ -204,23 +204,23 @@
     coreGroup = new THREE.Group();
     orbitSystemGroup.add(coreGroup);
 
-    // Esfera central brillante
+    // Esfera central cósmica (Estilo eclipse cinematográfico para no cegar el texto)
     const coreGeo = new THREE.SphereGeometry(isMobile ? 22 : 28, 32, 32);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
+      color: 0x090714,
       transparent: true,
       opacity: 0.95
     });
     coreMesh = new THREE.Mesh(coreGeo, coreMat);
     coreGroup.add(coreMesh);
 
-    // Corona externa luminosa
-    const coronaGeo = new THREE.RingGeometry(isMobile ? 26 : 34, isMobile ? 42 : 56, 48);
+    // Corona externa luminosa suave
+    const coronaGeo = new THREE.RingGeometry(isMobile ? 23 : 29, isMobile ? 38 : 50, 48);
     const coronaMat = new THREE.MeshBasicMaterial({
       color: 0x8b5cf6,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.4,
       blending: THREE.AdditiveBlending
     });
     coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);

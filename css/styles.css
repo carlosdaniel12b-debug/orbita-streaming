@@ -164,6 +164,17 @@ button {
   color: inherit;
 }
 
+/* Emil Kowalski: botones con retroalimentación táctil en el press */
+button:active,
+a.btn-cosmic-primary:active,
+a.btn-cosmic-secondary:active,
+a.btn-cosmic-glass:active,
+.btn-pricing-action:active,
+.btn-movie-detail:active {
+  transform: scale(0.96);
+  transition: transform 0.08s ease;
+}
+
 .container {
   width: 100%;
   max-width: 1240px;
@@ -194,7 +205,19 @@ button {
   height: 100vh;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.95;
+  opacity: 0.45;
+}
+
+/* Capa de obscurecimiento cinematográfico — garantiza legibilidad */
+.cosmic-blur-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(6, 5, 11, 0.0) 0%, rgba(6, 5, 11, 0.72) 55%, rgba(6, 5, 11, 0.94) 100%),
+    radial-gradient(ellipse at 0% 100%, rgba(6, 5, 11, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(6, 5, 11, 0.65) 0%, transparent 60%);
 }
 
 main, header, footer, .header-outer-wrapper {
@@ -206,14 +229,23 @@ main, header, footer, .header-outer-wrapper {
 .cinematic-intro-overlay {
   position: fixed;
   inset: 0;
-  background: #040307;
+  background: #040307 url('../assets/hero-cosmic.jpg') center/cover no-repeat;
   z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.7s var(--ease-smooth), visibility 0.7s var(--ease-smooth);
+  transition: opacity 0.8s var(--ease-smooth), visibility 0.8s var(--ease-smooth);
+}
+
+/* Velo oscuro sobre la imagen para mayor contraste */
+.cinematic-intro-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(4, 3, 7, 0.62) 0%, rgba(4, 3, 7, 0.91) 100%);
+  z-index: 0;
 }
 
 .cinematic-intro-overlay.intro-fade-out {
@@ -716,6 +748,7 @@ main, header, footer, .header-outer-wrapper {
   color: #ffffff;
   margin-bottom: 1.4rem;
   max-width: 950px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.7);
 }
 
 .title-gradient-cinema {
@@ -3627,3 +3660,806 @@ main, header, footer, .header-outer-wrapper {
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   ORBIT AI — VENTANA FLOTANTE MODAL CINEMATOGRÁFICA
+   ========================================================================== */
+
+.orbit-ai-floating-window {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  display: none;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  pointer-events: none;
+}
+
+.orbit-ai-floating-window.active {
+  display: flex;
+  pointer-events: all;
+}
+
+.orbit-ai-window-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 3, 7, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.orbit-ai-window-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(12, 8, 23, 0.96);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  animation: aiWindowSlideUp 0.4s var(--ease-spring) forwards;
+}
+
+@keyframes aiWindowSlideUp {
+  from { transform: translateY(28px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.orbit-ai-win-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(139, 92, 246, 0.08);
+  flex-shrink: 0;
+}
+
+.orbit-ai-win-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.orbit-ai-win-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.ai-avatar-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.6));
+}
+
+.orbit-ai-pulse-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid rgba(12, 8, 23, 0.96);
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.7; }
+}
+
+.orbit-ai-win-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.orbit-ai-win-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #10b981;
+  margin-top: 0.1rem;
+}
+
+.orbit-ai-close-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.orbit-ai-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.orbit-ai-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+}
+
+.orbit-ai-input-dock {
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(139, 92, 246, 0.04);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FLOATING BUTTONS — ORBIT AI & GAME (CINEMATIC VERSION)
+   ========================================================================== */
+
+.floating-orbit-ai-container {
+  position: fixed;
+  bottom: 7rem;
+  right: 1.5rem;
+  z-index: 9980;
+}
+
+.floating-orbit-ai-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(12, 8, 23, 0.92);
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.1rem 0.65rem 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.25);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.floating-orbit-ai-btn:hover {
+  background: rgba(18, 12, 36, 0.98);
+  border-color: rgba(139, 92, 246, 0.75);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.orbit-ai-halo-pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  animation: haloPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes haloPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.06); opacity: 0; }
+}
+
+.orbit-ai-btn-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
+}
+
+.orbit-ai-btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.orbit-ai-btn-title {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.orbit-ai-btn-sub {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--accent-violet-light);
+  letter-spacing: 0.04em;
+}
+
+.btn-live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+/* Floating Minigame Button */
+.floating-minigame-container {
+  position: fixed;
+  bottom: 12rem;
+  right: 1.5rem;
+  z-index: 9980;
+}
+
+.floating-minigame-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(12, 8, 23, 0.92);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.1rem 0.65rem 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(249, 115, 22, 0.18);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.floating-minigame-btn:hover {
+  border-color: rgba(249, 115, 22, 0.65);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+}
+
+.game-btn-halo {
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  animation: haloPulse 2.5s ease-in-out infinite;
+}
+
+.game-btn-icon-wrap {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-live-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+  border: 1.5px solid rgba(12, 8, 23, 0.92);
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+.game-btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.game-btn-title {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.game-btn-sub {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: #fb923c;
+  letter-spacing: 0.04em;
+}
+
+/* Intro brand stage needs z-index above overlay::before */
+.intro-brand-stage {
+  position: relative;
+  z-index: 3;
+}
+
+.intro-warp-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   GAME MODAL — CINEMATIC FLIGHT DECK (replace arcade neons)
+   ========================================================================== */
+
+.orbit-game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9970;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 3, 7, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1rem;
+}
+
+.orbit-game-modal.active {
+  display: flex;
+}
+
+.orbit-game-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: rgba(10, 7, 20, 0.97);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(139, 92, 246, 0.2);
+  overflow: hidden;
+  animation: gameModalReveal 0.4s var(--ease-spring) forwards;
+}
+
+@keyframes gameModalReveal {
+  from { transform: scale(0.94) translateY(16px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.orbit-game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.orbit-game-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.game-retro-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.orbit-game-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orbit-game-title .badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(139, 92, 246, 0.25);
+  color: var(--accent-violet-light);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  padding: 0.18rem 0.45rem;
+  border-radius: var(--radius-xs);
+}
+
+.orbit-game-close-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: var(--transition-fast);
+}
+
+.orbit-game-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.orbit-game-hud {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.65rem 1.25rem;
+  background: rgba(6, 5, 11, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hud-item-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.hud-item-val {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hud-item-val.level { color: var(--accent-violet-light); }
+.hud-item-val.record { color: var(--accent-amber-light); }
+
+.orbit-game-level-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 1.25rem;
+  background: rgba(6, 5, 11, 0.3);
+}
+
+.level-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent-violet-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.level-progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.level-progress-fill {
+  height: 100%;
+  background: var(--gradient-button);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.level-bar-pts {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.orbit-game-canvas-wrap {
+  position: relative;
+  background: #020110;
+}
+
+.orbit-game-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.orbit-game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(4, 3, 7, 0.88);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  padding: 2rem;
+}
+
+.orbit-game-overlay.hidden { display: none; }
+
+.overlay-hero-icon { font-size: 2.5rem; line-height: 1; }
+
+.overlay-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.overlay-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+.btn-arcade-play {
+  background: var(--gradient-button);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.7rem 1.75rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  transition: var(--transition-fast);
+}
+
+.btn-arcade-play:hover {
+  box-shadow: 0 0 30px rgba(217, 70, 239, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-arcade-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-arcade-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.overlay-btn-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.orbit-game-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(6, 5, 11, 0.5);
+}
+
+.game-instructions-text {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.btn-game-tap-action {
+  flex-shrink: 0;
+  background: var(--gradient-button);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  transition: var(--transition-fast);
+}
+
+.btn-game-tap-action:hover {
+  box-shadow: 0 0 22px rgba(217, 70, 239, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   FLOATING WHATSAPP BUTTON
+   ========================================================================== */
+
+.floating-whatsapp-container,
+.floating-whatsapp-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9985;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.floating-whatsapp-btn {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  transition: var(--transition-base);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.55);
+}
+
+.floating-whatsapp-btn svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.wa-pulse-wave,
+.wa-beacon-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.45);
+  animation: whatsappPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes whatsappPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.18); opacity: 0; }
+}
+
+.wa-tooltip-tag {
+  background: rgba(12, 8, 23, 0.9);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: var(--transition-fast);
+  pointer-events: none;
+}
+
+.floating-whatsapp-container:hover .wa-tooltip-tag {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* WhatsApp quick popup */
+.whatsapp-quick-popup {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  right: 0;
+  width: 280px;
+  background: rgba(12, 8, 23, 0.96);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transform: translateY(8px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-base);
+}
+
+.whatsapp-quick-popup.popup-open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background: rgba(37, 211, 102, 0.08);
+  border-bottom: 1px solid rgba(37, 211, 102, 0.15);
+}
+
+.popup-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.popup-avatar {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.popup-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.popup-status {
+  font-size: 0.7rem;
+  color: #25d366;
+  margin-top: 0.1rem;
+}
+
+.popup-close-btn {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.popup-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.popup-agent-bubble {
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.popup-direct-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.popup-direct-link:hover {
+  background: #1aad4f;
+  transform: translateY(-1px);
+}
+
+/* Floating buttons bottom offset adjustments to avoid overlap */
+@media (max-width: 640px) {
+  .floating-orbit-ai-container { bottom: 5.5rem; right: 1rem; }
+  .floating-minigame-container { display: none; }
+  .floating-whatsapp-container,
+  .floating-whatsapp-wrap { bottom: 1rem; right: 1rem; }
+}
