@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, interactive-widget=resizes-content">
-  <title>Combos de Streaming (2x$5) | Órbita Streaming</title>
-  <meta name="description" content="★ Arma tu Combo Dúo de streaming por solo $5/mes. Combina Netflix, Disney+, Max, Prime Video y ahorra con perfiles 100% privados y PIN. ¡Activa de inmediato!">
+  <title>Combos de Streaming (2x$5) | Órbita Streaming</title>  <meta name="description" content="Arma tu Combo Dúo de streaming por solo $5/mes. Combina Netflix, Disney+, Max, Prime Video y ahorra con perfiles 100% privados y PIN. ¡Activa de inmediato!">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://carlosdaniel12b-debug.github.io/orbita-streaming/combos.html">
   <meta name="theme-color" content="#070a09">
@@ -50,16 +49,16 @@
   }
   </script>
 
-  <!-- Tipografía Google Fonts -->
+  <!-- Tipografía Google Fonts: Stitch Design System (Syne, Inter, Space Grotesk) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Estilos Principales -->
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Favicon SVG oficial -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='41' fill='none' stroke='%23ccff00' stroke-width='8'/><circle cx='50' cy='50' r='23' fill='none' stroke='%23ccff00' stroke-width='13'/><circle cx='50' cy='9' r='5' fill='%23ffffff'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='41' fill='none' stroke='%23ccff00' stroke-width='8'/><circle cx='50' cy='23' fill='none' stroke='%23ccff00' stroke-width='13'/><circle cx='50' cy='9' r='5' fill='%23ffffff'/></svg>">
 </head>
 <body>
 
@@ -137,14 +136,18 @@
         </div>
 
         <!-- Botón Audio Cósmico -->
-        <button type="button" class="header-icon-btn" id="header-audio-toggle" aria-label="Alternar audio cósmico" title="Activar/Silenciar sonido de absorción">
-          <span class="audio-icon-on">🔊</span>
+        <button type="button" class="header-icon-btn" id="header-audio-toggle" aria-label="Alternar audio cósmico" title="Activar/Silenciar sonido">
+          <span id="header-audio-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </span>
         </button>
 
         <!-- Botón Minijuego Orbital Arcade -->
-        <button type="button" class="header-minigame-btn" id="open-minigame-btn" title="Jugar Minijuego Orbital">
-          <span class="game-icon">🎮</span>
-          <span class="game-text">Minijuego</span>
+        <button type="button" class="header-minigame-btn" id="open-minigame-btn" title="Jugar Void Raider">
+          <span class="game-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line></svg>
+          </span>
+          <span class="game-text">Void Raider</span>
         </button>
 
 
@@ -180,11 +183,31 @@
       </button>
     </div>
     <div class="mobile-nav-list">
-      <a href="index.html" class="mobile-nav-link">🏠 Inicio <span>→</span></a>
-      <a href="catalogo.html" class="mobile-nav-link">🍿 Catálogo <span>→</span></a>
-      <a href="combos.html" class="mobile-nav-link active">⚡ Combos <span>→</span></a>
-      <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">🤖 Asistente Orbit (IA) <span>⚡</span></a>
-      <button type="button" class="mobile-nav-link" id="mobile-drawer-minigame-btn" style="background: none; border: none; text-align: left; width: 100%; cursor: pointer; color: #00f0ff; font-weight: 700; padding: 0.85rem 1rem;">🎮 Minijuego Flappy Space <span>⚡</span></button>
+      <a href="index.html" class="mobile-nav-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.6rem;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Inicio</span>
+        <span style="margin-left: auto;">→</span>
+      </a>
+      <a href="catalogo.html" class="mobile-nav-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.6rem;"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+        <span>Catálogo</span>
+        <span style="margin-left: auto;">→</span>
+      </a>
+      <a href="combos.html" class="mobile-nav-link active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.6rem;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>Combos</span>
+        <span style="margin-left: auto;">→</span>
+      </a>
+      <a href="#orbit-ai" class="mobile-nav-link" data-open-orbit-ai style="color: var(--accent-lime); font-weight: 700;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.6rem;"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+        <span>Asistente Orbit (IA)</span>
+        <span style="margin-left: auto;">✦</span>
+      </a>
+      <button type="button" class="mobile-nav-link" id="mobile-drawer-minigame-btn" style="background: none; border: none; text-align: left; width: 100%; cursor: pointer; color: #00f0ff; font-weight: 700; padding: 0.85rem 1rem; display: flex; align-items: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.6rem;"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line></svg>
+        <span>Void Raider: Arcade 60FPS</span>
+        <span style="margin-left: auto;">✦</span>
+      </button>
     </div>
     <div class="mobile-drawer-footer">
       <a href="https://wa.me/593998226756" target="_blank" rel="noopener noreferrer" class="btn-cosmic-primary" style="justify-content: center; width: 100%;">
@@ -217,7 +240,7 @@
       </h1>
 
       <p class="hero-subtitle">
-        Combina <strong>2 aplicaciones por solo $5.00 / mes</strong> (ahorras $1.00 cada mes) y recibe <strong>1 cuenta de Spotify completamente GRATIS</strong> 🎧. Ambas pantallas son 100% privadas, con su propia clave PIN y en Ultra HD 4K.
+        Combina <strong>2 aplicaciones por solo $5.00 / mes</strong> (ahorras $1.00 cada mes) y recibe <strong>1 cuenta de Spotify completamente GRATIS</strong>. Ambas pantallas son 100% privadas, con su propia clave PIN y en Ultra HD 4K.
       </p>
     </div>
   </section>
@@ -228,7 +251,7 @@
       <div class="custom-combo-studio-card reveal-on-scroll">
         <div class="studio-header">
           <div class="studio-title-wrap">
-            <span class="studio-badge">🔥 PROMO 2x$5 + SPOTIFY GRATIS</span>
+            <span class="studio-badge">PROMO 2x$5 + SPOTIFY GRATIS</span>
             <h3 class="studio-main-heading">Selecciona 2 Plataformas por $5 y llévate Spotify GRATIS</h3>
             <p class="studio-subtext">Toca las tarjetas para armar tu combo. ¡Al seleccionar 2 aplicaciones recibes tu regalo de Spotify de inmediato!</p>
           </div>
@@ -248,7 +271,7 @@
             <div class="summary-combo-title" id="summary-combo-title">Combo Personalizado Órbita</div>
             <div class="summary-combo-apps" id="summary-combo-apps">Netflix + Disney+</div>
             <div class="summary-discount-tag" id="summary-discount-tag">
-              🎉 ¡Descuento de Combo Aplicado!
+              ¡Descuento de Combo Aplicado!
             </div>
           </div>
           <div class="summary-right-pricing">
@@ -309,7 +332,7 @@
               <span class="preset-combo-period">/ mes total</span>
             </div>
             <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'disneyplus'])">
-              <span>⚡ Cargar en Configurador</span>
+              <span>Cargar en Configurador</span>
             </button>
           </div>
         </div>
@@ -339,7 +362,7 @@
               <span class="preset-combo-period">/ mes total</span>
             </div>
             <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'hbomax'])">
-              <span>⚡ Cargar en Configurador</span>
+              <span>Cargar en Configurador</span>
             </button>
           </div>
         </div>
@@ -369,7 +392,7 @@
               <span class="preset-combo-period">/ mes total</span>
             </div>
             <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'spotify'])">
-              <span>⚡ Cargar en Configurador</span>
+              <span>Cargar en Configurador</span>
             </button>
           </div>
         </div>
@@ -403,7 +426,7 @@
               <span class="preset-combo-period">/ mes total ($5 + $3)</span>
             </div>
             <button type="button" class="btn-cosmic-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="window.selectComboPlatforms(['netflix', 'disneyplus', 'hbomax'])">
-              <span>⚡ Cargar 3 Apps en Configurador</span>
+              <span>Cargar 3 Apps en Configurador</span>
             </button>
           </div>
         </div>
@@ -416,8 +439,9 @@
           <h3 style="color: #ffffff; font-size: 1.35rem; font-weight: 800; margin: 0.4rem 0;">Revisa nuestro Catálogo Individual ($3.00/mes)</h3>
           <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0;">Si prefieres una sola pantalla privada o Canva Pro Anual ($4/año), explora nuestro catálogo completo.</p>
         </div>
-        <a href="catalogo.html" class="btn-cosmic-glass" style="white-space: nowrap;">
-          <span>🍿 Ver Catálogo Individual</span>
+        <a href="catalogo.html" class="btn-cosmic-glass" style="white-space: nowrap; display: inline-flex; align-items: center; gap: 0.5rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+          <span>Ver Catálogo Individual</span>
         </a>
       </div>
     </div>
@@ -453,22 +477,37 @@
         <div class="footer-links-col">
           <h4 class="footer-heading">Páginas</h4>
           <ul class="footer-links-list">
-            <li><a href="index.html">🏠 Inicio</a></li>
-            <li><a href="catalogo.html">🍿 Catálogo</a></li>
-            <li><a href="combos.html" style="color: var(--accent-lime); font-weight: 700;">⚡ Combos</a></li>
-            <li><a href="index.html#ventajas">🛡️ Ventajas & Garantía</a></li>
-            <li><a href="index.html#faq">❓ Preguntas Frecuentes</a></li>
+            <li><a href="index.html" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span>Inicio</span>
+            </a></li>
+            <li><a href="catalogo.html" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+              <span>Catálogo</span>
+            </a></li>
+            <li><a href="combos.html" class="footer-link" style="color: var(--accent-lime); font-weight: 700;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              <span>Combos</span>
+            </a></li>
+            <li><a href="index.html#ventajas" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              <span>Ventajas & Garantía</span>
+            </a></li>
+            <li><a href="index.html#faq" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><circle cx="12" cy="12" r="10"></circle><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Preguntas Frecuentes</span>
+            </a></li>
           </ul>
         </div>
 
         <div class="footer-links-col">
           <h4 class="footer-heading">Regla de Ahorro</h4>
           <ul class="footer-links-list">
-            <li><span>🍿 1 App Individual: <strong>$3.00 / mes</strong></span></li>
-            <li><span>⚡ Combo Dúo (2 Apps): <strong>$5.00 / mes</strong></span></li>
-            <li><span>🎨 Canva Pro Anual: <strong>$4.00 / año</strong></span></li>
-            <li><span>👨‍👩‍👧 Pack Trío (3 Apps): <strong>$8.00 / mes</strong></span></li>
-            <li><span>⚡ Activación: <strong>Menos de 5 min</strong></span></li>
+            <li><span>1 App Individual: <strong>$3.00 / mes</strong></span></li>
+            <li><span>Combo Dúo (2 Apps): <strong>$5.00 / mes</strong></span></li>
+            <li><span>Canva Pro Anual: <strong>$4.00 / año</strong></span></li>
+            <li><span>Pack Trío (3 Apps): <strong>$8.00 / mes</strong></span></li>
+            <li><span>Activación Inmediata: <strong>&lt; 5 min</strong></span></li>
           </ul>
         </div>
 
@@ -503,18 +542,22 @@
   </footer>
   </main>
 
-  <!-- ==================== MODAL MINIJUEGO FLAPPY SPACE ==================== -->
+  <!-- ==================== MODAL MINIJUEGO VOID RAIDER ARCADE ==================== -->
   <div class="orbit-game-modal" id="orbit-game-modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="orbit-game-dialog">
       <!-- Encabezado del Minijuego -->
       <div class="orbit-game-header">
         <div class="orbit-game-title-group">
-          <span style="font-size: 1.3rem;">🚀</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+          </svg>
           <div class="orbit-game-title">
-            Flappy Space <span class="badge">ARCADE 60FPS</span>
+            Órbita: Void Raider <span class="badge">SHOOTER 60FPS</span>
           </div>
         </div>
-        <button type="button" class="orbit-game-close-btn" id="orbit-game-close-btn" aria-label="Cerrar juego">✕</button>
+        <button type="button" class="orbit-game-close-btn" id="orbit-game-close-btn" aria-label="Cerrar juego">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
 
       <!-- HUD con métricas del juego -->
@@ -524,8 +567,8 @@
           <div class="hud-item-val" id="og-score">0</div>
         </div>
         <div>
-          <div class="hud-item-label">Nivel</div>
-          <div class="hud-item-val level" id="og-level">Nv. 1: Tierra</div>
+          <div class="hud-item-label">Sector</div>
+          <div class="hud-item-val level" id="og-level">Sector 1: Cinturón</div>
         </div>
         <div>
           <div class="hud-item-label">Récord</div>
@@ -535,11 +578,11 @@
 
       <!-- Barra de Progreso del Nivel -->
       <div class="orbit-game-level-bar">
-        <span class="level-bar-label" id="og-level-name">Nv. 1: Tierra</span>
+        <span class="level-bar-label" id="og-level-name">Sector 1: Cinturón Órbita</span>
         <div class="level-progress-track">
           <div class="level-progress-fill" id="og-level-progress" style="width: 0%;"></div>
         </div>
-        <span class="level-bar-pts" id="og-level-pts">0 / 10 pts</span>
+        <span class="level-bar-pts" id="og-level-pts">0 / 300 pts</span>
       </div>
 
       <!-- Lienzo Interactivo del Minijuego -->
@@ -548,39 +591,47 @@
 
         <!-- Pantalla de Inicio -->
         <div class="orbit-game-overlay" id="og-overlay-start">
-          <div class="overlay-hero-icon">🚀</div>
-          <div class="overlay-title">Flappy Space</div>
+          <div class="overlay-hero-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="overlay-title">Órbita: Void Raider</div>
           <div class="overlay-desc">
-            Viaje espacial interestelar de <strong>6 Niveles</strong>. Esquiva las compuertas de plasma cósmicas y llega al Agujero Negro.
+            Combate espacial en <strong>4 Sectores Galácticos</strong>. Destruye asteroides de titanio, intercepta drones rogue y recolecta núcleos de plasma triple y escudo.
           </div>
           <div class="overlay-levels-badge">
-            <span>Nv. 1: Tierra</span>
-            <span>Nv. 2: Luna</span>
-            <span>Nv. 3: Marte</span>
-            <span>Nv. 4: Saturno</span>
-            <span>Nv. 5: Hiperespacio</span>
-            <span>Nv. 6: Agujero Negro</span>
+            <span>S1: Cinturón Órbita</span>
+            <span>S2: Nebulosa Neón</span>
+            <span>S3: Tormenta Plasma</span>
+            <span>S4: Agujero Negro</span>
           </div>
           <button type="button" class="btn-arcade-play" id="og-btn-start">
-            🚀 Iniciar Vuelo
+            Iniciar Misión Espacial
           </button>
         </div>
 
         <!-- Pantalla de Game Over -->
         <div class="orbit-game-overlay hidden" id="og-overlay-gameover">
-          <div class="overlay-hero-icon">💥</div>
-          <div class="overlay-title" style="color: #ff4757;">¡Impacto Espacial!</div>
+          <div class="overlay-hero-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <div class="overlay-title" style="color: #ff4757;">¡Nave Interceptada!</div>
           <div class="overlay-desc">
             Puntaje obtenido: <strong id="og-final-score">0</strong> puntos. <br>
-            Nivel alcanzado: <strong id="og-final-level" style="color: #00f0ff;">Nv. 1: Tierra</strong>.
+            Sector alcanzado: <strong id="og-final-level" style="color: #00f0ff;">Sector 1: Cinturón Órbita</strong>.
             <div id="og-record-alert" style="color: #fbbf24; font-weight: 800; margin-top: 0.5rem; display: none;"></div>
           </div>
           <div class="overlay-btn-group">
             <button type="button" class="btn-arcade-play" id="og-btn-retry">
-              Reintentar Vuelo ↺
+              Reintentar Misión
             </button>
             <button type="button" class="btn-arcade-secondary" id="og-btn-exit">
-              Salir ✕
+              Salir
             </button>
           </div>
         </div>
@@ -589,10 +640,11 @@
       <!-- Pie de Control Táctil (Optimizado para Celulares) -->
       <div class="orbit-game-footer">
         <div class="game-instructions-text">
-          🎮 <strong>En PC:</strong> Tecla Espacio o Flecha Arriba. <strong>En Celular:</strong> Toca la pantalla o el botón.
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+          <strong>En PC:</strong> Arrastra el ratón o usa [A][D]/Flechas y [Espacio] para disparar. <strong>En Celular:</strong> Toca/arrastra sobre la pantalla o el botón de disparo.
         </div>
-        <button type="button" class="btn-game-tap-action" id="og-btn-tap-action" aria-label="Propulsar nave espacial">
-          🚀 TOCAR PARA PROPULSAR NAVE
+        <button type="button" class="btn-game-tap-action" id="og-btn-tap-action" aria-label="Disparar cañones láser">
+          TOCAR / DISPARAR BLASTERS
         </button>
       </div>
     </div>
@@ -631,7 +683,7 @@
           </div>
           <div class="ai-message-content">
             <div class="ai-bot-name">Orbit ✦ Asistente Inteligente</div>
-            <p>¡Hola! 👋 Soy <strong>Orbit</strong>, tu asistente de entretenimiento. Cuéntame qué plataformas deseas combinar, pregúntame por combos recomendados, o consulta precios y métodos de pago.</p>
+            <p>¡Hola! Soy <strong>Orbit</strong>, tu asistente de entretenimiento. Cuéntame qué plataformas deseas combinar, pregúntame por combos recomendados, o consulta precios y métodos de pago.</p>
           </div>
         </div>
       </div>
@@ -657,12 +709,12 @@
     <button type="button" class="floating-minigame-btn" id="floating-minigame-btn" data-open-minigame aria-label="Abrir Minijuego Espacial">
       <span class="game-btn-halo"></span>
       <div class="game-btn-icon-wrap">
-        <span class="game-btn-emoji">🎮</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line></svg>
         <span class="game-live-dot"></span>
       </div>
       <div class="game-btn-content">
-        <span class="game-btn-title">Flappy Space</span>
-        <span class="game-btn-sub">Arcade Espacial</span>
+        <span class="game-btn-title">Void Raider</span>
+        <span class="game-btn-sub">Arcade 60FPS</span>
       </div>
     </button>
   </div>

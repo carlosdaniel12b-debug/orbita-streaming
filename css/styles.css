@@ -39,8 +39,11 @@
   --gradient-text: linear-gradient(135deg, #ffffff 15%, #ccff00 65%, #a3e635 100%);
   --gradient-badge: linear-gradient(135deg, rgba(204, 255, 0, 0.22) 0%, rgba(163, 230, 53, 0.18) 100%);
 
-  /* Tipografía de Máximo Contraste */
-  --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Tipografía Oficial Stitch Design System: Syne (Titulares), Inter (Cuerpo), Space Grotesk (Métricas) */
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --font-main: var(--font-body);
   --text-main: #f8fafc;
   --text-muted: #cbd5e1;
   --text-dim: #94a3b8;
@@ -168,11 +171,31 @@ button:active,
 .modal-close-btn:active,
 .btn-primary:active,
 .btn-secondary:active,
+.btn-cosmic-primary:active,
+.btn-cosmic-glass:active,
+.btn-arcade-play:active,
+.btn-arcade-secondary:active,
+.hero-promo-action-btn:active,
+.calc-platform-card:active,
+.header-minigame-btn:active,
+.floating-minigame-btn:active,
+.floating-orbit-ai-btn:active,
 .combo-btn:active,
 .floating-whatsapp-btn:active,
 .orbit-ai-badge:active {
   transform: scale(0.97) !important;
-  transition: transform 120ms var(--ease-out) !important;
+  transition: transform 100ms var(--ease-out) !important;
+}
+
+/* Tipografía de Encabezados (Stitch Syne Display) */
+h1, h2, h3, .hero-main-title, .section-title, .preset-combo-title, .orbit-game-title, .studio-main-heading, .overlay-title, .brand-text-title, .intro-title-main {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Tipografía Numérica y Badges (Stitch Space Grotesk) */
+.hud-item-val, .level-bar-pts, .calc-card-rate-pill, .stat-value, .preset-combo-price, .modal-price-val, .level-bar-label, .hud-item-label {
+  font-family: var(--font-mono);
 }
 
 body {
@@ -5981,8 +6004,15 @@ ul {
 
 .overlay-hero-icon {
   font-size: 2.3rem;
-  margin-bottom: 0.25rem;
-  animation: floatOrb 2s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  animation: floatOrb 2.4s infinite ease-in-out;
+}
+
+.overlay-hero-icon svg {
+  filter: drop-shadow(0 0 12px currentColor);
 }
 
 @keyframes floatOrb {

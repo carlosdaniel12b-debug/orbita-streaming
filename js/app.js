@@ -44,7 +44,7 @@
         e.preventDefault();
         if (window.Orbita3D && window.Orbita3D.toggleAudio) {
           const isMuted = window.Orbita3D.toggleAudio();
-          showToast(isMuted ? '🔇 Audio cósmico silenciado' : '🔊 Audio cósmico activado');
+          showToast(isMuted ? 'Audio cósmico silenciado' : 'Audio cósmico activado');
         }
       });
     }
@@ -667,11 +667,11 @@
         rec = {
           title: "¡Hola! Soy Orbit, tu Copiloto IA",
           badge: "Agente Inteligente Activo",
-          reason: "¡Hola! 👋 Qué alegría saludarte. Soy **Orbit**, tu agente de inteligencia artificial en Órbita Streaming.\n\nPuedo conversar contigo y ayudarte en lo que necesites:\n• 🍿 **Recomendarte qué ver hoy:** Pídeme películas o series de terror, acción, comedia, anime, ciencia ficción o romance con títulos exactos.\n• 💡 **Descubrir qué app te conviene:** Te comparo Netflix, Max, Disney+, Prime, Paramount y más.\n• ⚡ **Armar tu Combo Dúo (2 apps x $5/mes)** y aprovechar la promo de Spotify Gratis.\n• 🔒 Resolver dudas sobre perfiles privados con PIN, medios de pago y garantía.\n\n¿De qué tienes ganas hoy, o qué plataforma estás buscando?",
+          reason: "¡Hola! Es un placer atenderte. Soy **Orbit**, tu agente de inteligencia artificial en Órbita Streaming.\n\nPuedo orientarte con precisión en lo que necesites:\n• **Recomendarte qué ver hoy:** Pídeme títulos exactos de terror, acción, comedia, anime, ciencia ficción o romance.\n• **Comparar plataformas:** Evaluamos Netflix, Max, Disney+, Prime Video, Paramount+ y más según tus preferencias.\n• **Armar tu Combo Dúo (2 apps x $5/mes):** Elige tus 2 favoritas y aprovecha el bono de Spotify Gratis.\n• **Garantías y pagos:** Resolvemos dudas sobre perfiles privados con PIN, métodos de pago y activación en 5 minutos.\n\n¿Qué plataforma te interesa o qué género te gustaría ver hoy?",
           recommendIds: ['netflix', 'hbomax', 'disneyplus'],
           isCombo: true,
           price: 5.00,
-          tip: "💡 Puedes escribir lo que quieras: 'recomiéndame pelis de terror', 'cuánto vale disney', 'cómo pago', etc."
+          tip: "Puedes escribir lo que gustes: 'recomiéndame pelis de terror', 'cuánto vale disney', 'cómo pago', etc."
         };
       }
 
@@ -680,11 +680,11 @@
         rec = {
           title: "¿Qué puedo hacer por ti?",
           badge: "Capacidades de Orbit AI",
-          reason: "🤖 **¡Tengo superpoderes para tu entretenimiento!** Como tu agente de IA oficial en Órbita Streaming, puedo:\n\n1. 🎬 **Recomendar Cine y Series:** Pídeme por ejemplo *'películas de terror'*, *'anime de acción'*, *'series adictivas para maratonear'* o *'qué ver en pareja'*, y te daré títulos recomendados y la plataforma exacta donde verlos.\n2. ⚖️ **Comparar Plataformas:** Pregúntame *'¿qué es mejor, Netflix o Max?'* o *'¿dónde ver fútbol en vivo?'* y te lo explico sin rodeos.\n3. 💰 **Optimizar tu Presupuesto:** Te asesoro entre 1 app individual ($3/mes), Canva Pro Anual ($4/año) o Combos Dúo (2 apps x $5/mes con Spotify gratis).\n4. 🛡️ **Garantía y Métodos de Pago:** Te explico cómo pagar por Binance USDT, Zelle, Pago Móvil o transferencias, y cómo activar tu perfil privado con PIN.\n\n¡Dime qué te gustaría saber o qué género prefieres!",
+          reason: "**Capacidades Oficiales de Orbit AI**\n\nComo tu asistente especializado en Órbita Streaming, puedo:\n\n1. **Recomendar Cine y Series:** Pídeme por ejemplo *'películas de terror'*, *'anime de acción'*, *'series adictivas'* o *'qué ver en pareja'*, y te daré títulos recomendados y la plataforma donde verlos.\n2. **Comparar Plataformas:** Pregúntame *'¿qué es mejor, Netflix o Max?'* o *'¿dónde ver fútbol en vivo?'* y te lo explico al detalle.\n3. **Optimizar tu Presupuesto:** Te asesoro entre 1 app individual ($3/mes), Canva Pro Anual ($4/año) o Combos Dúo (2 apps x $5/mes con Spotify gratis).\n4. **Garantía y Pagos:** Te explico cómo pagar por Binance USDT, Zelle, Pago Móvil o transferencias, y cómo activar tu perfil privado con PIN.\n\n¿Qué te gustaría consultar?",
           recommendIds: ['netflix', 'disneyplus'],
           isCombo: true,
           price: 5.00,
-          tip: "⚡ Escribe tu duda o pide una recomendación de cine y te responderé de inmediato."
+          tip: "Escribe tu consulta y recibirás respuesta al instante."
         };
       }
 
@@ -693,11 +693,11 @@
         rec = {
           title: "Medios de Pago & Activación en 5 Min",
           badge: "Pagos 100% Seguros",
-          reason: "💳 **¡Pagar y activar tus cuentas es sumamente sencillo y seguro!**\n\nAceptamos diversos métodos de pago:\n• 🪙 **Criptomonedas:** Binance Pay (USDT) directo y sin comisiones.\n• 🇺🇸 **Zelle** para pagos en dólares.\n• 📱 **Pago Móvil & Transferencias Bancarias** (a tasa del día garantizada).\n• 🇨🇴 **Nequi / Bancolombia** (según disponibilidad para usuarios en Colombia).\n\n⚡ **Entrega Express:** Al enviar tu comprobante a nuestro WhatsApp oficial, te entregamos tu acceso oficial con tu **PIN de perfil privado en menos de 5 minutos**.",
+          reason: "**Métodos de Pago y Activación Express**\n\nAceptamos diversas opciones de pago seguro:\n• **Criptomonedas:** Binance Pay (USDT) directo y sin comisiones.\n• **Zelle:** Para pagos en dólares.\n• **Pago Móvil & Transferencias:** A tasa oficial garantizada.\n• **Bancolombia / Nequi / PSE:** Para usuarios en Colombia.\n• **PayPal y Tarjetas:** Para pagos internacionales.\n\n**Entrega Inmediata:** Tras confirmar tu comprobante por WhatsApp, recibes tu usuario, contraseña y **PIN de perfil privado en menos de 5 minutos**.",
           recommendIds: ['netflix', 'disneyplus'],
           isCombo: true,
           price: 5.00,
-          tip: "📲 Pulsa el botón de WhatsApp abajo para solicitar los datos de pago al instante."
+          tip: "Haz clic en el botón de WhatsApp para solicitar los datos de pago al instante."
         };
       }
 
@@ -706,11 +706,11 @@
         rec = {
           title: "Garantía de Reposición Órbita (30 Días)",
           badge: "Seguridad & Garantía Total",
-          reason: "🛡️ **Tu servicio está completamente protegido en Órbita:**\n\n• **Garantía Total de 30 Días:** Cada cuenta contratada cuenta con garantía activa durante todo el mes. Si en algún momento presentas cualquier inconveniente, nuestro equipo de soporte en WhatsApp te da **reemplazo o solución inmediata**.\n• **Cuentas 100% Originales:** Son accesos a las aplicaciones oficiales, no APKs modificadas ni enlaces de dudosa procedencia.\n• **Soporte Humano 24/7:** Te atendemos directamente vía WhatsApp todos los días.",
+          reason: "**Garantía de Reposición Total Órbita:**\n\n• **Garantía Activa de 30 Días:** Cada pantalla cuenta con garantía completa durante todo el período contratado. Ante cualquier eventualidad, recibes asistencia o reposición inmediata por WhatsApp.\n• **Cuentas 100% Oficiales:** Accesos directos y legítimos, sin métodos riesgosos ni caídas.\n• **Soporte Humano 24/7:** Atención rápida y continua todos los días.",
           recommendIds: ['netflix'],
           isCombo: false,
           price: 3.00,
-          tip: "✨ Miles de clientes activos confían en nuestra atención y garantía continua."
+          tip: "Más de 12,000 suscriptores respaldan nuestro servicio y garantía."
         };
       }
 
@@ -719,11 +719,11 @@
         rec = {
           title: "Privacidad Total: Tu Perfil con Clave PIN",
           badge: "100% Privado & Seguro",
-          reason: "🔒 **¿Cómo funciona el perfil privado con PIN?**\n\n• Al contratar tu pantalla, te asignamos un **perfil exclusivo con tu nombre** dentro de la cuenta oficial.\n• Le colocas una **clave PIN personal de 4 dígitos** para que nadie más pueda entrar a ver tus cosas.\n• Tu historial, tu lista de películas y el algoritmo son **totalmente tuyos**, con reproducción en Ultra HD 4K.",
+          reason: "**¿Cómo funciona el perfil privado con PIN?**\n\n• Al contratar tu pantalla, te asignamos un **perfil exclusivo con tu nombre** dentro de la cuenta oficial.\n• Le colocas una **clave PIN personal de 4 dígitos** para que nadie más pueda ingresar.\n• Tu historial, tu lista de reproducción y recomendaciones son **100% tuyos**, en calidad Ultra HD 4K.",
           recommendIds: ['netflix', 'hbomax'],
           isCombo: true,
           price: 5.00,
-          tip: "🔒 Tu privacidad es sagrada: nadie interfiere con tus series ni con tu historial."
+          tip: "Privacidad garantizada: nadie interfiere con tus reproducciones ni listas."
         };
       }
 
@@ -732,11 +732,11 @@
         rec = {
           title: "Super Promo: Combo 2x$5 + SPOTIFY GRATIS",
           badge: "Promoción Estrella de Regalo",
-          reason: "🎁 **¡La mejor promoción de Órbita Streaming!**\n\nAl ordenar cualquier **Combo Dúo de 2 aplicaciones por solo $5.00/mes** (como Netflix + Disney+, o Max + Prime Video), te obsequiamos **1 cuenta de SPOTIFY PREMIUM totalmente GRATIS** durante el mes.\n\n¡Disfrutas del mejor cine y series en dos plataformas más 100 millones de canciones sin anuncios sin pagar un solo centavo extra!",
+          reason: "**Promoción Exclusiva Órbita:**\n\nAl ordenar cualquier **Combo Dúo de 2 aplicaciones por solo $5.00/mes** (como Netflix + Disney+, o Max + Prime Video), te obsequiamos **1 cuenta de SPOTIFY PREMIUM totalmente GRATIS** durante el mes.\n\nDisfruta del mejor cine y series en dos pantallas más música ilimitada sin anuncios sin pagar un solo centavo extra.",
           recommendIds: ['netflix', 'disneyplus', 'spotify'],
           isCombo: true,
           price: 5.00,
-          tip: "🎁 Para activarla, pulsa en WhatsApp y pide tu Combo 2x$5 con el bono de Spotify de regalo."
+          tip: "Para reclamarla, solicita tu Combo 2x$5 en WhatsApp mencionando el bono de Spotify de regalo."
         };
       }
 
@@ -745,11 +745,11 @@
         rec = {
           title: "Comparativa: Netflix vs Max (HBO)",
           badge: "Duelo de Gigantes",
-          reason: "⚖️ **¿Netflix o Max? Aquí te ayudo a elegir la mejor opción:**\n\n• **Elige Netflix ($3/mes):** Si prefieres cantidad masiva de contenido, series que se vuelven virales cada semana (*Stranger Things*, *Merlina*, *El Juego del Calamar*), realities y documentales.\n• **Elige Max ($3/mes):** Si priorizas el cine de mayor prestigio mundial, producciones de HBO multipremiadas (*House of the Dragon*, *The Last of Us*, *Succession*), cine de Warner en 4K y el universo de *Dune* y *DC Comics*.\n\n💡 **El Secreto:** En lugar de elegir una sola por $3, ¡puedes llevarte el **Combo Dúo Cinéfilo con ambas por solo $5/mes**!",
+          reason: "**Comparativa Directa: Netflix vs Max**\n\n• **Elige Netflix ($3/mes):** Si buscas volumen de contenido, lanzamientos virales cada semana (*Stranger Things*, *Merlina*, *El Juego del Calamar*), realities y documentales.\n• **Elige Max ($3/mes):** Si prefieres cine de culto, producciones galardonadas de HBO (*House of the Dragon*, *The Last of Us*, *Succession*), cine de Warner en 4K y todo *DC Comics*.\n\n**Ahorro inteligente:** En lugar de elegir una sola, lleva el **Combo Dúo Cinéfilo con ambas por solo $5/mes**.",
           recommendIds: ['netflix', 'hbomax'],
           isCombo: true,
           price: 5.00,
-          tip: "⚡ Las dos plataformas en Ultra HD 4K con perfil privado y PIN por solo $5."
+          tip: "Ambas plataformas en Ultra HD 4K con perfil privado y PIN por solo $5."
         };
       }
 
@@ -763,7 +763,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "👻 Pide tu combo de terror en WhatsApp y recíbelo con entrega inmediata en 5 minutos."
+          tip: "Pide tu combo de terror en WhatsApp y recíbelo con entrega inmediata en 5 minutos."
         };
       } else if (isAccion && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.accion) {
         const g = ORBITA_AI_KB.genres.accion;
@@ -774,7 +774,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "💥 Películas taquilleras y superproducciones en Ultra HD 4K."
+          tip: "Películas taquilleras y superproducciones en Ultra HD 4K."
         };
       } else if (isScifi && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.scifi) {
         const g = ORBITA_AI_KB.genres.scifi;
@@ -785,7 +785,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "🚀 Visuales asombrosos en 4K Dolby Vision y sonido envolvente."
+          tip: "Visuales asombrosos en 4K Dolby Vision y sonido envolvente."
         };
       } else if (isDrama && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.drama) {
         const g = ORBITA_AI_KB.genres.drama;
@@ -796,7 +796,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "🏆 Historias profundas y actuaciones multipremiadas."
+          tip: "Historias profundas y actuaciones multipremiadas."
         };
       } else if (isComedia && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.comedia) {
         const g = ORBITA_AI_KB.genres.comedia;
@@ -807,7 +807,7 @@
           recommendIds: ['hbomax', 'netflix'],
           isCombo: true,
           price: 5.00,
-          tip: "😂 Las mejores sitcoms de la historia completas en tu pantalla."
+          tip: "Las mejores sitcoms de la historia completas en tu pantalla."
         };
       } else if (isAnime && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.anime) {
         const g = ORBITA_AI_KB.genres.anime;
@@ -818,7 +818,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "⚔️ Capítulos nuevos y películas anime en máxima resolución."
+          tip: "Capítulos nuevos y películas anime en máxima resolución."
         };
       } else if (isFamily && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.infantil) {
         const g = ORBITA_AI_KB.genres.infantil;
@@ -829,7 +829,7 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "🎈 Control parental con PIN para que los niños disfruten con seguridad."
+          tip: "Control parental con PIN para que los niños disfruten con seguridad."
         };
       } else if (isRomance && window.ORBITA_AI_KB && ORBITA_AI_KB.genres && ORBITA_AI_KB.genres.romance) {
         const g = ORBITA_AI_KB.genres.romance;
@@ -840,37 +840,37 @@
           recommendIds: g.idealCombo,
           isCombo: true,
           price: 5.00,
-          tip: "❤️ Ideal para maratonear este fin de semana en pareja."
+          tip: "Ideal para maratonear este fin de semana en pareja."
         };
       } else if (isSports) {
         rec = {
           title: "Deportes en Vivo: Champions, F1 & Ligas",
           badge: "Deportes & Fútbol Total",
-          reason: "⚽ **¡La pasión del deporte en vivo sin cortes!**\n\n• **Disney+ (ESPN):** La casa de la Champions League, Premier League inglesa, Fórmula 1, torneos de tenis de Grand Slam y ligas internacionales por solo **$3.00/mes**.\n• **ViX Premium:** Transmisiones en vivo de la Liga MX y fútbol en español por **$3.00/mes**.\n\n💡 **Recomendación:** Llévate el **Combo Dúo Gol (Disney+ & ViX) por solo $5.00/mes** para tener cobertura deportiva total en vivo.",
+          reason: "**Deportes en Vivo sin Interrupciones**\n\n• **Disney+ (ESPN):** La señal en directo de UEFA Champions League, Premier League, Fórmula 1, torneos de tenis y ligas internacionales por solo **$3.00/mes**.\n• **ViX Premium:** Transmisiones exclusivas de la Liga MX y fútbol en español por **$3.00/mes**.\n\n**Recomendación:** Llévate el **Combo Dúo Gol (Disney+ & ViX) por solo $5.00/mes** para una cobertura deportiva total.",
           recommendIds: ['disneyplus', 'vix'],
           isCombo: true,
           price: 5.00,
-          tip: "⚽ Transmisiones en vivo de ESPN y ViX con perfil privado."
+          tip: "Transmisiones en vivo de ESPN y ViX con perfil privado."
         };
       } else if (isTools) {
         rec = {
           title: "Canva Pro Anual (365 Días)",
           badge: "Plan Anual $4",
-          reason: "🎨 **¡La herramienta imprescindible para creadores, estudiantes y negocios!**\n\nObtienes **1 año completo (365 días)** de Canva Pro por solo **$4.00 el año** (menos de $0.35 al mes):\n• Quitafondos mágico en 1 clic.\n• Kit de marcas y fuentes personalizadas.\n• Más de 100 millones de fotos, videos y plantillas premium.\n• Activado directo a tu propio correo electrónico.",
+          reason: "**Diseño y Productividad Profesional**\n\nObtienes **1 año completo (365 días)** de Canva Pro por solo **$4.00 el año** (menos de $0.35 al mes):\n• Quitafondos mágico en 1 clic.\n• Kit de marcas y tipografías personalizadas.\n• Más de 100 millones de plantillas y recursos premium.\n• Activado directo a tu propio correo electrónico.",
           recommendIds: ['canva'],
           isCombo: false,
           price: 4.00,
-          tip: "✨ Garantía completa durante todo el año de servicio."
+          tip: "Garantía completa durante todo el año de servicio."
         };
       } else if (isMusic) {
         rec = {
           title: "Spotify Premium Individual",
           badge: "1 Aplicación Individual ($3)",
-          reason: "🎧 **¡Música y podcasts sin límites!**\n\nCon **Spotify Premium** disfrutas de más de 100 millones de canciones sin cortes comerciales, audio de máxima calidad (320 kbps) y descargas sin conexión a internet por solo **$3.00 al mes**.\n\n💡 **Tip de Ahorro:** Si compras un Combo Dúo de 2 aplicaciones por $5, ¡te regalamos Spotify totalmente gratis!",
+          reason: "**Música y Podcasts en Alta Fidelidad**\n\nCon **Spotify Premium** disfrutas de más de 100 millones de canciones sin cortes comerciales, audio de máxima calidad (320 kbps) y descargas sin conexión por solo **$3.00 al mes**.\n\n**Ahorro:** Si compras un Combo Dúo de 2 aplicaciones por $5, ¡te regalamos Spotify totalmente gratis!",
           recommendIds: ['spotify'],
           isCombo: false,
           price: 3.00,
-          tip: "💡 Tarifa individual de $3.00/mes o gratis con tu Combo 2x$5."
+          tip: "Tarifa individual de $3.00/mes o gratis con tu Combo 2x$5."
         };
       }
 
@@ -882,8 +882,8 @@
 
         let reasonText = profile.reason || `Para lo que buscas, **${pData.name}** es excelente: perfil 100% privado con clave PIN, calidad Ultra HD y garantía total por solo ${formatPrice(pData.priceUSD)}/${pData.pricePeriod}.`;
         let tipText = pData.id === 'canva'
-          ? '✨ Acceso anual completo (365 días) activado directo a tu propio correo.'
-          : `💡 Si deseas sumar otra plataforma, con el Combo Dúo te llevas 2 pantallas por solo $5/mes (ahorras $1/mes).`;
+          ? 'Acceso anual completo (365 días) activado directo a tu propio correo.'
+          : `Si deseas sumar otra plataforma, con el Combo Dúo te llevas 2 pantallas por solo $5/mes (ahorras $1/mes).`;
 
         rec = {
           recommendIds: [pData.id],
@@ -918,7 +918,7 @@
           title: `Combo Dúo: ${p1.shortName} + ${p2.shortName}`,
           badge: 'Combo Dúo (2 Pantallas x $5)',
           reason: `¡Excelente elección! Al combinar **${p1.name}** y **${p2.name}** tienes entretenimiento completo para todo tu hogar. En lugar de pagar $6 ($3 por cada una), en Órbita pagas únicamente **$5.00/mes** por ambas cuentas con perfiles 100% privados y PIN. ¡Y además puedes solicitar tu cuenta de Spotify de regalo!`,
-          tip: '⚡ Al ordenar te entregamos ambas credenciales y tus PINs exclusivos en menos de 5 minutos.'
+          tip: 'Al ordenar te entregamos ambas credenciales y tus PINs exclusivos en menos de 5 minutos.'
         };
       }
 
@@ -939,7 +939,7 @@
           title: `Paquete Trío: ${trioNames}`,
           badge: 'Pack 3 Pantallas ($8.00)',
           reason: `Para 3 plataformas, te aplicamos la regla de ahorro Órbita: **Combo Dúo de 2 apps por $5** + **3ra aplicación por $3** = **$8.00/mes** en total. Tres pantallas privadas con PIN para tu hogar.`,
-          tip: '⚡ Puedes cargar las 3 de inmediato en el configurador o pedirlas juntas por WhatsApp.'
+          tip: 'Puedes cargar las 3 de inmediato en el configurador o pedirlas juntas por WhatsApp.'
         };
       }
 
@@ -952,7 +952,7 @@
           recommendIds: ['netflix', 'hbomax'],
           isCombo: true,
           price: 5.00,
-          tip: "💡 Pregúntame sobre cualquier película, serie o plataforma con total libertad."
+          tip: "Pregúntame sobre cualquier película, serie o plataforma con total libertad."
         };
       }
     }
@@ -985,23 +985,23 @@
         actionButtonsHtml = `
           <div class="ai-chat-actions">
             <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-chat-btn ai-chat-btn-primary">
-              <span>📲 Pedir por WhatsApp (${priceFormatted})</span>
+              <span>Pedir por WhatsApp (${priceFormatted})</span>
             </a>
             <button type="button" class="ai-chat-btn ai-chat-btn-secondary" onclick="window.selectComboPlatforms(${JSON.stringify(rec.recommendIds)})">
-              <span>⚡ Armar en Combo ($5)</span>
+              <span>Armar en Combo ($5)</span>
             </button>
           </div>
         `;
       } else {
         const p = recPlatforms[0];
-        const singleOrderText = p.id === 'canva' ? '📲 Activar Canva Pro ($4/año)' : `📲 Pedir ${p.shortName} (${priceFormatted})`;
+        const singleOrderText = p.id === 'canva' ? 'Activar Canva Pro ($4/año)' : `Pedir ${p.shortName} (${priceFormatted})`;
         actionButtonsHtml = `
           <div class="ai-chat-actions">
             <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="ai-chat-btn ai-chat-btn-primary">
               <span>${singleOrderText}</span>
             </a>
             <button type="button" class="ai-chat-btn ai-chat-btn-secondary" onclick="window.selectComboPlatforms(['${p.id}'])">
-              <span>⚡ O armar Combo Dúo ($5)</span>
+              <span>O armar Combo Dúo ($5)</span>
             </button>
           </div>
         `;
@@ -1247,7 +1247,7 @@
             <span>Pedir por WhatsApp (${formatPrice(platform.priceUSD)})</span>
           </a>
           <button type="button" class="btn-cosmic-glass" style="justify-content: center;" onclick="window.selectComboPlatforms(['${platform.id}'])">
-            <span>⚡ Añadir a Armar Combo</span>
+            <span>Añadir a Armar Combo</span>
           </button>
         </div>
       </div>
@@ -1427,7 +1427,7 @@
     if (hasSpotifyPromo) {
       if (discountTag) {
         discountTag.style.display = 'inline-block';
-        discountTag.innerHTML = `🎉 ¡Descuento de Combo + 🎧 <strong>Cuenta SPOTIFY GRATIS</strong> Incluida!`;
+        discountTag.innerHTML = `¡Descuento de Combo + <strong>Cuenta SPOTIFY GRATIS</strong> Incluida!`;
       }
       if (regularPriceBox) {
         regularPriceBox.style.display = 'block';
@@ -1436,7 +1436,7 @@
     } else if (discountUSD > 0) {
       if (discountTag) {
         discountTag.style.display = 'inline-block';
-        discountTag.textContent = '🎉 ¡Descuento de Combo Aplicado!';
+        discountTag.textContent = '¡Descuento de Combo Aplicado!';
       }
       if (regularPriceBox) {
         regularPriceBox.style.display = 'block';
@@ -1452,7 +1452,7 @@
       const fullNames = selectedPlatforms.map(p => p.name).join(', ');
       let msg = `¡Hola Órbita Streaming! Deseo activar mi combo personalizado con: *${fullNames}* por un total de *${formatPrice(finalPriceUSD)}*.`;
       if (hasSpotifyPromo) {
-        msg += ` ¡Y quiero reclamar mi cuenta de *SPOTIFY GRATIS* de regalo! 🎁🎧`;
+        msg += ` ¡Y quiero reclamar mi cuenta de *SPOTIFY GRATIS* de regalo!`;
       }
       msg += ` ¿Cuáles son los métodos de pago para activarlo ya?`;
       ctaBtn.href = `https://wa.me/${ORBITA_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
@@ -1657,6 +1657,10 @@
   // =========================================================================
   // --- 13. MINIJUEGO ARCADE: FLAPPY SPACE (RECONSTRUIDO • 6 NIVELES • INFINITO) ---
   // =========================================================================
+  // ==========================================================================
+  // MINIJUEGO ARCADE: ÓRBITA VOID RAIDER (SHOOTER ESPACIAL 60FPS)
+  // Reemplazo moderno, profesional y sin emojis de Flappy Space
+  // ==========================================================================
   function initOrbitMiniGame() {
     const modal = document.getElementById('orbit-game-modal');
     const canvas = document.getElementById('orbit-arcade-canvas');
@@ -1683,121 +1687,61 @@
     const btnTapAction = document.getElementById('og-btn-tap-action');
     const closeBtn = document.getElementById('orbit-game-close-btn');
 
-    // =======================================================================
-    // 6 NIVELES CÓSMICOS PROGRESIVOS Y EXTENSOS
-    // =======================================================================
-    const LEVELS = [
-      {
-        id: 1,
-        name: 'Nv. 1: Tierra',
-        sector: 'Órbita Terrestre',
-        minScore: 0,
-        targetScore: 10,
-        speed: 2.2,
-        gap: 145,
-        color: '#00f0ff',
-        pylonColor: '#0a1d28',
-        osc: 0
-      },
-      {
-        id: 2,
-        name: 'Nv. 2: Luna',
-        sector: 'Estación Lunar & Satélites',
-        minScore: 10,
-        targetScore: 25,
-        speed: 2.6,
-        gap: 135,
-        color: '#ccff00',
-        pylonColor: '#192806',
-        osc: 0
-      },
-      {
-        id: 3,
-        name: 'Nv. 3: Marte',
-        sector: 'Cinturón de Asteroides',
-        minScore: 25,
-        targetScore: 45,
-        speed: 3.0,
-        gap: 125,
-        color: '#ff9900',
-        pylonColor: '#2b1504',
-        osc: 0.6
-      },
-      {
-        id: 4,
-        name: 'Nv. 4: Saturno',
-        sector: 'Anillos de Saturno',
-        minScore: 45,
-        targetScore: 70,
-        speed: 3.4,
-        gap: 118,
-        color: '#c084fc',
-        pylonColor: '#250836',
-        osc: 1.2
-      },
-      {
-        id: 5,
-        name: 'Nv. 5: Hiperespacio',
-        sector: 'Túnel Cuántico Warp',
-        minScore: 70,
-        targetScore: 100,
-        speed: 3.8,
-        gap: 110,
-        color: '#f43f5e',
-        pylonColor: '#360611',
-        osc: 1.8
-      },
-      {
-        id: 6,
-        name: 'Nv. 6: Agujero Negro',
-        sector: 'Horizonte de Sucesos (Infinito)',
-        minScore: 100,
-        targetScore: Infinity,
-        speed: 4.2,
-        gap: 104,
-        color: '#fbbf24',
-        pylonColor: '#362203',
-        osc: 2.4
-      }
+    // Sectores cósmicos de combate
+    const SECTORS = [
+      { id: 1, name: 'Sector 1: Cinturón Órbita', sector: 'Cinturón de Asteroides', minScore: 0, targetScore: 300, speed: 2.2, spawnInterval: 48, color: '#ccff00' },
+      { id: 2, name: 'Sector 2: Nebulosa Neón', sector: 'Espacio Profundo & Drones', minScore: 300, targetScore: 750, speed: 2.7, spawnInterval: 40, color: '#00e5ff' },
+      { id: 3, name: 'Sector 3: Tormenta de Plasma', sector: 'Nebulosa Electromagnética', minScore: 750, targetScore: 1400, speed: 3.3, spawnInterval: 32, color: '#a855f7' },
+      { id: 4, name: 'Sector 4: Agujero Negro', sector: 'Horizonte de Sucesos Infinito', minScore: 1400, targetScore: Infinity, speed: 3.9, spawnInterval: 25, color: '#f59e0b' }
     ];
 
     let isRunning = false;
     let animId = null;
     let score = 0;
-    let currentLevel = LEVELS[0];
-    let highscore = parseInt(localStorage.getItem('flappy_space_highscore') || '0', 10);
+    let combo = 1;
+    let comboTimer = 0;
+    let currentSector = SECTORS[0];
+    let highscore = parseInt(localStorage.getItem('orbita_void_raider_highscore') || localStorage.getItem('flappy_space_highscore') || '0', 10);
     if (highscoreEl) highscoreEl.textContent = highscore;
 
     let canvasW = 480;
     let canvasH = 350;
 
-    // Nave espacial (Física Flappy refinada)
+    // Nave interceptora del jugador
     const ship = {
-      x: 75,
-      y: 150,
-      vy: 0,
-      gravity: 0.34,
-      jump: -5.7,
-      radius: 9,
-      tilt: 0
+      x: 240,
+      y: 295,
+      targetX: 240,
+      width: 28,
+      height: 26,
+      tilt: 0,
+      shield: 1,
+      tripleTimer: 0,
+      slowTimer: 0,
+      lastShotTime: 0,
+      fireRate: 130
     };
 
-    let pipes = [];
-    let asteroids = [];
+    let lasers = [];
+    let obstacles = [];
+    let powerups = [];
     let particles = [];
+    let popups = [];
     let stars = [];
-    const pipeWidth = 46;
-    const pipeSpacing = 185;
+    let spawnTimer = 0;
+    let droneTimer = 0;
+    let powerupTimer = 0;
 
-    // Efectos de cambio de nivel
-    let levelBannerText = '';
-    let levelBannerSector = '';
-    let levelBannerTimer = 0;
-    let levelBannerColor = '#00f0ff';
-    let screenFlashOpacity = 0;
-    let screenFlashColor = '#00f0ff';
+    // Banners y efectos visuales
+    let bannerText = '';
+    let bannerSub = '';
+    let bannerTimer = 0;
+    let bannerColor = '#ccff00';
+    let screenFlash = 0;
+    let screenFlashColor = '#ffffff';
+    let screenShake = 0;
 
-    // Sintetizador Web Audio API
+    // Síntesis de sonido procedural vía Web Audio API
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -1827,74 +1771,76 @@
       } catch (e) {}
     }
 
-    function playFlapSound() {
-      try {
-        const actx = getAudioContext();
-        if (!actx) return;
-        const osc = actx.createOscillator();
-        const gain = actx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(320, actx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(540, actx.currentTime + 0.09);
-        gain.gain.setValueAtTime(0.12, actx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.09);
-        osc.connect(gain);
-        gain.connect(actx.destination);
-        osc.start();
-        osc.stop(actx.currentTime + 0.09);
-      } catch (e) {}
-    }
-
-    function playScoreSound() {
-      playTone(880, 'sine', 0.1, 0.14);
-    }
-
-    function playLevelUpSound() {
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((freq, idx) => {
-        setTimeout(() => playTone(freq, 'triangle', 0.22, 0.18), idx * 90);
-      });
-    }
-
-    function playCrashSound() {
+    function playLaserSound() {
       try {
         const actx = getAudioContext();
         if (!actx) return;
         const osc = actx.createOscillator();
         const gain = actx.createGain();
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(190, actx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(50, actx.currentTime + 0.3);
-        gain.gain.setValueAtTime(0.2, actx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.3);
+        osc.frequency.setValueAtTime(950, actx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(260, actx.currentTime + 0.07);
+        gain.gain.setValueAtTime(0.08, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.07);
         osc.connect(gain);
         gain.connect(actx.destination);
         osc.start();
-        osc.stop(actx.currentTime + 0.3);
+        osc.stop(actx.currentTime + 0.07);
       } catch (e) {}
+    }
+
+    function playExplosionSound(isBig = false) {
+      try {
+        const actx = getAudioContext();
+        if (!actx) return;
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(isBig ? 130 : 220, actx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(35, actx.currentTime + (isBig ? 0.32 : 0.18));
+        gain.gain.setValueAtTime(isBig ? 0.22 : 0.13, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + (isBig ? 0.32 : 0.18));
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start();
+        osc.stop(actx.currentTime + (isBig ? 0.32 : 0.18));
+      } catch (e) {}
+    }
+
+    function playPowerupSound() {
+      [587.33, 739.99, 880, 1174.66].forEach((f, idx) => {
+        setTimeout(() => playTone(f, 'sine', 0.12, 0.12), idx * 55);
+      });
+    }
+
+    function playLevelUpSound() {
+      [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => {
+        setTimeout(() => playTone(f, 'triangle', 0.18, 0.16), idx * 75);
+      });
     }
 
     function resizeCanvas() {
       const rect = canvas.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvasW = Math.max(300, Math.floor(rect.width || 480));
-      canvasH = Math.max(220, Math.floor(rect.height || 350));
+      canvasH = Math.max(240, Math.floor(rect.height || 350));
       canvas.width = Math.floor(canvasW * dpr);
       canvas.height = Math.floor(canvasH * dpr);
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
+      ship.y = canvasH - 46;
     }
 
     function initStars() {
       stars = [];
-      const starCount = 38;
+      const starCount = 45;
       for (let i = 0; i < starCount; i++) {
         stars.push({
           x: Math.random() * canvasW,
           y: Math.random() * canvasH,
-          size: Math.random() * 2 + 0.7,
-          speed: Math.random() * 0.7 + 0.3,
-          alpha: Math.random() * 0.65 + 0.35
+          size: Math.random() * 2 + 0.6,
+          speed: Math.random() * 1.8 + 0.8,
+          alpha: Math.random() * 0.7 + 0.3
         });
       }
     }
@@ -1929,25 +1875,25 @@
       });
     }
 
-    function updateLevelAndHUD() {
-      let nextLevel = LEVELS[0];
-      for (let i = LEVELS.length - 1; i >= 0; i--) {
-        if (score >= LEVELS[i].minScore) {
-          nextLevel = LEVELS[i];
+    function updateSectorAndHUD() {
+      let nextSector = SECTORS[0];
+      for (let i = SECTORS.length - 1; i >= 0; i--) {
+        if (score >= SECTORS[i].minScore) {
+          nextSector = SECTORS[i];
           break;
         }
       }
 
-      if (nextLevel.id !== currentLevel.id) {
-        currentLevel = nextLevel;
+      if (nextSector.id !== currentSector.id) {
+        currentSector = nextSector;
         playLevelUpSound();
 
-        levelBannerText = `¡SECTOR ${currentLevel.id}: ${currentLevel.name.split(':')[1].trim().toUpperCase()}!`;
-        levelBannerSector = `Sector: ${currentLevel.sector}`;
-        levelBannerTimer = 110;
-        levelBannerColor = currentLevel.color;
-        screenFlashColor = currentLevel.color;
-        screenFlashOpacity = 0.55;
+        bannerText = currentSector.name.toUpperCase();
+        bannerSub = currentSector.sector;
+        bannerTimer = 110;
+        bannerColor = currentSector.color;
+        screenFlashColor = currentSector.color;
+        screenFlash = 0.5;
 
         for (let i = 0; i < 40; i++) {
           particles.push({
@@ -1955,8 +1901,8 @@
             y: ship.y,
             vx: (Math.random() - 0.5) * 8,
             vy: (Math.random() - 0.5) * 8,
-            color: currentLevel.color,
-            size: Math.random() * 4 + 1.5,
+            color: currentSector.color,
+            size: Math.random() * 3.5 + 1.5,
             life: 1.2
           });
         }
@@ -1964,72 +1910,59 @@
 
       if (scoreEl) scoreEl.textContent = score;
       if (levelEl) {
-        levelEl.textContent = currentLevel.name;
-        levelEl.style.color = currentLevel.color;
+        levelEl.textContent = combo > 1 ? `x${combo} COMBO` : currentSector.name.split(':')[0];
+        levelEl.style.color = combo > 1 ? '#00e5ff' : currentSector.color;
       }
       if (highscoreEl) highscoreEl.textContent = highscore;
 
-      if (levelNameEl) levelNameEl.textContent = currentLevel.name;
+      if (levelNameEl) levelNameEl.textContent = currentSector.name;
       if (levelProgressEl) {
-        if (currentLevel.targetScore === Infinity) {
+        if (currentSector.targetScore === Infinity) {
           levelProgressEl.style.width = '100%';
-          levelProgressEl.style.background = currentLevel.color;
-          if (levelPtsEl) levelPtsEl.textContent = '★ MODO MAESTRO';
+          levelProgressEl.style.background = currentSector.color;
+          if (levelPtsEl) levelPtsEl.textContent = 'SECTOR MAESTRO';
         } else {
-          const span = currentLevel.targetScore - currentLevel.minScore;
-          const cur = score - currentLevel.minScore;
+          const span = currentSector.targetScore - currentSector.minScore;
+          const cur = score - currentSector.minScore;
           const pct = Math.min(100, Math.max(0, (cur / span) * 100));
           levelProgressEl.style.width = `${pct}%`;
-          levelProgressEl.style.background = `linear-gradient(90deg, #00f0ff, ${currentLevel.color})`;
-          if (levelPtsEl) levelPtsEl.textContent = `${score} / ${currentLevel.targetScore} pts`;
+          levelProgressEl.style.background = `linear-gradient(90deg, #00e5ff, ${currentSector.color})`;
+          if (levelPtsEl) levelPtsEl.textContent = `${score} / ${currentSector.targetScore} pts`;
         }
       }
     }
 
-    function flap() {
-      if (!isRunning) return;
+    function shootLasers() {
       getAudioContext();
-      ship.vy = ship.jump;
-      ship.tilt = -0.42;
-      playFlapSound();
+      playLaserSound();
 
-      for (let i = 0; i < 7; i++) {
-        particles.push({
-          x: ship.x - 14,
-          y: ship.y + (Math.random() - 0.5) * 6,
-          vx: -(Math.random() * 3.5 + 2.5),
-          vy: (Math.random() - 0.5) * 2.2,
-          color: Math.random() > 0.35 ? currentLevel.color : '#ffffff',
-          size: Math.random() * 2.5 + 1.2,
-          life: 0.75
-        });
+      if (ship.tripleTimer > 0) {
+        // Disparo triple en abanico
+        lasers.push({ x: ship.x, y: ship.y - 14, vx: 0, vy: -11, color: '#ccff00', len: 14 });
+        lasers.push({ x: ship.x - 9, y: ship.y - 12, vx: -2.2, vy: -10.5, color: '#00e5ff', len: 12 });
+        lasers.push({ x: ship.x + 9, y: ship.y - 12, vx: 2.2, vy: -10.5, color: '#00e5ff', len: 12 });
+      } else {
+        // Disparo doble gemelo
+        lasers.push({ x: ship.x - 8, y: ship.y - 12, vx: 0, vy: -11, color: '#00e5ff', len: 13 });
+        lasers.push({ x: ship.x + 8, y: ship.y - 12, vx: 0, vy: -11, color: '#00e5ff', len: 13 });
       }
-    }
 
-    function spawnPipe(xPos) {
-      const gapH = currentLevel.gap;
-      const margin = 45;
-      const minY = margin + gapH / 2;
-      const maxY = (canvasH - margin) - gapH / 2;
-      const baseGapY = minY + Math.random() * Math.max(20, maxY - minY);
-
-      pipes.push({
-        x: xPos,
-        width: pipeWidth,
-        baseGapY: baseGapY,
-        currentGapY: baseGapY,
-        gapH: gapH,
-        passed: false,
-        oscPhase: Math.random() * Math.PI * 2,
-        oscSpeed: Math.random() * 0.03 + 0.02
+      // Destello de disparo en los cañones
+      particles.push({
+        x: ship.x,
+        y: ship.y - 14,
+        vx: 0,
+        vy: -1,
+        color: '#ffffff',
+        size: 3,
+        life: 0.2
       });
     }
 
-    function spawnAsteroid(xPos) {
-      const radius = Math.floor(Math.random() * 8 + 13); // 13 to 21px
-      const minY = 45 + radius;
-      const maxY = canvasH - 45 - radius;
-      const yPos = minY + Math.random() * Math.max(20, maxY - minY);
+    function spawnAsteroid() {
+      const radius = Math.floor(Math.random() * 10 + 13);
+      const isBig = radius >= 19;
+      const x = Math.random() * (canvasW - radius * 2) + radius;
       const vertexCount = 7;
       const vertices = [];
       for (let i = 0; i < vertexCount; i++) {
@@ -2037,37 +1970,93 @@
         const r = radius * (0.75 + Math.random() * 0.45);
         vertices.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
       }
-      asteroids.push({
-        x: xPos,
-        y: yPos,
+
+      obstacles.push({
+        type: 'asteroid',
+        x: x,
+        y: -radius - 10,
         radius: radius,
+        hp: isBig ? 2 : 1,
+        maxHp: isBig ? 2 : 1,
         vertices: vertices,
         rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.038,
-        speed: currentLevel.speed * (0.95 + Math.random() * 0.3)
+        rotSpeed: (Math.random() - 0.5) * 0.04,
+        speed: (currentSector.speed * (ship.slowTimer > 0 ? 0.45 : 1)) * (0.85 + Math.random() * 0.35),
+        color: isBig ? '#f59e0b' : currentSector.color
       });
     }
 
-    function circleRectOverlap(cx, cy, r, rx, ry, rw, rh) {
-      const closestX = Math.max(rx, Math.min(cx, rx + rw));
-      const closestY = Math.max(ry, Math.min(cy, ry + rh));
-      const dx = cx - closestX;
-      const dy = cy - closestY;
-      return (dx * dx + dy * dy) < (r * r);
+    function spawnDrone() {
+      const radius = 15;
+      const x = Math.random() * (canvasW - 80) + 40;
+      obstacles.push({
+        type: 'drone',
+        x: x,
+        baseX: x,
+        y: -25,
+        radius: radius,
+        hp: 2,
+        maxHp: 2,
+        phase: Math.random() * Math.PI * 2,
+        speed: (currentSector.speed * 0.85) * (ship.slowTimer > 0 ? 0.45 : 1),
+        color: '#ff0055'
+      });
     }
 
-    function checkPipeCollision(s, p) {
-      const topH = Math.max(10, p.currentGapY - p.gapH / 2);
-      const botY = p.currentGapY + p.gapH / 2;
-      const botH = Math.max(10, canvasH - botY);
+    function spawnPowerup(x, y) {
+      const types = ['shield', 'triple', 'emp', 'slow'];
+      const chosen = types[Math.floor(Math.random() * types.length)];
+      powerups.push({
+        type: chosen,
+        x: x,
+        y: y,
+        radius: 12,
+        vy: 1.5,
+        pulse: 0
+      });
+    }
 
-      if (circleRectOverlap(s.x, s.y, s.radius, p.x, 0, p.width, topH)) {
-        return true;
+    function triggerEMP() {
+      playExplosionSound(true);
+      screenFlashColor = '#ccff00';
+      screenFlash = 0.7;
+      screenShake = 12;
+
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        const obs = obstacles[i];
+        createExplosion(obs.x, obs.y, obs.color, 16);
+        score += 25 * combo;
       }
-      if (circleRectOverlap(s.x, s.y, s.radius, p.x, botY, p.width, botH)) {
-        return true;
+      obstacles = [];
+      addPopup('PULSO EMP TOTAL', canvasW / 2, canvasH / 2, '#ccff00');
+      updateSectorAndHUD();
+    }
+
+    function addPopup(text, x, y, color = '#ffffff') {
+      popups.push({
+        text: text,
+        x: x,
+        y: y,
+        vy: -1.2,
+        color: color,
+        life: 1
+      });
+    }
+
+    function createExplosion(x, y, color, count = 12) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const spd = Math.random() * 5 + 1.5;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd,
+          color: Math.random() > 0.4 ? color : '#ffffff',
+          size: Math.random() * 3 + 1,
+          life: 0.95
+        });
       }
-      return false;
     }
 
     function startGame() {
@@ -2075,25 +2064,34 @@
       resizeCanvas();
       isRunning = true;
       score = 0;
-      currentLevel = LEVELS[0];
-      pipes = [];
-      asteroids = [];
+      combo = 1;
+      comboTimer = 0;
+      currentSector = SECTORS[0];
+      lasers = [];
+      obstacles = [];
+      powerups = [];
       particles = [];
-      levelBannerTimer = 0;
-      screenFlashOpacity = 0;
+      popups = [];
+      bannerTimer = 0;
+      screenFlash = 0;
+      screenShake = 0;
+      spawnTimer = 0;
+      droneTimer = 0;
+      powerupTimer = 0;
 
-      ship.x = Math.max(60, Math.floor(canvasW * 0.2));
-      ship.y = Math.floor(canvasH * 0.45);
-      ship.vy = 0;
+      ship.x = canvasW / 2;
+      ship.targetX = canvasW / 2;
+      ship.y = canvasH - 46;
       ship.tilt = 0;
+      ship.shield = 1;
+      ship.tripleTimer = 0;
+      ship.slowTimer = 0;
+      ship.lastShotTime = 0;
 
       initStars();
-      updateLevelAndHUD();
+      updateSectorAndHUD();
       showOverlay(null);
-      playTone(520, 'triangle', 0.12);
-
-      spawnPipe(canvasW + 50);
-      spawnPipe(canvasW + 50 + pipeSpacing);
+      playTone(600, 'triangle', 0.12);
 
       cancelAnimationFrame(animId);
       animId = requestAnimationFrame(gameLoop);
@@ -2106,37 +2104,29 @@
 
     function triggerGameOver() {
       stopGame();
-      playCrashSound();
+      playExplosionSound(true);
+      screenShake = 16;
 
-      for (let i = 0; i < 35; i++) {
-        particles.push({
-          x: ship.x,
-          y: ship.y,
-          vx: (Math.random() - 0.5) * 9,
-          vy: (Math.random() - 0.5) * 9,
-          color: Math.random() > 0.4 ? '#ff4757' : (Math.random() > 0.5 ? '#ffa502' : '#ffffff'),
-          size: Math.random() * 4.5 + 1.5,
-          life: 1.3
-        });
-      }
+      createExplosion(ship.x, ship.y, '#ff4757', 35);
+      createExplosion(ship.x, ship.y, '#ccff00', 20);
 
       const isNewRecord = score > highscore;
       if (isNewRecord) {
         highscore = score;
         try {
-          localStorage.setItem('flappy_space_highscore', highscore.toString());
+          localStorage.setItem('orbita_void_raider_highscore', highscore.toString());
         } catch (e) {}
         if (highscoreEl) highscoreEl.textContent = highscore;
       }
 
       if (finalScoreEl) finalScoreEl.textContent = score;
       if (finalLevelEl) {
-        finalLevelEl.textContent = currentLevel.name;
-        finalLevelEl.style.color = currentLevel.color;
+        finalLevelEl.textContent = currentSector.name;
+        finalLevelEl.style.color = currentSector.color;
       }
       if (recordAlertEl) {
         if (isNewRecord && score > 0) {
-          recordAlertEl.textContent = '⭐ ¡NUEVO RÉCORD GALÁCTICO! ⭐';
+          recordAlertEl.textContent = 'NUEVO RECORD GALACTICO';
           recordAlertEl.style.display = 'block';
         } else {
           recordAlertEl.style.display = 'none';
@@ -2146,25 +2136,28 @@
       showOverlay(overlayGameOver);
     }
 
-    // Manejo unificado de eventos táctiles, clics y teclado (cero doble-salto)
-    let lastInputTime = 0;
-    function handleFlapInput(e) {
-      if (e) {
-        if (e.cancelable) e.preventDefault();
-        e.stopPropagation();
-      }
-      const now = Date.now();
-      if (now - lastInputTime < 80) return;
-      lastInputTime = now;
-
-      if (!isRunning) {
-        startGame();
-      } else {
-        flap();
+    // Control de puntero / ratón / toque
+    function handlePointerMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+      if (clientX !== null) {
+        const relX = clientX - rect.left;
+        ship.targetX = Math.max(20, Math.min(canvasW - 20, relX));
       }
     }
 
-    // Botones para abrir el minijuego
+    function handlePointerDown(e) {
+      if (e && e.cancelable) e.preventDefault();
+      getAudioContext();
+      if (!isRunning) {
+        startGame();
+        return;
+      }
+      handlePointerMove(e);
+      shootLasers();
+    }
+
+    // Enlaces de eventos para botones
     document.querySelectorAll('#open-minigame-btn, #hero-minigame-btn, #mobile-drawer-minigame-btn, #floating-minigame-btn, [data-open-minigame]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -2178,268 +2171,394 @@
       if (e.target === modal) closeMiniGameModal();
     });
 
-    // Control táctil y de botones
-    if (btnStart) btnStart.addEventListener('pointerdown', handleFlapInput);
-    if (btnRetry) btnRetry.addEventListener('pointerdown', handleFlapInput);
-    if (btnTapAction) btnTapAction.addEventListener('pointerdown', handleFlapInput);
+    if (btnStart) btnStart.addEventListener('pointerdown', handlePointerDown);
+    if (btnRetry) btnRetry.addEventListener('pointerdown', handlePointerDown);
+    if (btnTapAction) {
+      btnTapAction.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        if (!isRunning) startGame();
+        else shootLasers();
+      });
+    }
 
-    // Tocar cualquier parte del canvas o los overlays para jugar
-    canvas.addEventListener('pointerdown', handleFlapInput);
-    if (overlayStart) overlayStart.addEventListener('pointerdown', handleFlapInput);
-    if (overlayGameOver) overlayGameOver.addEventListener('pointerdown', handleFlapInput);
+    canvas.addEventListener('pointermove', handlePointerMove);
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      handlePointerMove(e);
+    }, { passive: false });
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      handlePointerDown(e);
+    }, { passive: false });
 
+    // Controles por teclado (Flechas o A/D para mover, Espacio para disparar)
+    const keys = {};
     document.addEventListener('keydown', (e) => {
       if (!modal.classList.contains('active')) return;
       if (e.key === 'Escape') {
         closeMiniGameModal();
         return;
       }
+      keys[e.key] = true;
       if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
         e.preventDefault();
-        handleFlapInput(null);
+        if (!isRunning) startGame();
+        else shootLasers();
       }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      keys[e.key] = false;
     });
 
     window.addEventListener('resize', () => {
-      if (modal.classList.contains('active')) {
-        resizeCanvas();
-      }
+      if (modal.classList.contains('active')) resizeCanvas();
     });
 
-    // Bucle principal de animación y física Flappy Space (60 FPS)
-    function gameLoop(timestamp) {
+    // =========================================================================
+    // BUCLE PRINCIPAL DE JUEGO (60 FPS)
+    // =========================================================================
+    function gameLoop(now) {
       if (!isRunning) return;
+
+      // Movimiento por teclado fluido
+      if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
+        ship.targetX -= ship.speed * 1.3;
+      }
+      if (keys['ArrowRight'] || keys['d'] || keys['D']) {
+        ship.targetX += ship.speed * 1.3;
+      }
+      ship.targetX = Math.max(20, Math.min(canvasW - 20, ship.targetX));
+
+      // Suavizado e interpolación de la nave
+      const dx = ship.targetX - ship.x;
+      ship.x += dx * 0.22;
+      ship.tilt = Math.max(-0.45, Math.min(0.45, dx * 0.04));
+
+      // Disparo automático continuo
+      if (now - ship.lastShotTime > ship.fireRate) {
+        shootLasers();
+        ship.lastShotTime = now;
+      }
+
+      // Temporizadores de power-ups
+      if (ship.tripleTimer > 0) ship.tripleTimer--;
+      if (ship.slowTimer > 0) ship.slowTimer--;
+      if (comboTimer > 0) {
+        comboTimer--;
+        if (comboTimer === 0) combo = 1;
+      }
+
+      // Sacudida de pantalla si hubo impacto
+      ctx.save();
+      if (screenShake > 0) {
+        const shakeX = (Math.random() - 0.5) * screenShake;
+        const shakeY = (Math.random() - 0.5) * screenShake;
+        ctx.translate(shakeX, shakeY);
+        screenShake *= 0.88;
+        if (screenShake < 0.5) screenShake = 0;
+      }
 
       ctx.clearRect(0, 0, canvasW, canvasH);
 
-      // 1. Estrellas con efecto parallax
-      ctx.fillStyle = currentLevel.color;
+      // 1. Estrellas parallax cósmicas hacia abajo
+      ctx.fillStyle = currentSector.color;
       stars.forEach(st => {
-        st.x -= st.speed * (currentLevel.speed * 0.45);
-        if (st.x < 0) {
-          st.x = canvasW;
-          st.y = Math.random() * canvasH;
+        st.y += st.speed * (ship.slowTimer > 0 ? 0.6 : 1.2);
+        if (st.y > canvasH) {
+          st.y = -4;
+          st.x = Math.random() * canvasW;
         }
-        ctx.globalAlpha = st.alpha * 0.85;
-        if (currentLevel.id >= 5) {
-          ctx.fillRect(st.x, st.y, st.size * 3.8, st.size * 0.75);
-        } else {
-          ctx.fillRect(st.x, st.y, st.size, st.size);
-        }
+        ctx.globalAlpha = st.alpha * 0.75;
+        ctx.fillRect(st.x, st.y, st.size, st.size * (st.speed > 1.5 ? 2.5 : 1));
       });
       ctx.globalAlpha = 1;
 
-      // 2. Físicas de la nave
-      ship.vy += ship.gravity;
-      if (ship.vy > 7.5) ship.vy = 7.5;
-      ship.y += ship.vy;
-
-      const targetTilt = Math.min(0.75, ship.vy * 0.08);
-      ship.tilt += (targetTilt - ship.tilt) * 0.12;
-
-      // Techo seguro (no mata al jugador)
-      if (ship.y < ship.radius + 2) {
-        ship.y = ship.radius + 2;
-        ship.vy = 0;
+      // 2. Generación dinámica de asteroides y amenazas
+      spawnTimer++;
+      const currentSpawnRate = ship.slowTimer > 0 ? currentSector.spawnInterval * 1.8 : currentSector.spawnInterval;
+      if (spawnTimer >= currentSpawnRate) {
+        spawnAsteroid();
+        spawnTimer = 0;
       }
 
-      // Colisión con piso
-      const floorY = canvasH - 6;
-      if (ship.y + ship.radius >= floorY) {
-        triggerGameOver();
-        return;
-      }
-
-      // Estela de motor
-      if (Math.random() > 0.25) {
-        particles.push({
-          x: ship.x - 14,
-          y: ship.y,
-          vx: -(currentLevel.speed + Math.random() * 2),
-          vy: (Math.random() - 0.5) * 1.5,
-          color: currentLevel.color,
-          size: Math.random() * 2 + 0.8,
-          life: 0.5
-        });
-      }
-
-      // 3. GENERACIÓN INFINITA DE COMPUERTAS
-      const lastPipe = pipes[pipes.length - 1];
-      if (!lastPipe || (canvasW - lastPipe.x >= pipeSpacing)) {
-        spawnPipe(canvasW + 10);
-      }
-
-      // 4. Actualizar y dibujar compuertas
-      for (let i = pipes.length - 1; i >= 0; i--) {
-        const p = pipes[i];
-        p.x -= currentLevel.speed;
-
-        if (currentLevel.osc > 0) {
-          p.oscPhase += p.oscSpeed;
-          p.currentGapY = p.baseGapY + Math.sin(p.oscPhase) * (currentLevel.osc * 15);
-        } else {
-          p.currentGapY = p.baseGapY;
-        }
-
-        const topH = Math.max(10, p.currentGapY - p.gapH / 2);
-        const botY = p.currentGapY + p.gapH / 2;
-        const botH = Math.max(10, canvasH - botY);
-
-        // Pilón superior
-        ctx.fillStyle = currentLevel.pylonColor;
-        ctx.fillRect(p.x, 0, p.width, topH);
-        ctx.strokeStyle = currentLevel.color;
-        ctx.lineWidth = 2;
-        ctx.strokeRect(p.x, -2, p.width, topH + 2);
-
-        // Emisor superior
-        ctx.fillStyle = currentLevel.color;
-        ctx.fillRect(p.x - 3, topH - 8, p.width + 6, 8);
-
-        // Haz láser superior
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.fillRect(p.x + p.width / 2 - 1, 0, 2, topH);
-
-        // Pilón inferior
-        ctx.fillStyle = currentLevel.pylonColor;
-        ctx.fillRect(p.x, botY, p.width, botH);
-        ctx.strokeStyle = currentLevel.color;
-        ctx.lineWidth = 2;
-        ctx.strokeRect(p.x, botY, p.width, botH + 2);
-
-        // Emisor inferior
-        ctx.fillStyle = currentLevel.color;
-        ctx.fillRect(p.x - 3, botY, p.width + 6, 8);
-
-        // Haz láser inferior
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.fillRect(p.x + p.width / 2 - 1, botY, 2, botH);
-
-        // Cruzar compuerta y sumar punto
-        if (!p.passed && (p.x + p.width < ship.x)) {
-          p.passed = true;
-          score++;
-          playScoreSound();
-          updateLevelAndHUD();
-        }
-
-        // Colisión con compuertas
-        if (checkPipeCollision(ship, p)) {
-          triggerGameOver();
-          return;
-        }
-
-        // Remover compuertas fuera de pantalla
-        if (p.x + p.width < -30) {
-          pipes.splice(i, 1);
+      // Drones a partir del Sector 2
+      if (currentSector.id >= 2) {
+        droneTimer++;
+        if (droneTimer >= 150) {
+          spawnDrone();
+          droneTimer = 0;
         }
       }
 
-      // 4b. Spawn y movimiento de Asteroides Cósmicos (Desde Nivel 2)
-      if (currentLevel.id >= 2) {
-        const lastAst = asteroids[asteroids.length - 1];
-        if (!lastAst || (canvasW - lastAst.x >= 260)) {
-          if (Math.random() > 0.35) {
-            spawnAsteroid(canvasW + 30);
+      // Power-ups ocasionales
+      powerupTimer++;
+      if (powerupTimer >= 380) {
+        const rx = Math.random() * (canvasW - 60) + 30;
+        spawnPowerup(rx, -20);
+        powerupTimer = 0;
+      }
+
+      // 3. Actualizar y dibujar láseres
+      for (let lIdx = lasers.length - 1; lIdx >= 0; lIdx--) {
+        const l = lasers[lIdx];
+        l.x += l.vx;
+        l.y += l.vy;
+
+        ctx.fillStyle = l.color;
+        ctx.shadowColor = l.color;
+        ctx.shadowBlur = 8;
+        ctx.fillRect(l.x - 1.5, l.y, 3, l.len);
+        ctx.shadowBlur = 0;
+
+        if (l.y < -20 || l.x < 0 || l.x > canvasW) {
+          lasers.splice(lIdx, 1);
+          continue;
+        }
+
+        // Colisión láser con obstáculos
+        for (let oIdx = obstacles.length - 1; oIdx >= 0; oIdx--) {
+          const obs = obstacles[oIdx];
+          const distSq = (l.x - obs.x) * (l.x - obs.x) + (l.y - obs.y) * (l.y - obs.y);
+          if (distSq < obs.radius * obs.radius) {
+            lasers.splice(lIdx, 1);
+            obs.hp--;
+
+            // Chispas de impacto
+            createExplosion(l.x, l.y, obs.color, 4);
+
+            if (obs.hp <= 0) {
+              obstacles.splice(oIdx, 1);
+              playExplosionSound(obs.radius > 18);
+              createExplosion(obs.x, obs.y, obs.color, obs.radius > 18 ? 20 : 12);
+              screenShake = Math.max(screenShake, obs.radius > 18 ? 6 : 3);
+
+              const pts = (obs.type === 'drone' ? 40 : (obs.maxHp > 1 ? 25 : 15)) * combo;
+              score += pts;
+              addPopup(`+${pts}`, obs.x, obs.y, currentSector.color);
+
+              // Subir combo
+              combo = Math.min(5, combo + 1);
+              comboTimer = 140;
+
+              // Probabilidad de soltar power-up
+              if (Math.random() < 0.14) {
+                spawnPowerup(obs.x, obs.y);
+              }
+
+              updateSectorAndHUD();
+            }
+            break;
           }
         }
       }
 
-      for (let a = asteroids.length - 1; a >= 0; a--) {
-        const ast = asteroids[a];
-        ast.x -= ast.speed;
-        ast.rotation += ast.rotSpeed;
+      // 4. Actualizar y dibujar obstáculos
+      for (let oIdx = obstacles.length - 1; oIdx >= 0; oIdx--) {
+        const obs = obstacles[oIdx];
+        obs.y += obs.speed;
 
-        // Colisión con la nave espacial
-        const distSq = (ship.x - ast.x) * (ship.x - ast.x) + (ship.y - ast.y) * (ship.y - ast.y);
-        const colRadius = ship.radius + ast.radius * 0.82;
-        if (distSq < colRadius * colRadius) {
-          triggerGameOver();
-          return;
+        if (obs.type === 'asteroid') {
+          obs.rotation += obs.rotSpeed;
+
+          ctx.save();
+          ctx.translate(obs.x, obs.y);
+          ctx.rotate(obs.rotation);
+          ctx.fillStyle = '#0f172a';
+          ctx.strokeStyle = obs.color;
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          for (let v = 0; v < obs.vertices.length; v++) {
+            const pt = obs.vertices[v];
+            if (v === 0) ctx.moveTo(pt.x, pt.y);
+            else ctx.lineTo(pt.x, pt.y);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          // Núcleo brillante en asteroides grandes
+          if (obs.maxHp > 1) {
+            ctx.fillStyle = obs.color;
+            ctx.beginPath();
+            ctx.arc(0, 0, obs.radius * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        } else if (obs.type === 'drone') {
+          obs.phase += 0.05;
+          obs.x = obs.baseX + Math.sin(obs.phase) * 35;
+
+          // Dibujar Drone Cibernético
+          ctx.save();
+          ctx.translate(obs.x, obs.y);
+          ctx.fillStyle = '#1e1022';
+          ctx.strokeStyle = '#ff0055';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(0, 14);
+          ctx.lineTo(-14, -8);
+          ctx.lineTo(0, -3);
+          ctx.lineTo(14, -8);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          // Ojo rojo escáner
+          ctx.fillStyle = '#ff0055';
+          ctx.beginPath();
+          ctx.arc(0, 2, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
 
-        // Dibujar Asteroide con relieve rocoso
-        ctx.save();
-        ctx.translate(ast.x, ast.y);
-        ctx.rotate(ast.rotation);
-        ctx.fillStyle = '#141d2b';
-        ctx.strokeStyle = currentLevel.color;
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        for (let v = 0; v < ast.vertices.length; v++) {
-          const pt = ast.vertices[v];
-          if (v === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
+        // Colisión con la nave del jugador
+        const shipDistSq = (ship.x - obs.x) * (ship.x - obs.x) + (ship.y - obs.y) * (ship.y - obs.y);
+        const colRadius = 14 + obs.radius * 0.8;
+        if (shipDistSq < colRadius * colRadius) {
+          if (ship.shield > 0) {
+            ship.shield--;
+            obstacles.splice(oIdx, 1);
+            playExplosionSound(true);
+            createExplosion(obs.x, obs.y, '#00e5ff', 18);
+            screenFlashColor = '#00e5ff';
+            screenFlash = 0.45;
+            screenShake = 8;
+            combo = 1;
+            addPopup('ESCUDO DESCARGADO', ship.x, ship.y - 30, '#00e5ff');
+            continue;
+          } else {
+            triggerGameOver();
+            ctx.restore();
+            return;
+          }
         }
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
 
-        // Cráter superficial
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
-        ctx.beginPath();
-        ctx.arc(ast.radius * 0.25, -ast.radius * 0.2, ast.radius * 0.25, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        // Remover asteroides fuera de pantalla
-        if (ast.x + ast.radius < -30) {
-          asteroids.splice(a, 1);
+        if (obs.y - obs.radius > canvasH + 20) {
+          obstacles.splice(oIdx, 1);
         }
       }
 
-      // 5. Barrera de energía del piso
-      ctx.fillStyle = currentLevel.color;
-      ctx.fillRect(0, floorY, canvasW, 2);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.fillRect(0, floorY + 2, canvasW, 4);
+      // 5. Actualizar y dibujar power-ups
+      for (let pIdx = powerups.length - 1; pIdx >= 0; pIdx--) {
+        const pw = powerups[pIdx];
+        pw.y += pw.vy;
+        pw.pulse += 0.08;
 
-      // 6. Dibujar Nave Espacial (Flappy Shuttle Vectorial)
+        const pulseScale = 1 + Math.sin(pw.pulse) * 0.15;
+        let pColor = '#ccff00';
+        let pLabel = 'TRIPLE';
+        if (pw.type === 'shield') { pColor = '#00e5ff'; pLabel = 'ESCUDO'; }
+        if (pw.type === 'emp') { pColor = '#eab308'; pLabel = 'EMP'; }
+        if (pw.type === 'slow') { pColor = '#a855f7'; pLabel = 'TIEMPO'; }
+
+        ctx.save();
+        ctx.translate(pw.x, pw.y);
+        ctx.scale(pulseScale, pulseScale);
+        ctx.strokeStyle = pColor;
+        ctx.lineWidth = 2;
+        ctx.fillStyle = 'rgba(10, 20, 15, 0.9)';
+        ctx.beginPath();
+        ctx.arc(0, 0, pw.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = pColor;
+        ctx.font = '900 8px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(pLabel[0], 0, 1);
+        ctx.restore();
+
+        // Recoger power-up
+        const pDistSq = (ship.x - pw.x) * (ship.x - pw.x) + (ship.y - pw.y) * (ship.y - pw.y);
+        if (pDistSq < (16 + pw.radius) * (16 + pw.radius)) {
+          powerups.splice(pIdx, 1);
+          playPowerupSound();
+
+          if (pw.type === 'shield') {
+            ship.shield = 1;
+            addPopup('+ ESCUDO KINETICO', ship.x, ship.y - 25, '#00e5ff');
+          } else if (pw.type === 'triple') {
+            ship.tripleTimer = 350;
+            addPopup('TRIPLE CANON DE PLASMA', ship.x, ship.y - 25, '#ccff00');
+          } else if (pw.type === 'emp') {
+            triggerEMP();
+          } else if (pw.type === 'slow') {
+            ship.slowTimer = 300;
+            addPopup('DISTORSION TEMPORAL', ship.x, ship.y - 25, '#a855f7');
+          }
+        } else if (pw.y > canvasH + 20) {
+          powerups.splice(pIdx, 1);
+        }
+      }
+
+      // 6. Dibujar la nave espacial (Void Raider Interceptor Vectorial)
       ctx.save();
       ctx.translate(ship.x, ship.y);
       ctx.rotate(ship.tilt);
 
-      // Fuego del motor
+      // Fuego de los motores iónicos duales
+      const flameH = Math.random() * 8 + 10;
+      ctx.fillStyle = '#00e5ff';
       ctx.beginPath();
-      ctx.moveTo(-11, -3.5);
-      ctx.lineTo(-21 - Math.random() * 8, 0);
-      ctx.lineTo(-11, 3.5);
+      ctx.moveTo(-9, 12);
+      ctx.lineTo(-6, 12 + flameH);
+      ctx.lineTo(-3, 12);
       ctx.closePath();
-      ctx.fillStyle = Math.random() > 0.5 ? currentLevel.color : '#ffffff';
       ctx.fill();
 
-      // Fuselaje
       ctx.beginPath();
-      ctx.moveTo(16, 0);
-      ctx.lineTo(-11, -8);
-      ctx.lineTo(-7, 0);
-      ctx.lineTo(-11, 8);
+      ctx.moveTo(3, 12);
+      ctx.lineTo(6, 12 + flameH);
+      ctx.lineTo(9, 12);
       ctx.closePath();
-      ctx.fillStyle = '#0a1420';
       ctx.fill();
-      ctx.strokeStyle = currentLevel.color;
+
+      // Fuselaje futurista
+      ctx.beginPath();
+      ctx.moveTo(0, -18);
+      ctx.lineTo(16, 10);
+      ctx.lineTo(6, 8);
+      ctx.lineTo(0, 12);
+      ctx.lineTo(-6, 8);
+      ctx.lineTo(-16, 10);
+      ctx.closePath();
+      ctx.fillStyle = '#08110b';
+      ctx.fill();
+      ctx.strokeStyle = currentSector.color;
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Cabina brillante
+      // Cabina de mando luminosa
       ctx.beginPath();
-      ctx.ellipse(2, 0, 5, 2.2, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, -2, 3.5, 7, 0, 0, Math.PI * 2);
       ctx.fillStyle = '#ffffff';
       ctx.fill();
 
-      // Luces de alerón
-      ctx.fillStyle = currentLevel.color;
-      ctx.fillRect(-6, -6, 2.5, 2.5);
-      ctx.fillRect(-6, 4, 2.5, 2.5);
+      // Cañones en las puntas de las alas
+      ctx.fillStyle = '#00e5ff';
+      ctx.fillRect(-15, 0, 2.5, 6);
+      ctx.fillRect(12.5, 0, 2.5, 6);
+
+      // Escudo cinético activo
+      if (ship.shield > 0) {
+        ctx.strokeStyle = '#00e5ff';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(0, 0, 24, 0, Math.PI * 2);
+        ctx.stroke();
+      }
 
       ctx.restore();
 
-      // 7. Partículas activas (Optimizado para 60 FPS)
+      // 7. Partículas activas
       for (let pIdx = particles.length - 1; pIdx >= 0; pIdx--) {
         const pt = particles[pIdx];
         pt.x += pt.vx;
         pt.y += pt.vy;
-        pt.life -= 0.035;
+        pt.life -= 0.04;
 
         if (pt.life <= 0) {
           particles.splice(pIdx, 1);
@@ -2453,55 +2572,81 @@
       }
       ctx.globalAlpha = 1;
 
-      // 8. Marcador flotante en pantalla de juego (Sin shadowBlur pesado)
+      // 8. Popups de texto flotante (+pts / combo)
+      for (let popIdx = popups.length - 1; popIdx >= 0; popIdx--) {
+        const pop = popups[popIdx];
+        pop.y += pop.vy;
+        pop.life -= 0.035;
+
+        if (pop.life <= 0) {
+          popups.splice(popIdx, 1);
+        } else {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, pop.life);
+          ctx.fillStyle = pop.color;
+          ctx.font = '900 13px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(pop.text, pop.x, pop.y);
+          ctx.restore();
+        }
+      }
+
+      // 9. Marcador superior dentro del canvas
       ctx.save();
-      ctx.font = '900 24px sans-serif';
+      ctx.font = '900 22px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(score.toString(), canvasW / 2, 14);
+      ctx.fillText(score.toString(), canvasW / 2, 12);
+
+      if (combo > 1) {
+        ctx.font = '800 12px sans-serif';
+        ctx.fillStyle = '#00e5ff';
+        ctx.fillText(`MULTIPLICADOR x${combo}`, canvasW / 2, 38);
+      }
       ctx.restore();
 
-      // 9. Destello de cambio de nivel
-      if (screenFlashOpacity > 0) {
+      // 10. Destello de pantalla (EMP / Daño / Nivel)
+      if (screenFlash > 0) {
         ctx.fillStyle = screenFlashColor;
-        ctx.globalAlpha = screenFlashOpacity;
+        ctx.globalAlpha = screenFlash;
         ctx.fillRect(0, 0, canvasW, canvasH);
         ctx.globalAlpha = 1;
-        screenFlashOpacity -= 0.025;
+        screenFlash -= 0.03;
       }
 
-      // 10. Cartel de Anuncio de Nivel (Ultra optimizado)
-      if (levelBannerTimer > 0) {
-        levelBannerTimer--;
+      // 11. Cartel de Anuncio de Sector
+      if (bannerTimer > 0) {
+        bannerTimer--;
         ctx.save();
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        const boxW = Math.min(canvasW - 30, 320);
-        const boxH = 58;
+        const boxW = Math.min(canvasW - 40, 310);
+        const boxH = 54;
         const boxX = (canvasW - boxW) / 2;
-        const boxY = 48;
+        const boxY = 50;
 
-        ctx.fillStyle = 'rgba(5, 12, 20, 0.9)';
-        ctx.strokeStyle = levelBannerColor;
-        ctx.lineWidth = 2;
+        ctx.fillStyle = 'rgba(6, 12, 18, 0.92)';
+        ctx.strokeStyle = bannerColor;
+        ctx.lineWidth = 1.8;
         ctx.beginPath();
         if (ctx.roundRect) ctx.roundRect(boxX, boxY, boxW, boxH, 10);
         else ctx.rect(boxX, boxY, boxW, boxH);
         ctx.fill();
         ctx.stroke();
 
-        ctx.font = '900 15px sans-serif';
-        ctx.fillStyle = levelBannerColor;
-        ctx.fillText(levelBannerText, canvasW / 2, boxY + 20);
+        ctx.font = '900 14px sans-serif';
+        ctx.fillStyle = bannerColor;
+        ctx.fillText(bannerText, canvasW / 2, boxY + 18);
 
         ctx.font = '700 11px sans-serif';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(levelBannerSector, canvasW / 2, boxY + 40);
+        ctx.fillText(bannerSub, canvasW / 2, boxY + 36);
         ctx.restore();
       }
 
+      ctx.restore();
       animId = requestAnimationFrame(gameLoop);
     }
 

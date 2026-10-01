@@ -267,7 +267,7 @@ const STREAMING_PLATFORMS = [
     secondaryColor: "#8b5cf6",
     glowColor: "rgba(6, 182, 212, 0.45)",
     themeName: "Turquesa & Violeta Canva",
-    badge: "✨ Plan Anual $4",
+    badge: "Plan Anual $4",
     priceUSD: 4.00,
     pricePeriod: "año",
     iconUrl: "assets/icons/canva.svg",
@@ -382,7 +382,7 @@ const ORBITA_AI_KB = {
   presets: [
     {
       id: "promo_spotify_gratis",
-      label: "🎁 PROMO: 2 Apps + Spotify GRATIS",
+      label: "PROMO: 2 Apps + Spotify GRATIS",
       prompt: "¿Cómo funciona la promo de comprar 2 aplicaciones y recibir Spotify gratis?",
       recommendIds: ["netflix", "disneyplus"],
       isCombo: true,
@@ -390,11 +390,11 @@ const ORBITA_AI_KB = {
       title: "Super Promo: Combo 2x$5 + SPOTIFY GRATIS",
       badge: "Promoción Estrella de Regalo",
       reason: "¡Es la mejor promoción de Órbita Streaming! Al ordenar cualquier **Combo de 2 aplicaciones por solo $5.00/mes** (como Netflix + Disney+ o tus 2 favoritas), te obsequiamos **1 cuenta de SPOTIFY PREMIUM totalmente GRATIS** durante el mes. ¡Disfrutas de streaming de video más toda la música sin pagar un centavo extra!",
-      tip: "🎁 Para activarla, solo di en WhatsApp que deseas tu Combo 2x$5 con el bono de Spotify de regalo."
+      tip: "Para activarla, solo di en WhatsApp que deseas tu Combo 2x$5 con el bono de Spotify de regalo."
     },
     {
       id: "single_cinema",
-      label: "🍿 1 Sola: Series & Cine ($3)",
+      label: "1 Sola: Series & Cine ($3)",
       prompt: "Quiero 1 sola aplicación para ver series y películas taquilleras",
       recommendIds: ["netflix"],
       isCombo: false,
@@ -402,11 +402,11 @@ const ORBITA_AI_KB = {
       title: "Netflix Premium 4K (1 Pantalla)",
       badge: "1 Aplicación Individual",
       reason: "Si buscas **1 sola aplicación** para ver las mejores series mundiales y estrenos de cine, **Netflix Premium** es la elección #1. Tienes catálogo gigantesco en Ultra HD 4K, perfil 100% privado con tu propio PIN y descargas offline por solo $3.00 al mes.",
-      tip: "💡 Si luego deseas sumar otra plataforma, con nuestro Combo Dúo te llevas 2 pantallas por solo $5/mes (ahorras $1/mes)."
+      tip: "Si luego deseas sumar otra plataforma, con nuestro Combo Dúo te llevas 2 pantallas por solo $5/mes (ahorras $1/mes)."
     },
     {
       id: "single_sports",
-      label: "⚽ 1 Sola: Fútbol en Vivo ($3)",
+      label: "1 Sola: Fútbol en Vivo ($3)",
       prompt: "Quiero 1 sola aplicación para ver fútbol y deportes en vivo",
       recommendIds: ["disneyplus"],
       isCombo: false,
@@ -414,11 +414,11 @@ const ORBITA_AI_KB = {
       title: "Disney+ con ESPN en Vivo (1 Pantalla)",
       badge: "1 Aplicación Individual",
       reason: "Para disfrutar del deporte rey con **1 sola aplicación**, **Disney+** es la mejor opción: incluye la señal en vivo de ESPN con la Champions League, Premier League, F1, tenis de Grand Slam y ligas internacionales por solo $3.00 al mes con perfil privado y PIN.",
-      tip: "💡 Si eres fanático de la Liga MX o fútbol en español, también puedes combinarla con ViX Premium por solo $5/mes en Combo Dúo."
+      tip: "Si eres fanático de la Liga MX o fútbol en español, también puedes combinarla con ViX Premium por solo $5/mes en Combo Dúo."
     },
     {
       id: "combo_duo",
-      label: "⚡ Combo Dúo (2 Apps x $5)",
+      label: "Combo Dúo (2 Apps x $5)",
       prompt: "Recomiéndame el mejor combo de 2 aplicaciones por $5",
       recommendIds: ["netflix", "disneyplus"],
       isCombo: true,
@@ -426,11 +426,11 @@ const ORBITA_AI_KB = {
       title: "Combo Dúo Rey: Netflix + Disney+",
       badge: "Combo Dúo (2 Pantallas)",
       reason: "¡El combo más popular y completo de Órbita Streaming! Reúnes las series globales de Netflix con todo el deporte en vivo de ESPN y el cine de Disney, Marvel y Star Wars. Dos pantallas privadas con PIN por solo $5.00 al mes en total (en lugar de $6).",
-      tip: "⚡ Al activar tu combo te entregamos ambas credenciales y tus PINs privados en menos de 5 minutos."
+      tip: "Al activar tu combo te entregamos ambas credenciales y tus PINs privados en menos de 5 minutos."
     },
     {
       id: "music",
-      label: "🎧 1 Sola: Spotify ($3)",
+      label: "1 Sola: Spotify ($3)",
       prompt: "Quiero 1 sola aplicación para escuchar música sin anuncios",
       recommendIds: ["spotify"],
       isCombo: false,
@@ -438,11 +438,11 @@ const ORBITA_AI_KB = {
       title: "Spotify Premium Individual",
       badge: "1 Aplicación Individual",
       reason: "Para música y podcasts continuos con **1 sola aplicación**, **Spotify Premium** te da más de 100 millones de canciones sin cortes comerciales, audio de máxima calidad (320 kbps) y descargas sin internet por solo $3.00 al mes.",
-      tip: "💡 También puedes combinar Spotify + Netflix en Combo Dúo por solo $5/mes."
+      tip: "También puedes combinar Spotify + Netflix en Combo Dúo por solo $5/mes."
     },
     {
       id: "tools",
-      label: "🎨 1 Sola: Canva Pro Anual ($4)",
+      label: "1 Sola: Canva Pro Anual ($4)",
       prompt: "Quiero Canva Pro para diseño gráfico y redes sociales",
       recommendIds: ["canva"],
       isCombo: false,
@@ -450,11 +450,11 @@ const ORBITA_AI_KB = {
       title: "Canva Pro Anual (365 Días)",
       badge: "Plan Anual de Productividad",
       reason: "¡La mejor inversión para creadores y estudiantes! Obtienes 1 año completo (365 días) de Canva Pro por solo $4.00/año (menos de $0.35 al mes). Quitafondos mágico en 1 clic, kit de marca y millones de recursos premium activados directo a tu correo.",
-      tip: "✨ Garantía completa durante todo el año de servicio."
+      tip: "Garantía completa durante todo el año de servicio."
     },
     {
       id: "combo_cine",
-      label: "🎬 Combo Dúo: Netflix + Max ($5)",
+      label: "Combo Dúo: Netflix + Max ($5)",
       prompt: "Quiero un combo de 2 aplicaciones para cine y series galardonadas",
       recommendIds: ["netflix", "hbomax"],
       isCombo: true,
@@ -462,11 +462,11 @@ const ORBITA_AI_KB = {
       title: "Combo Dúo Cinéfilo: Netflix + Max (HBO)",
       badge: "Combo Dúo (2 Pantallas)",
       reason: "La combinación definitiva para amantes del cine: los fenómenos virales de Netflix más las series multipremiadas de HBO (House of the Dragon, The Last of Us) y estrenos taquilleros de Warner Bros por solo $5.00 al mes en lugar de $6.",
-      tip: "⚡ Ambas con perfil privado, PIN exclusivo y resolución 4K Ultra HD."
+      tip: "Ambas con perfil privado, PIN exclusivo y resolución 4K Ultra HD."
     },
     {
       id: "family",
-      label: "👨‍👩‍👧 1 Sola: Familia & Niños ($3)",
+      label: "1 Sola: Familia & Niños ($3)",
       prompt: "Quiero 1 sola aplicación con contenido infantil y seguro para niños",
       recommendIds: ["disneyplus"],
       isCombo: false,
@@ -474,7 +474,7 @@ const ORBITA_AI_KB = {
       title: "Disney+ Familiar (1 Pantalla)",
       badge: "1 Aplicación Individual",
       reason: "Para niños y familia con **1 sola aplicación**, **Disney+** es la reina: catálogo completo de Pixar, clásicos de Disney, Marvel, Star Wars y National Geographic en un entorno con control parental seguro por solo $3.00 al mes.",
-      tip: "💡 Si quieres sumar todo Nickelodeon (Paw Patrol, Bob Esponja), puedes pedir el Combo Disney+ & Paramount+ por $5/mes."
+      tip: "Si quieres sumar todo Nickelodeon (Paw Patrol, Bob Esponja), puedes pedir el Combo Disney+ & Paramount+ por $5/mes."
     }
   ],
 
@@ -635,7 +635,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "hbomax",
       idealCombo: ["hbomax", "netflix"],
-      answer: "👻 **¡Noche de terror asegurada!** Aquí tienes las mejores recomendaciones del cine de horror:\n\n• **Max (HBO):** El universo de *El Conjuro*, *Hereditary* y *La Monja* (las más perturbadoras y aclamadas).\n• **Netflix:** Fenómenos como *Smile*, *Bebé Reno*, *La Maldición de Hill House* y *Bird Box*.\n• **Paramount+:** La obra maestra de tensión *Un Lugar en Silencio*.\n• **Prime Video:** *Saw X* y *Háblame*.\n\n💡 **Recomendación:** Llévate **Max ($3/mes)** o el **Combo Dúo Max + Netflix ($5/mes)** para maratones de miedo sin pausa."
+      answer: "**¡Noche de terror asegurada!** Aquí tienes las mejores recomendaciones del cine de horror:\n\n• **Max (HBO):** El universo de *El Conjuro*, *Hereditary* y *La Monja* (las más perturbadoras y aclamadas).\n• **Netflix:** Fenómenos como *Smile*, *Bebé Reno*, *La Maldición de Hill House* y *Bird Box*.\n• **Paramount+:** La obra maestra de tensión *Un Lugar en Silencio*.\n• **Prime Video:** *Saw X* y *Háblame*.\n\n**Recomendación:** Llévate **Max ($3/mes)** o el **Combo Dúo Max + Netflix ($5/mes)** para maratones de miedo sin pausa."
     },
     accion: {
       name: "Acción, Adrenalina & Aventura",
@@ -647,7 +647,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "primevideo",
       idealCombo: ["primevideo", "disneyplus"],
-      answer: "💥 **¡Adrenalina al máximo nivel!** Las mejores películas y series de acción pura:\n\n• **Paramount+:** *Top Gun: Maverick* y la saga completa de *Misión Imposible*.\n• **Prime Video:** *John Wick 4*, la serie de superhéroes más brutal *The Boys* y *Reacher*.\n• **Netflix:** *Extraction (Misión de Rescate)*, *Alerta Roja* y *El Hombre Gris*.\n• **Disney+ (ESPN):** Todo el Universo Marvel más las carreras de Fórmula 1 en vivo.\n\n💡 **Recomendación:** **Prime Video ($3/mes)** o el **Combo Dúo Prime + Disney+ ($5/mes)** para tener cine y deportes en vivo."
+      answer: "**¡Adrenalina al máximo nivel!** Las mejores películas y series de acción pura:\n\n• **Paramount+:** *Top Gun: Maverick* y la saga completa de *Misión Imposible*.\n• **Prime Video:** *John Wick 4*, la serie de superhéroes más brutal *The Boys* y *Reacher*.\n• **Netflix:** *Extraction (Misión de Rescate)*, *Alerta Roja* y *El Hombre Gris*.\n• **Disney+ (ESPN):** Todo el Universo Marvel más las carreras de Fórmula 1 en vivo.\n\n**Recomendación:** **Prime Video ($3/mes)** o el **Combo Dúo Prime + Disney+ ($5/mes)** para tener cine y deportes en vivo."
     },
     scifi: {
       name: "Ciencia Ficción, Espacio & Fantasía",
@@ -659,7 +659,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "hbomax",
       idealCombo: ["hbomax", "appletv"],
-      answer: "🚀 **¡Viajes interestelares y mundos futuristas!** Las joyas de la ciencia ficción moderna:\n\n• **Max (HBO):** *Dune (Parte 1 y 2)*, *The Last of Us* y *House of the Dragon*.\n• **Apple TV+:** *Severance* (fascinante thriller psicológico) y *Silo* en la más alta calidad 4K Dolby Vision.\n• **Netflix:** La magistral *Dark*, *Interstellar* y *Stranger Things*.\n• **Disney+:** La saga completa de *Star Wars*, *The Mandalorian* y *Andor*.\n\n💡 **Recomendación:** **Max ($3/mes)** o el **Combo Ultra 4K Max + Apple TV+ ($5/mes)**."
+      answer: "**¡Viajes interestelares y mundos futuristas!** Las joyas de la ciencia ficción moderna:\n\n• **Max (HBO):** *Dune (Parte 1 y 2)*, *The Last of Us* y *House of the Dragon*.\n• **Apple TV+:** *Severance* (fascinante thriller psicológico) y *Silo* en la más alta calidad 4K Dolby Vision.\n• **Netflix:** La magistral *Dark*, *Interstellar* y *Stranger Things*.\n• **Disney+:** La saga completa de *Star Wars*, *The Mandalorian* y *Andor*.\n\n**Recomendación:** **Max ($3/mes)** o el **Combo Ultra 4K Max + Apple TV+ ($5/mes)**."
     },
     drama: {
       name: "Cine Galardonado, Premiadas & Drama",
@@ -671,7 +671,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "hbomax",
       idealCombo: ["hbomax", "disneyplus"],
-      answer: "🏆 **¡Cine galardonado y producciones de culto!** Si buscas historias de gran profundidad:\n\n• **Max (HBO):** *Oppenheimer*, *Succession* (la mejor serie de la década) y *Chernobyl*.\n• **Disney+:** Los fenómenos premiados mundialmente *The Bear* y *Shōgun*.\n• **Apple TV+:** *Ted Lasso* y la cinta de Martin Scorsese *Los Asesinos de la Luna*.\n• **Netflix:** *La Sociedad de la Nieve* y *El Juicio de los 7 de Chicago*.\n\n💡 **Recomendación:** El **Combo Dúo Max + Disney+ ($5/mes)** reúne el 90% de los premios del cine actual."
+      answer: "**¡Cine galardonado y producciones de culto!** Si buscas historias de gran profundidad:\n\n• **Max (HBO):** *Oppenheimer*, *Succession* (la mejor serie de la década) y *Chernobyl*.\n• **Disney+:** Los fenómenos premiados mundialmente *The Bear* y *Shōgun*.\n• **Apple TV+:** *Ted Lasso* y la cinta de Martin Scorsese *Los Asesinos de la Luna*.\n• **Netflix:** *La Sociedad de la Nieve* y *El Juicio de los 7 de Chicago*.\n\n**Recomendación:** El **Combo Dúo Max + Disney+ ($5/mes)** reúne el 90% de los premios del cine actual."
     },
     comedia: {
       name: "Comedia, Risas & Sitcoms",
@@ -683,7 +683,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "hbomax",
       idealCombo: ["hbomax", "netflix"],
-      answer: "😂 **¡Risas garantizadas para relajarte!** Las series de comedia más adictivas:\n\n• **Max (HBO):** Las tres reinas indiscutibles: *The Office*, *Friends* y *The Big Bang Theory* completas.\n• **Disney+:** *Modern Family*, *How I Met Your Mother* y *Malcolm in the Middle*.\n• **Apple TV+:** *Ted Lasso* (alegra el día como ninguna otra serie).\n• **Netflix:** *Brooklyn Nine-Nine*, *Seinfeld* y *Sex Education*.\n\n💡 **Recomendación:** Para maratonear riendo en Smart TV, **Max ($3/mes)** es insuperable."
+      answer: "**¡Risas garantizadas para relajarte!** Las series de comedia más adictivas:\n\n• **Max (HBO):** Las tres reinas indiscutibles: *The Office*, *Friends* y *The Big Bang Theory* completas.\n• **Disney+:** *Modern Family*, *How I Met Your Mother* y *Malcolm in the Middle*.\n• **Apple TV+:** *Ted Lasso* (alegra el día como ninguna otra serie).\n• **Netflix:** *Brooklyn Nine-Nine*, *Seinfeld* y *Sex Education*.\n\n**Recomendación:** Para maratonear riendo en Smart TV, **Max ($3/mes)** es insuperable."
     },
     anime: {
       name: "Anime & Animación Japonesa",
@@ -695,7 +695,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "netflix",
       idealCombo: ["netflix", "primevideo"],
-      answer: "⚔️ **¡El universo del anime a tus pies!** Para los amantes de la animación japonesa:\n\n• **Netflix:** *Demon Slayer (Kimetsu no Yaiba)*, *Attack on Titan*, *DanDaDan* y las películas de Studio Ghibli.\n• **Disney+:** Estreno simultáneo de *Bleach: Thousand-Year Blood War*.\n• **Prime Video:** *Vinland Saga*, las películas de *Evangelion* y series animadas adultas como *Invincible*.\n\n💡 **Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)** para un catálogo inagotable."
+      answer: "**¡El universo del anime a tus pies!** Para los amantes de la animación japonesa:\n\n• **Netflix:** *Demon Slayer (Kimetsu no Yaiba)*, *Attack on Titan*, *DanDaDan* y las películas de Studio Ghibli.\n• **Disney+:** Estreno simultáneo de *Bleach: Thousand-Year Blood War*.\n• **Prime Video:** *Vinland Saga*, las películas de *Evangelion* y series animadas adultas como *Invincible*.\n\n**Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)** para un catálogo inagotable."
     },
     infantil: {
       name: "Familia, Niños & Animación",
@@ -706,7 +706,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "disneyplus",
       idealCombo: ["disneyplus", "paramount"],
-      answer: "🎈 **¡Diversión mágica y segura para los niños y la familia!**\n\n• **Disney+:** Todo Pixar (*Intensamente 2*, *Toy Story*, *Coco*), clásicos Disney (*Moana*, *Frozen*) y Marvel seguro.\n• **Paramount+:** El hogar oficial de Nickelodeon: *Paw Patrol*, *Bob Esponja*, *Las Tortugas Ninja* y *Dora*.\n• **Netflix:** *Peppa Pig*, películas de DreamWorks (*Kung Fu Panda*, *Shrek*).\n\n💡 **Recomendación:** El **Combo Familiar Disney+ & Paramount+ ($5/mes)** es la biblioteca infantil más completa con control parental y PIN."
+      answer: "**¡Diversión mágica y segura para los niños y la familia!**\n\n• **Disney+:** Todo Pixar (*Intensamente 2*, *Toy Story*, *Coco*), clásicos Disney (*Moana*, *Frozen*) y Marvel seguro.\n• **Paramount+:** El hogar oficial de Nickelodeon: *Paw Patrol*, *Bob Esponja*, *Las Tortugas Ninja* y *Dora*.\n• **Netflix:** *Peppa Pig*, películas de DreamWorks (*Kung Fu Panda*, *Shrek*).\n\n**Recomendación:** El **Combo Familiar Disney+ & Paramount+ ($5/mes)** es la biblioteca infantil más completa con control parental y PIN."
     },
     romance: {
       name: "Romance, Parejas & Historias de Amor",
@@ -717,7 +717,7 @@ const ORBITA_AI_KB = {
       ],
       idealPlatform: "netflix",
       idealCombo: ["netflix", "primevideo"],
-      answer: "❤️ **¡Historias para suspirar y disfrutar en pareja!**\n\n• **Netflix:** *Orgullo y Prejuicio*, *Diario de una Pasión*, romances coreanos de gran éxito y *A Todos los Chicos de los que me Enamoré*.\n• **Prime Video:** Fenómenos como *Culpa Mía*, *La Idea de Ti* y *El Verano en que me Enamoré*.\n• **Max (HBO):** *La La Land* y *Vidas Pasadas (Past Lives)*.\n\n💡 **Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)**."
+      answer: "**¡Historias para suspirar y disfrutar en pareja!**\n\n• **Netflix:** *Orgullo y Prejuicio*, *Diario de una Pasión*, romances coreanos de gran éxito y *A Todos los Chicos de los que me Enamoré*.\n• **Prime Video:** Fenómenos como *Culpa Mía*, *La Idea de Ti* y *El Verano en que me Enamoré*.\n• **Max (HBO):** *La La Land* y *Vidas Pasadas (Past Lives)*.\n\n**Recomendación:** **Netflix ($3/mes)** o el **Combo Dúo Netflix + Prime ($5/mes)**."
     }
   }
 };
