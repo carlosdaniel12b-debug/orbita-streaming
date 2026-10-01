@@ -88,6 +88,64 @@ html {
   -webkit-tap-highlight-color: transparent; /* Elimina destello gris táctil en iOS/Android */
 }
 
+/* --- ACCESIBILIDAD Y UTILIDADES WCAG 2.2 (wcag-audit-patterns) --- */
+.sr-only, .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: -120px;
+  left: 20px;
+  background: var(--accent-lime, #ccff00);
+  color: #070a09;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm, 8px);
+  z-index: 99999;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(204, 255, 0, 0.6);
+  transition: top 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-to-content:focus {
+  top: 18px;
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Indicadores de foco accesible para teclado (WCAG 2.4.7 Focus Visible) */
+:focus-visible {
+  outline: 2px solid var(--accent-lime, #ccff00) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 12px var(--accent-lime-glow, rgba(204, 255, 0, 0.45)) !important;
+}
+
+/* Reducción de movimiento para usuarios sensibles (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cosmic-shooting-stars,
+  .cosmic-floating-dust,
+  .warp-speed-rays,
+  .warp-ring {
+    display: none !important;
+  }
+}
+
 /* Optimización táctil y prevención de lag (mobile-native §5) */
 button, a, [role="button"], input[type="submit"], input[type="button"], select, .filter-chip, .app-card {
   touch-action: manipulation;

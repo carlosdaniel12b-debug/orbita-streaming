@@ -458,15 +458,32 @@
     document.addEventListener('visibilitychange', () => {
       isVisible = !document.hidden;
     });
+
+    // Manejo resiliente de pérdida y restauración de contexto WebGL (performance-engineer)
+    if (renderer && renderer.domElement) {
+      renderer.domElement.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault();
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+      }, false);
+
+      renderer.domElement.addEventListener('webglcontextrestored', () => {
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        animate();
+      }, false);
+    }
   }
 
+  let resizeFrameId = null;
   function onWindowResize() {
-    if (!camera || !renderer) return;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
+    if (resizeFrameId) cancelAnimationFrame(resizeFrameId);
+    resizeFrameId = requestAnimationFrame(() => {
+      if (!camera || !renderer) return;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
   }
 
   // =========================================================================

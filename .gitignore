@@ -1,0 +1,5 @@
+# Junctions y temporales locales
+.agent
+.agent/
+.DS_Store
+Thumbs.db
