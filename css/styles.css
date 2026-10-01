@@ -63,9 +63,15 @@
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-color: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Emil Kowalski Signature Easing Tokens (from emil-design-eng & animate skills) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.15);
 }
 
-/* --- 2. RESET Y ESTILOS BASE --- */
+/* --- 2. RESET Y ESTILOS BASE (Optimizado según mobile-native skill) --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -79,6 +85,36 @@ html {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  -webkit-tap-highlight-color: transparent; /* Elimina destello gris táctil en iOS/Android */
+}
+
+/* Optimización táctil y prevención de lag (mobile-native §5) */
+button, a, [role="button"], input[type="submit"], input[type="button"], select, .filter-chip, .app-card {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Prevención de zoom involuntario en iOS (mobile-native §4) */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Feedback instantáneo en presión con física natural (emil-design-eng §5) */
+button:active, 
+.btn-cosmic:active,
+.btn-action:active,
+.header-cta-btn:active, 
+.card-cta:active, 
+.ai-send-btn:active, 
+.modal-close-btn:active,
+.btn-primary:active,
+.btn-secondary:active,
+.combo-btn:active,
+.floating-whatsapp-btn:active,
+.orbit-ai-badge:active {
+  transform: scale(0.97) !important;
+  transition: transform 120ms var(--ease-out) !important;
 }
 
 body {
@@ -1986,7 +2022,7 @@ ul {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.28s ease, visibility 0.28s ease;
+  transition: opacity 220ms var(--ease-out), visibility 220ms var(--ease-out);
 }
 
 .modal-overlay.active {
@@ -2009,8 +2045,8 @@ ul {
   overflow-y: auto;
   padding: clamp(1.2rem, 3.5vw, 2rem);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.98), 0 0 35px rgba(204, 255, 0, 0.22);
-  transform: scale(0.94) translateY(15px);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+  transform: scale(0.95) translateY(12px);
+  transition: transform 240ms var(--ease-out), opacity 220ms var(--ease-out);
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
 }
@@ -3184,8 +3220,8 @@ ul {
 /* --- 13. BOTÓN FLOTANTE WHATSAPP Y QUICK POPUP --- */
 .floating-whatsapp-container {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  right: calc(2rem + env(safe-area-inset-right, 0px));
   z-index: 150;
 }
 
@@ -3200,12 +3236,21 @@ ul {
   justify-content: center;
   box-shadow: 0 8px 30px rgba(37, 211, 102, 0.45);
   position: relative;
-  transition: all var(--transition-fast);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  touch-action: manipulation;
+  user-select: none;
 }
 
-.floating-whatsapp-btn:hover {
-  transform: scale(1.1) translateY(-3px);
-  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.65);
+@media (hover: hover) and (pointer: fine) {
+  .floating-whatsapp-btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.65);
+  }
+}
+
+.floating-whatsapp-btn:active {
+  transform: scale(0.95);
+  transition-duration: 100ms;
 }
 
 .wa-pulse-wave {
@@ -3810,8 +3855,8 @@ ul {
     text-align: center;
   }
   .floating-whatsapp-container {
-    bottom: 1.25rem;
-    right: 1.25rem;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1.25rem + env(safe-area-inset-right, 0px));
   }
   .floating-whatsapp-btn {
     width: 54px;
@@ -4901,9 +4946,9 @@ ul {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(30px) scale(0.95);
+  transform: translateY(24px) scale(0.96);
   opacity: 0;
-  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease-out;
+  transition: transform 260ms var(--ease-drawer), opacity 220ms var(--ease-out);
 }
 
 .orbit-ai-floating-window.active .orbit-ai-window-dialog {
