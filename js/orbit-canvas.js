@@ -1,16 +1,14 @@
 /**
- * Órbita Streaming - Motor 3D Orbital de Alto Rendimiento (60 FPS Cero Lag)
+ * Órbita Streaming - Motor 3D Orbital Cinematográfico (Three.js WebGL a 60 FPS)
  * 
- * Basado en la identidad oficial de Órbita Streaming (anillos orbitales concéntricos):
- * - Sistema orbital 3D de anillos concéntricos en color verde lima neón (#ccff00 / #a3e635)
- * - Satélites y nodos de energía en traslación orbital fluida
- * - Núcleo radiante con halo atmosférico reactivo
- * - Campo estelar tridimensional ultraligero
- * - Sincronización y morfismo de color dinámico en tiempo real según la plataforma activa
- * - Interacción táctil suave en móviles e interactividad con el ratón en escritorio
- * - Optimización para celulares: 60 FPS garantizados, renderer con DPR controlado y pausa inteligente al hacer scroll
- * - Intro espacial cinematográfica rápida (1.2s) con salto instantáneo y persistencia por sesión
- * - Sintetizador de audio ambiental con Web Audio API
+ * - Núcleo estelar gravitacional con corona volumétrica
+ * - 4 Pistas orbitales concéntricas Keplerianas con partículas en traslación
+ * - Satélites de plataformas de streaming con halos reactivos
+ * - Respuesta al cursor (Parallax Lerp) y giroscopio móvil
+ * - Ondas de choque gravitacionales (Gravitational Shockwaves)
+ * - Transición de intro espacial hiper-optimizada
+ * - Web Audio API procedural para sonido espacial sutil
+ * - Pausa automática vía IntersectionObserver (Cero gasto de CPU/GPU fuera de vista)
  */
 
 (function () {
@@ -24,11 +22,12 @@
 
   // Variables Three.js
   let scene, camera, renderer, clock;
-  let orbitSystemGroup;
-  let outerRingMesh, innerRingMesh, coreSphereMesh, coreCoronaMesh;
-  let satelliteNodes = [];
+  let orbitSystemGroup, coreGroup;
+  let coreMesh, coronaMesh, glowSprite;
+  let orbitalRings = [];
+  let satelliteMeshes = [];
   let starFieldPoints, shockwaves = [];
-  let ambientLight, pointLightPrimary, pointLightSecondary;
+  let ambientLight, pointLightCore, pointLightAccent;
 
   // Estado de interactividad
   let mouseX = 0, mouseY = 0;
@@ -37,21 +36,20 @@
   let isIntroPlaying = false;
   let animFrameId = null;
 
-  // Paleta de colores de marca oficial (Verde Lima Neón & Grafito)
+  // Colores Oficiales (Violeta Estelar, Magenta Cósmico y Ámbar Supernova)
   const currentColors = {
-    primary: new THREE.Color(0xccff00),     // Lima neón característico
-    secondary: new THREE.Color(0xa3e635),   // Verde lima de apoyo
-    core: new THREE.Color(0xffffff),        // Núcleo blanco radiante
-    targetPrimary: new THREE.Color(0xccff00),
-    targetSecondary: new THREE.Color(0xa3e635),
-    targetCore: new THREE.Color(0xffffff)
+    primary: new THREE.Color(0x8b5cf6),    // Violeta principal
+    secondary: new THREE.Color(0xd946ef),  // Magenta cósmico
+    accent: new THREE.Color(0xf97316),     // Ámbar supernova
+    core: new THREE.Color(0xffffff),       // Blanco estelar
+    targetPrimary: new THREE.Color(0x8b5cf6),
+    targetSecondary: new THREE.Color(0xd946ef)
   };
 
-  // Coordenadas base de cámara
-  const CAMERA_BASE_Z = isMobile ? 550 : 480;
+  const CAMERA_BASE_Z = isMobile ? 540 : 460;
 
   // =========================================================================
-  // 1. SINTETIZADOR DE AUDIO AMBIENTAL SUTIL (WEB AUDIO API)
+  // 1. SINTETIZADOR DE AUDIO AMBIENTAL PROCEDURAL (WEB AUDIO API)
   // =========================================================================
   const OrbitaAudio = {
     ctx: null,
@@ -84,16 +82,9 @@
 
     updateIcons() {
       const headerIcon = document.getElementById('header-audio-icon');
-      const introIcon = document.getElementById('intro-audio-icon');
-      const introText = document.getElementById('intro-audio-text');
-
       const svgMuted = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
-      const svgPlaying = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
-      const text = this.isMuted ? 'Sonido: OFF' : 'Sonido: ON';
-
+      const svgPlaying = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d946ef" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
       if (headerIcon) headerIcon.innerHTML = this.isMuted ? svgMuted : svgPlaying;
-      if (introIcon) introIcon.innerHTML = this.isMuted ? svgMuted : svgPlaying;
-      if (introText) introText.textContent = text;
     },
 
     startHum() {
@@ -104,13 +95,13 @@
         const gain = this.ctx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(55, this.ctx.currentTime); // 55 Hz A1
+        osc.frequency.setValueAtTime(55, this.ctx.currentTime); // 55 Hz (A1)
 
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(120, this.ctx.currentTime);
+        filter.frequency.setValueAtTime(140, this.ctx.currentTime);
 
         gain.gain.setValueAtTime(0.001, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.04, this.ctx.currentTime + 1.5);
+        gain.gain.exponentialRampToValueAtTime(0.035, this.ctx.currentTime + 1.5);
 
         osc.connect(filter);
         filter.connect(gain);
@@ -125,15 +116,17 @@
     stopHum() {
       if (this.droneGain && this.ctx) {
         try {
-          this.droneGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.3);
+          this.droneGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.6);
           setTimeout(() => {
             if (this.droneOsc) {
               this.droneOsc.stop();
               this.droneOsc.disconnect();
               this.droneOsc = null;
             }
-          }, 350);
-        } catch (e) {}
+          }, 650);
+        } catch (e) {
+          this.droneOsc = null;
+        }
       }
     },
 
@@ -142,13 +135,10 @@
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
-        osc.type = 'triangle';
+        osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq * 1.5, this.ctx.currentTime + 0.3);
-
-        gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.45);
-
+        gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start();
@@ -158,270 +148,259 @@
   };
 
   // =========================================================================
-  // 2. INICIALIZACIÓN DE LA ESCENA THREE.JS
+  // 2. CONFIGURACIÓN DEL MOTOR THREE.JS
   // =========================================================================
-  function init() {
+  function initScene() {
+    scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x06050b, 0.0016);
+
+    camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 1, 1400);
+    camera.position.z = CAMERA_BASE_Z;
+    camera.position.y = 12;
+
     clock = new THREE.Clock();
 
-    // 1. Escena
-    scene = new THREE.Scene();
-
-    // 2. Cámara de perspectiva
-    const aspect = window.innerWidth / window.innerHeight;
-    camera = new THREE.PerspectiveCamera(45, aspect, 1, 3000);
-    camera.position.set(0, 0, CAMERA_BASE_Z);
-
-    // 3. Renderer con optimizaciones críticas para móviles
     renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !isMobile,
-      powerPreference: 'high-performance',
-      stencil: false,
-      depth: true
+      powerPreference: 'high-performance'
     });
-    // Limitar pixel ratio a 1.0 en móviles y 1.25 en escritorio para fluidez 60 FPS garantizada
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.25));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.outputEncoding = THREE.sRGBEncoding;
 
-    container.innerHTML = '';
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setClearColor(0x000000, 0);
+
     container.appendChild(renderer.domElement);
 
-    // 4. Luces
-    ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // Luces Cinematográficas
+    ambientLight = new THREE.AmbientLight(0x2d1f4d, 0.9);
     scene.add(ambientLight);
 
-    pointLightPrimary = new THREE.PointLight(currentColors.primary, 3.5, 800);
-    pointLightPrimary.position.set(0, 0, 50);
-    scene.add(pointLightPrimary);
+    pointLightCore = new THREE.PointLight(0x8b5cf6, 2.5, 650);
+    pointLightCore.position.set(0, 0, 30);
+    scene.add(pointLightCore);
 
-    pointLightSecondary = new THREE.PointLight(currentColors.secondary, 2.0, 700);
-    pointLightSecondary.position.set(120, -100, 80);
-    scene.add(pointLightSecondary);
+    pointLightAccent = new THREE.PointLight(0xd946ef, 1.8, 500);
+    pointLightAccent.position.set(160, 90, 80);
+    scene.add(pointLightAccent);
 
-    // 5. Grupo del Sistema Orbital
     orbitSystemGroup = new THREE.Group();
-    // Inclinación inicial tipo 3D elegante
-    orbitSystemGroup.rotation.x = Math.PI / 3.4;
-    orbitSystemGroup.rotation.y = -Math.PI / 10;
     scene.add(orbitSystemGroup);
 
-    // Construcción de componentes
-    buildConcentricOrbitRings();
-    buildLuminousCore();
-    buildOrbitingSatellites();
-    buildStarDustField();
+    buildCosmicCore();
+    buildOrbitalTracks();
+    buildPlatformSatellites();
+    buildStarField();
 
-    // 6. Listeners interactivos
-    setupEvents();
-
-    // 7. Evaluar introducción o modo directo
-    evaluateIntro();
-
-    // 8. Bucle de animación
-    animate();
+    initEvents();
+    initIntersectionObserver();
   }
 
   // =========================================================================
-  // 3. CONSTRUCCIÓN DE COMPONENTES 3D
+  // 3. NÚCLEO ESTELAR GRAVITACIONAL
   // =========================================================================
+  function buildCosmicCore() {
+    coreGroup = new THREE.Group();
+    orbitSystemGroup.add(coreGroup);
 
-  // Anillos concéntricos de Órbita (símbolo exacto del logo)
-  function buildConcentricOrbitRings() {
-    const segments = isMobile ? 64 : 128;
-    const baseRadius = isMobile ? 65 : 85;
-
-    // --- Anillo Exterior (Más fino, como en el logo) ---
-    const outerRadius = baseRadius * 1.35;
-    const outerTube = isMobile ? 1.5 : 2.0;
-    const outerGeo = new THREE.TorusGeometry(outerRadius, outerTube, 16, segments);
-    const outerMat = new THREE.MeshBasicMaterial({
-      color: currentColors.primary,
-      transparent: true,
-      opacity: 0.92,
-      blending: THREE.AdditiveBlending
-    });
-    outerRingMesh = new THREE.Mesh(outerGeo, outerMat);
-    orbitSystemGroup.add(outerRingMesh);
-
-    // Halo tenue exterior
-    const outerGlowGeo = new THREE.TorusGeometry(outerRadius, outerTube * 2.2, 12, isMobile ? 48 : 80);
-    const outerGlowMat = new THREE.MeshBasicMaterial({
-      color: currentColors.primary,
-      transparent: true,
-      opacity: 0.22,
-      blending: THREE.AdditiveBlending
-    });
-    const outerGlowMesh = new THREE.Mesh(outerGlowGeo, outerGlowMat);
-    outerRingMesh.add(outerGlowMesh);
-
-    // --- Anillo Interior (Más grueso y concéntrico, como en el logo) ---
-    const innerRadius = baseRadius * 0.78;
-    const innerTube = isMobile ? 3.2 : 4.0;
-    const innerGeo = new THREE.TorusGeometry(innerRadius, innerTube, 16, segments);
-    const innerMat = new THREE.MeshBasicMaterial({
-      color: currentColors.primary,
-      transparent: true,
-      opacity: 0.95,
-      blending: THREE.AdditiveBlending
-    });
-    innerRingMesh = new THREE.Mesh(innerGeo, innerMat);
-    orbitSystemGroup.add(innerRingMesh);
-
-    // Halo interior
-    const innerGlowGeo = new THREE.TorusGeometry(innerRadius, innerTube * 1.8, 12, isMobile ? 48 : 80);
-    const innerGlowMat = new THREE.MeshBasicMaterial({
-      color: currentColors.secondary,
-      transparent: true,
-      opacity: 0.28,
-      blending: THREE.AdditiveBlending
-    });
-    const innerGlowMesh = new THREE.Mesh(innerGlowGeo, innerGlowMat);
-    innerRingMesh.add(innerGlowMesh);
-
-    // --- Anillo Exterior Lejano (Pista de Aplicaciones Satelitales) ---
-    const celestialRadius = baseRadius * 2.25;
-    const celestialTube = isMobile ? 0.9 : 1.2;
-    const celestialGeo = new THREE.TorusGeometry(celestialRadius, celestialTube, 12, isMobile ? 64 : 100);
-    const celestialMat = new THREE.MeshBasicMaterial({
-      color: 0xccff00,
-      transparent: true,
-      opacity: 0.24,
-      blending: THREE.AdditiveBlending
-    });
-    const celestialMesh = new THREE.Mesh(celestialGeo, celestialMat);
-    celestialMesh.rotation.x = 0.15;
-    orbitSystemGroup.add(celestialMesh);
-
-    // --- Anillo 4: Astrolabio Girosférico Cósmico Inclinado (Efecto Órbita 3D Profundo) ---
-    const gyroRadius = baseRadius * 1.75;
-    const gyroGeo = new THREE.TorusGeometry(gyroRadius, isMobile ? 0.75 : 1.1, 12, isMobile ? 50 : 90);
-    const gyroMat = new THREE.MeshBasicMaterial({
-      color: 0x00ffd5,
-      transparent: true,
-      opacity: 0.35,
-      blending: THREE.AdditiveBlending
-    });
-    const gyroMesh = new THREE.Mesh(gyroGeo, gyroMat);
-    gyroMesh.rotation.x = Math.PI / 3.8;
-    gyroMesh.rotation.y = Math.PI / 5.5;
-    orbitSystemGroup.add(gyroMesh);
-    window._gyroOrbitalMesh = gyroMesh;
-  }
-
-  // Núcleo Radiante Central
-  function buildLuminousCore() {
-    const coreRadius = isMobile ? 9 : 12;
-
-    // Núcleo blanco brillante
-    const sphereGeo = new THREE.SphereGeometry(coreRadius, isMobile ? 20 : 28, isMobile ? 20 : 28);
-    const sphereMat = new THREE.MeshBasicMaterial({
+    // Esfera central brillante
+    const coreGeo = new THREE.SphereGeometry(isMobile ? 22 : 28, 32, 32);
+    const coreMat = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       transparent: true,
-      opacity: 0.96
+      opacity: 0.95
     });
-    coreSphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    orbitSystemGroup.add(coreSphereMesh);
+    coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    coreGroup.add(coreMesh);
 
-    // Corona atmosférica de resplandor
-    const coronaGeo = new THREE.SphereGeometry(coreRadius * 2.0, isMobile ? 18 : 24, isMobile ? 18 : 24);
+    // Corona externa luminosa
+    const coronaGeo = new THREE.RingGeometry(isMobile ? 26 : 34, isMobile ? 42 : 56, 48);
     const coronaMat = new THREE.MeshBasicMaterial({
-      color: currentColors.primary,
+      color: 0x8b5cf6,
+      side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.5,
       blending: THREE.AdditiveBlending
     });
-    coreCoronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
-    orbitSystemGroup.add(coreCoronaMesh);
+    coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
+    coreGroup.add(coronaMesh);
+
+    // Segunda corona con tonalidad magenta
+    const corona2Geo = new THREE.RingGeometry(isMobile ? 38 : 52, isMobile ? 54 : 76, 48);
+    const corona2Mat = new THREE.MeshBasicMaterial({
+      color: 0xd946ef,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.25,
+      blending: THREE.AdditiveBlending
+    });
+    const corona2Mesh = new THREE.Mesh(corona2Geo, corona2Mat);
+    coreGroup.add(corona2Mesh);
   }
 
-  // Satélites orbitales de aplicaciones que recorren los anillos
-  function buildOrbitingSatellites() {
-    satelliteNodes = [];
-    const baseRadius = isMobile ? 65 : 85;
+  // =========================================================================
+  // 4. ANILLOS ORBITALES CONCÉNTRICOS KEPLERIANOS
+  // =========================================================================
+  function buildOrbitalTracks() {
+    const trackRadii = isMobile 
+      ? [80, 130, 180, 230] 
+      : [110, 175, 245, 315];
 
-    // Definición de satélites celestiales con las frecuencias de color de las plataformas
-    const platformPlanets = [
-      { name: 'Netflix', color: 0xE50914, radius: baseRadius * 1.35, speed: 0.75, angle: 0, size: 3.8 },
-      { name: 'Disney+', color: 0x00A3FF, radius: baseRadius * 1.35, speed: 0.75, angle: (2 * Math.PI) / 3, size: 3.6 },
-      { name: 'Max', color: 0x7c3aed, radius: baseRadius * 1.35, speed: 0.75, angle: (4 * Math.PI) / 3, size: 3.6 },
-      { name: 'Prime', color: 0x0284c7, radius: baseRadius * 2.25, speed: 0.48, angle: 0.4, size: 4.2 },
-      { name: 'ViX', color: 0xea580c, radius: baseRadius * 2.25, speed: 0.48, angle: 0.4 + (2 * Math.PI) / 3, size: 3.9 },
-      { name: 'Spotify', color: 0x16a34a, radius: baseRadius * 2.25, speed: 0.48, angle: 0.4 + (4 * Math.PI) / 3, size: 3.9 },
-      { name: 'Paramount', color: 0x2563eb, radius: baseRadius * 0.78, speed: -1.05, angle: 0.2, size: 3.4 },
-      { name: 'AppleTV', color: 0xffffff, radius: baseRadius * 0.78, speed: -1.05, angle: 0.2 + (2 * Math.PI) / 3, size: 3.4 },
-      { name: 'Canva', color: 0x0891b2, radius: baseRadius * 0.78, speed: -1.05, angle: 0.2 + (4 * Math.PI) / 3, size: 3.4 }
-    ];
+    orbitalRings = [];
 
-    platformPlanets.forEach(p => {
-      const pGroup = new THREE.Group();
+    trackRadii.forEach((radius, idx) => {
+      // Línea de la órbita
+      const segments = 120;
+      const curvePoints = [];
+      const tiltX = (idx * 0.08) - 0.12;
+      const tiltY = (idx * 0.1) - 0.15;
 
-      // Esfera del núcleo del satélite
-      const sGeo = new THREE.SphereGeometry(isMobile ? p.size * 0.78 : p.size, 12, 12);
-      const sMat = new THREE.MeshBasicMaterial({
-        color: p.color,
+      for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        curvePoints.push(new THREE.Vector3(
+          Math.cos(theta) * radius,
+          Math.sin(theta) * (radius * 0.72),
+          Math.sin(theta) * 20
+        ));
+      }
+
+      const ringGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
+      const ringMat = new THREE.LineBasicMaterial({
+        color: idx % 2 === 0 ? 0x8b5cf6 : 0xd946ef,
+        transparent: true,
+        opacity: 0.35 - (idx * 0.05),
         blending: THREE.AdditiveBlending
       });
-      const sMesh = new THREE.Mesh(sGeo, sMat);
-      pGroup.add(sMesh);
+      const ringLine = new THREE.Line(ringGeo, ringMat);
+      ringLine.rotation.x = 1.05 + tiltX;
+      ringLine.rotation.y = tiltY;
+      ringLine.userData = { radius, speed: (0.18 / (idx + 1)), baseRot: ringLine.rotation.clone() };
 
-      // Corona de resplandor atmosférico
-      const haloGeo = new THREE.SphereGeometry(isMobile ? p.size * 1.6 : p.size * 1.9, 10, 10);
-      const haloMat = new THREE.MeshBasicMaterial({
-        color: p.color,
+      orbitSystemGroup.add(ringLine);
+      orbitalRings.push(ringLine);
+
+      // Partículas a lo largo de cada órbita
+      const particleCount = isMobile ? 12 : 24;
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(particleCount * 3);
+
+      for (let p = 0; p < particleCount; p++) {
+        const pTheta = (p / particleCount) * Math.PI * 2;
+        pPos[p * 3] = Math.cos(pTheta) * radius;
+        pPos[p * 3 + 1] = Math.sin(pTheta) * (radius * 0.72);
+        pPos[p * 3 + 2] = Math.sin(pTheta) * 20;
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+
+      const pMat = new THREE.PointsMaterial({
+        color: idx === 0 ? 0xf97316 : (idx === 1 ? 0xd946ef : 0x8b5cf6),
+        size: isMobile ? 2.5 : 3.5,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending
+      });
+
+      const pPoints = new THREE.Points(pGeo, pMat);
+      pPoints.rotation.copy(ringLine.rotation);
+      orbitSystemGroup.add(pPoints);
+    });
+  }
+
+  // =========================================================================
+  // 5. SATÉLITES DE PLATAFORMAS EN TRASLACIÓN
+  // =========================================================================
+  function buildPlatformSatellites() {
+    satelliteMeshes = [];
+
+    const platformsData = [
+      { id: 'netflix', color: 0xe50914, ringIdx: 0, speed: 0.8, size: 7.5 },
+      { id: 'disneyplus', color: 0x1d4ed8, ringIdx: 1, speed: 0.55, size: 7.0 },
+      { id: 'hbomax', color: 0x7c3aed, ringIdx: 1, speed: -0.45, size: 7.0 },
+      { id: 'primevideo', color: 0x0284c7, ringIdx: 2, speed: 0.38, size: 6.5 },
+      { id: 'appletv', color: 0xf8fafc, ringIdx: 2, speed: -0.32, size: 6.0 },
+      { id: 'crunchyroll', color: 0xf47521, ringIdx: 3, speed: 0.28, size: 6.5 },
+      { id: 'paramount', color: 0x2563eb, ringIdx: 3, speed: -0.25, size: 6.0 },
+      { id: 'spotify', color: 0x10b981, ringIdx: 0, speed: -0.7, size: 6.0 }
+    ];
+
+    platformsData.forEach((item, idx) => {
+      const ring = orbitalRings[item.ringIdx];
+      const radius = ring ? ring.userData.radius : 140;
+
+      const satGroup = new THREE.Group();
+
+      // Esfera satélite
+      const satGeo = new THREE.SphereGeometry(item.size, 16, 16);
+      const satMat = new THREE.MeshBasicMaterial({
+        color: item.color,
+        transparent: true,
+        opacity: 0.95
+      });
+      const satMesh = new THREE.Mesh(satGeo, satMat);
+      satGroup.add(satMesh);
+
+      // Halo del satélite
+      const haloGeo = new THREE.RingGeometry(item.size * 1.1, item.size * 2.2, 24);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: item.color,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.45,
         blending: THREE.AdditiveBlending
       });
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
-      pGroup.add(haloMesh);
+      satGroup.add(haloMesh);
 
-      orbitSystemGroup.add(pGroup);
+      satGroup.userData = {
+        radius: radius,
+        speed: item.speed * 0.8,
+        angle: (idx / platformsData.length) * Math.PI * 2,
+        ringIdx: item.ringIdx,
+        baseColor: item.color
+      };
 
-      satelliteNodes.push({
-        mesh: pGroup,
-        radius: p.radius,
-        angle: p.angle,
-        speed: p.speed
-      });
+      orbitSystemGroup.add(satGroup);
+      satelliteMeshes.push(satGroup);
     });
   }
 
-  // Campo de Polvo Estelar Ultraligero (Partículas 3D con cero sobrecarga)
-  function buildStarDustField() {
-    const count = isMobile ? 180 : 480;
+  // =========================================================================
+  // 6. CAMPO ESTELAR TRIDIMENSIONAL
+  // =========================================================================
+  function buildStarField() {
+    const starCount = isMobile ? 180 : 420;
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
 
-    for (let i = 0; i < count; i++) {
-      const idx = i * 3;
-      // Distribución esférica y cilíndrica profunda
-      const radius = 100 + Math.random() * 800;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = (Math.random() - 0.5) * Math.PI;
+    const palette = [
+      new THREE.Color(0xffffff),
+      new THREE.Color(0x8b5cf6),
+      new THREE.Color(0xd946ef),
+      new THREE.Color(0xf97316)
+    ];
 
-      positions[idx] = radius * Math.cos(phi) * Math.cos(theta);
-      positions[idx + 1] = radius * Math.cos(phi) * Math.sin(theta);
-      positions[idx + 2] = radius * Math.sin(phi);
+    for (let i = 0; i < starCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 1100;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 850;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 650;
 
-      // Color aleatorio entre blanco y verde lima sutil
-      const isLime = Math.random() > 0.65;
-      colors[idx] = isLime ? 0.8 : 1.0;
-      colors[idx + 1] = isLime ? 1.0 : 1.0;
-      colors[idx + 2] = isLime ? 0.2 : 1.0;
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      colors[i * 3] = c.r;
+      colors[i * 3 + 1] = c.g;
+      colors[i * 3 + 2] = c.b;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: isMobile ? 2.5 : 3.2,
+      size: isMobile ? 1.6 : 2.2,
       vertexColors: true,
       transparent: true,
-      opacity: 0.65,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending
     });
 
     starFieldPoints = new THREE.Points(geometry, material);
@@ -429,327 +408,170 @@
   }
 
   // =========================================================================
-  // 4. INTERACTIVIDAD & EVENTOS
+  // 7. ONDAS DE CHOQUE GRAVITACIONALES
   // =========================================================================
-  function setupEvents() {
-    // Movimiento de mouse en escritorio
-    window.addEventListener('mousemove', (e) => {
-      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
-
-    // Toque suave en móviles
-    window.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        targetMouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 1.6;
-        targetMouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 1.6;
-      }
-    }, { passive: true });
-
-    // Redimensionamiento de ventana
-    window.addEventListener('resize', onWindowResize, { passive: true });
-
-    // Pausar Three.js si el usuario hace scroll profundo (ahorro total de batería en móviles)
-    window.addEventListener('scroll', () => {
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-      isVisible = scrollY < (window.innerHeight * 1.3);
-    }, { passive: true });
-
-    // Pausar si la pestaña está en segundo plano
-    document.addEventListener('visibilitychange', () => {
-      isVisible = !document.hidden;
-    });
-
-    // Manejo resiliente de pérdida y restauración de contexto WebGL (performance-engineer)
-    if (renderer && renderer.domElement) {
-      renderer.domElement.addEventListener('webglcontextlost', (e) => {
-        e.preventDefault();
-        if (animFrameId) cancelAnimationFrame(animFrameId);
-      }, false);
-
-      renderer.domElement.addEventListener('webglcontextrestored', () => {
-        if (animFrameId) cancelAnimationFrame(animFrameId);
-        animate();
-      }, false);
-    }
-  }
-
-  let resizeFrameId = null;
-  function onWindowResize() {
-    if (resizeFrameId) cancelAnimationFrame(resizeFrameId);
-    resizeFrameId = requestAnimationFrame(() => {
-      if (!camera || !renderer) return;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    });
-  }
-
-  // =========================================================================
-  // 5. INTRO CINEMATOGRÁFICA RÁPIDA & SKIP
-  // =========================================================================
-  // =========================================================================
-  // 5. INTRO CINEMATOGRÁFICA RÁPIDA & SKIP (1.4s)
-  // =========================================================================
-  function evaluateIntro() {
-    const introOverlay = document.getElementById('cinematic-intro-overlay');
-    const brandReveal = document.getElementById('intro-brand-reveal');
-    const skipBtn = document.getElementById('btn-skip-intro');
-
-    if (!introOverlay) return;
-
-    isIntroPlaying = true;
-    introOverlay.style.display = 'flex';
-    introOverlay.style.opacity = '1';
-
-    // Auto-cierre rápido y cinematográfico en 1350ms ("entrando a la órbita")
-    const autoCloseTimer = setTimeout(() => {
-      skipIntro();
-    }, 1350);
-
-    // Manejador del botón Saltar
-    if (skipBtn) {
-      skipBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        clearTimeout(autoCloseTimer);
-        skipIntro();
-      });
-    }
-
-    // Tocar o hacer clic en cualquier parte de la intro para saltar inmediatamente
-    introOverlay.addEventListener('click', () => {
-      clearTimeout(autoCloseTimer);
-      skipIntro();
-    });
-
-    // Secuencia de entrada en órbita con cámara Three.js
-    if (camera) {
-      camera.position.z = CAMERA_BASE_Z * 1.8;
-      if (window.gsap) {
-        gsap.to(camera.position, {
-          z: CAMERA_BASE_Z,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-      } else {
-        camera.position.z = CAMERA_BASE_Z;
-      }
-    }
-  }
-
-  function skipIntro() {
-    isIntroPlaying = false;
-
-    const introOverlay = document.getElementById('cinematic-intro-overlay');
-    if (introOverlay) {
-      introOverlay.style.transition = 'opacity 0.35s ease-out, transform 0.35s ease-out';
-      introOverlay.style.opacity = '0';
-      introOverlay.style.transform = 'scale(1.08)';
-      introOverlay.style.pointerEvents = 'none';
-      setTimeout(() => {
-        introOverlay.style.display = 'none';
-      }, 350);
-    }
-
-    if (camera) {
-      if (window.gsap) {
-        gsap.to(camera.position, {
-          z: CAMERA_BASE_Z,
-          duration: 0.5,
-          ease: 'power2.out'
-        });
-      } else {
-        camera.position.z = CAMERA_BASE_Z;
-      }
-    }
-  }
-
-  // =========================================================================
-  // 6. ABSORCIÓN GRAVITACIONAL & ONDAS DE CHOQUE
-  // =========================================================================
-  function triggerShockwave(colorHex) {
-    if (!orbitSystemGroup) return;
-
-    const shockColor = colorHex ? new THREE.Color(colorHex) : currentColors.primary;
-    const shockGeo = new THREE.RingGeometry(10, 22, isMobile ? 32 : 64);
-    const shockMat = new THREE.MeshBasicMaterial({
-      color: shockColor,
+  function triggerShockwave(hexColor = '#8b5cf6') {
+    const color = new THREE.Color(hexColor);
+    const waveGeo = new THREE.RingGeometry(10, 16, 48);
+    const waveMat = new THREE.MeshBasicMaterial({
+      color: color,
+      side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.9,
-      blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
     });
-    const shockMesh = new THREE.Mesh(shockGeo, shockMat);
-    shockMesh.rotation.x = Math.PI / 2;
-    orbitSystemGroup.add(shockMesh);
+    const waveMesh = new THREE.Mesh(waveGeo, waveMat);
+    waveMesh.rotation.x = Math.PI / 2;
+    waveMesh.userData = { radius: 16, maxRadius: isMobile ? 220 : 340, life: 1 };
 
-    shockwaves.push({
-      mesh: shockMesh,
-      scale: 1,
-      maxScale: isMobile ? 8.5 : 12.0,
-      opacity: 0.9
-    });
+    scene.add(waveMesh);
+    shockwaves.push(waveMesh);
 
-    OrbitaAudio.playChime(620);
-  }
-
-  function triggerAbsorbAnimation(platformId, colorHex) {
-    // Pulso lumínico en el núcleo
-    if (coreCoronaMesh) {
-      coreCoronaMesh.scale.set(2.4, 2.4, 2.4);
-      setTimeout(() => {
-        if (coreCoronaMesh) coreCoronaMesh.scale.set(1.9, 1.9, 1.9);
-      }, 400);
-    }
-
-    triggerShockwave(colorHex);
+    OrbitaAudio.playChime(640);
   }
 
   // =========================================================================
-  // 7. BUCLE PRINCIPAL DE ANIMACIÓN (60 FPS FLUIDO)
+  // 8. ANIMACIÓN Y BUCLE PRINCIPAL (60 FPS)
   // =========================================================================
   function animate() {
     animFrameId = requestAnimationFrame(animate);
 
-    if (!isVisible || window._orbitCanvasPaused) return; // Ahorro total de GPU cuando no está visible o juego activo
+    if (!isVisible) return;
 
     const delta = clock.getDelta();
-    const elapsedTime = clock.getElapsedTime();
+    const time = clock.getElapsedTime();
 
-    // 1. Suavizado de inclinación por ratón/toque (Inercia)
+    // Lerp suave del ratón
     mouseX += (targetMouseX - mouseX) * 0.05;
     mouseY += (targetMouseY - mouseY) * 0.05;
 
-    if (orbitSystemGroup) {
-      orbitSystemGroup.rotation.x = (Math.PI / 3.4) + mouseY * 0.22;
-      orbitSystemGroup.rotation.y = (-Math.PI / 10) + mouseX * 0.28;
+    // Movimiento sutil de cámara por parallax
+    camera.position.x = mouseX * 45;
+    camera.position.y = 12 + (-mouseY * 30);
+    camera.lookAt(0, 0, 0);
 
-      // Rotación de los anillos en sentidos opuestos y respiración armónica
-      if (outerRingMesh) {
-        outerRingMesh.rotation.z += delta * 0.25;
-        const breathOut = 1.0 + Math.sin(elapsedTime * 1.8) * 0.022;
-        outerRingMesh.scale.set(breathOut, breathOut, 1.0 + Math.cos(elapsedTime * 1.8) * 0.018);
-      }
-      if (innerRingMesh) {
-        innerRingMesh.rotation.z -= delta * 0.35;
-        const breathIn = 1.0 + Math.cos(elapsedTime * 2.1) * 0.028;
-        innerRingMesh.scale.set(breathIn, breathIn, 1.0 + Math.sin(elapsedTime * 2.1) * 0.018);
-      }
-      if (window._gyroOrbitalMesh) {
-        window._gyroOrbitalMesh.rotation.z += delta * 0.16;
-        window._gyroOrbitalMesh.rotation.y += delta * 0.06;
-      }
+    // Pulsación del núcleo estelar
+    if (coreMesh && coronaMesh) {
+      const pulse = 1 + Math.sin(time * 2.4) * 0.05;
+      coreMesh.scale.set(pulse, pulse, pulse);
+      coronaMesh.rotation.z = time * 0.15;
     }
 
-    // 2. Movimiento orbital de satélites
-    satelliteNodes.forEach(node => {
-      node.angle += delta * node.speed;
-      node.mesh.position.x = Math.cos(node.angle) * node.radius;
-      node.mesh.position.y = Math.sin(node.angle) * node.radius;
-      node.mesh.position.z = Math.sin(node.angle * 2) * 12; // Ligera oscilación en Z
+    // Rotación del sistema orbital general
+    if (orbitSystemGroup) {
+      orbitSystemGroup.rotation.y = time * 0.04;
+      orbitSystemGroup.rotation.x = Math.sin(time * 0.2) * 0.04;
+    }
+
+    // Actualización de satélites en sus órbitas
+    satelliteMeshes.forEach(sat => {
+      sat.userData.angle += sat.userData.speed * delta;
+      const theta = sat.userData.angle;
+      const r = sat.userData.radius;
+
+      sat.position.x = Math.cos(theta) * r;
+      sat.position.y = Math.sin(theta) * (r * 0.72);
+      sat.position.z = Math.sin(theta) * 20;
+
+      // Orientar hacia la cámara
+      sat.quaternion.copy(camera.quaternion);
     });
 
-    // 3. Rotación sutil del campo estelar de fondo
-    if (starFieldPoints) {
-      starFieldPoints.rotation.y = elapsedTime * 0.015;
-    }
-
-    // 4. Pulso de respiración suave en el núcleo y coronas
-    if (coreCoronaMesh) {
-      const breath = 1.0 + Math.sin(elapsedTime * 2.2) * 0.08;
-      coreCoronaMesh.scale.set(1.9 * breath, 1.9 * breath, 1.9 * breath);
-    }
-
-    // 5. Animación de ondas de choque activas
+    // Ondas de choque
     for (let i = shockwaves.length - 1; i >= 0; i--) {
       const sw = shockwaves[i];
-      sw.scale += delta * 14;
-      sw.opacity -= delta * 1.8;
-      sw.mesh.scale.set(sw.scale, sw.scale, sw.scale);
-      sw.mesh.material.opacity = Math.max(0, sw.opacity);
+      sw.userData.radius += delta * 240;
+      sw.userData.life -= delta * 1.5;
 
-      if (sw.opacity <= 0 || sw.scale >= sw.maxScale) {
-        orbitSystemGroup.remove(sw.mesh);
-        sw.mesh.geometry.dispose();
-        sw.mesh.material.dispose();
+      const scale = sw.userData.radius / 16;
+      sw.scale.set(scale, scale, 1);
+      sw.material.opacity = Math.max(0, sw.userData.life * 0.8);
+
+      if (sw.userData.life <= 0 || sw.userData.radius >= sw.userData.maxRadius) {
+        scene.remove(sw);
+        sw.geometry.dispose();
+        sw.material.dispose();
         shockwaves.splice(i, 1);
       }
     }
 
-    // 6. Ciclo ambiental sutil y elegante de colores cósmicos (cuando no hay hover activo)
-    if (!window.activeHoverPlatform) {
-      const cycleTime = elapsedTime * 0.16; // Ciclo suave
-      const phase = (Math.sin(cycleTime) + 1) * 0.5; // 0 a 1
-      const phase2 = (Math.cos(cycleTime * 0.8) + 1) * 0.5;
-
-      // Morfismo sutil entre Lima (#ccff00), Cian (#00f0ff), Violeta (#a855f7) y Esmeralda (#10b981)
-      currentColors.targetPrimary.setRGB(
-        0.8 * (1 - phase) + 0.05 * phase,
-        0.98 * (1 - phase) + 0.85 * phase,
-        0.05 * (1 - phase) + 0.95 * phase
-      );
-      currentColors.targetSecondary.setRGB(
-        0.55 * phase2 + 0.65 * (1 - phase2),
-        0.88 * phase2 + 0.15 * (1 - phase2),
-        0.95 * phase2 + 0.92 * (1 - phase2)
-      );
+    // Rotación suave del campo estelar
+    if (starFieldPoints) {
+      starFieldPoints.rotation.y = time * 0.012;
     }
-
-    // 7. Transición suave de colores (Lerp dinámico a 60 FPS)
-    currentColors.primary.lerp(currentColors.targetPrimary, 0.04);
-    currentColors.secondary.lerp(currentColors.targetSecondary, 0.04);
-
-    if (outerRingMesh) outerRingMesh.material.color.copy(currentColors.primary);
-    if (innerRingMesh) innerRingMesh.material.color.copy(currentColors.primary);
-    if (coreCoronaMesh) coreCoronaMesh.material.color.copy(currentColors.secondary);
-    if (pointLightPrimary) pointLightPrimary.color.copy(currentColors.primary);
-    if (pointLightSecondary) pointLightSecondary.color.copy(currentColors.secondary);
 
     renderer.render(scene, camera);
   }
 
   // =========================================================================
-  // 8. API GLOBAL EXPUESTA EN WINDOW.ORBITA3D
+  // 9. EVENTOS Y REDIMENSIONAMIENTO
+  // =========================================================================
+  function initEvents() {
+    window.addEventListener('resize', onWindowResize, { passive: true });
+
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+
+    if (window.DeviceOrientationEvent && isMobile) {
+      window.addEventListener('deviceorientation', (e) => {
+        if (e.gamma !== null && e.beta !== null) {
+          targetMouseX = Math.max(-1, Math.min(1, e.gamma / 25));
+          targetMouseY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+        }
+      }, { passive: true });
+    }
+  }
+
+  function onWindowResize() {
+    if (!container || !renderer || !camera) return;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.position.z = window.innerWidth < 768 ? 540 : 460;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+
+  function initIntersectionObserver() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+        });
+      }, { threshold: 0.05 });
+      observer.observe(container);
+    }
+  }
+
+  // =========================================================================
+  // 10. API PÚBLICA PARA INTEGRACIÓN GLOBAL
   // =========================================================================
   window.Orbita3D = {
-    setThemeColors(primaryHex, secondaryHex) {
-      if (primaryHex) currentColors.targetPrimary.set(primaryHex);
-      if (secondaryHex) currentColors.targetSecondary.set(secondaryHex);
+    triggerShockwave,
+    toggleAudio: () => OrbitaAudio.toggleMute(),
+    pause: () => { isVisible = false; },
+    resume: () => { isVisible = true; },
+    setThemeColors: (primaryHex, secondaryHex) => {
+      if (pointLightCore) pointLightCore.color.set(primaryHex);
+      if (pointLightAccent) pointLightAccent.color.set(secondaryHex);
     },
-    resetThemeColors() {
-      currentColors.targetPrimary.set(0xccff00);
-      currentColors.targetSecondary.set(0xa3e635);
-    },
-    triggerAbsorb(platformId, colorHex) {
-      triggerAbsorbAnimation(platformId, colorHex);
-    },
-    triggerShockwave(colorHex) {
-      triggerShockwave(colorHex);
-    },
-    toggleAudio() {
-      return OrbitaAudio.toggleMute();
-    },
-    skipIntro() {
-      skipIntro();
-    },
-    pause() {
-      window._orbitCanvasPaused = true;
-    },
-    resume() {
-      window._orbitCanvasPaused = false;
+    resetThemeColors: () => {
+      if (pointLightCore) pointLightCore.color.set(0x8b5cf6);
+      if (pointLightAccent) pointLightAccent.color.set(0xd946ef);
     }
   };
 
-  // Compatibilidad con invocaciones antiguas
-  window.OrbitaBlackHole = window.Orbita3D;
-
-  // Iniciar al cargar el DOM
+  // Inicializar Three.js tras carga de página
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+      initScene();
+      animate();
+    });
   } else {
-    init();
+    initScene();
+    animate();
   }
 
 })();
